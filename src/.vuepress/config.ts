@@ -11,8 +11,8 @@ export default defineUserConfig({
   title: "CS通关之路",
   // 描述
   description: "记录我的CS通关之路",
-  // // HTML 目录
-  // dest: "./dist",
+  // HTML 目录
+  dest: "./dist",
   // 如果你正在使用 PWA 插件，我们推荐在你的 VuePress 配置文件中设置 
   shouldPrefetch: false,
 
