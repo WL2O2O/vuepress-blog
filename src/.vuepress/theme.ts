@@ -3,12 +3,13 @@ import navbar from "./navbar";
 import { sidebarConfig } from "./sidebar";
 
 export default hopeTheme({
-  hostname: "https://tobebetterjavaer.com",
+  hostname: "https://wlei224.gitee.io/",
+
   // 网站图标
-  logo: "https://cdn.tobebetterjavaer.com/tobebetterjavaer/images/logo-02.png",
+  logo: "http://images.rl0206.love/202304181527666.png",
   // Git 仓库和编辑链接
-  repo: "https://github.com/itwanger/toBeBetterJavaer",
-  repoLabel: "GitHub",
+  repo: "https://gitee.com/WLei224/WLei224.git",
+  repoLabel: "Gitee",
   docsDir: "docs",
   // 以前的默认仓库分支名，方便提交 pr 和 issue
   docsBranch: "master",
@@ -20,10 +21,11 @@ export default hopeTheme({
   // 纯净模式，会禁用一些花哨的动画以及一些色彩
   // pure: true,
 
-  // 阿里妈妈图标的前缀
-  iconPrefix: "iconfont icon-",
-  // Iconfont 精选图标 和 阿里妈妈的互斥
-  // iconAssets: "iconfont",
+  // 阿里巴巴矢量库图标的前缀
+  // iconPrefix: "iconfont icon-",
+
+  // home页和导航栏Iconfont 精选图标 和 阿里妈妈的互斥
+  iconAssets: "iconfont",
 
   // 全局默认作者
   author: {
@@ -41,12 +43,12 @@ export default hopeTheme({
   },
   // 提示文字
   encryptLocales: {
-    placeholder: "微信搜‘沉默王二’回复‘密码’获取口令",
+    placeholder: "唱、跳、rap、篮球🏀！",
 
     /**
      * Passwrod error hint
      */
-    errorHint: "哈哈，别调戏人家啦，按规则来嘛",
+    errorHint: "哈哈，你干嘛~",
   },
 
   // navbar
@@ -71,7 +73,7 @@ export default hopeTheme({
     intro: "/about-the-author/",
     sidebarDisplay: "mobile",
     // 博主头像
-    avatar: "/assets/icon/itwanger-282.png",
+    avatar: "http://images.rl0206.love/202304192047438.png",
     // 圆角
     roundAvatar: true,
     // 座右铭
@@ -85,17 +87,12 @@ export default hopeTheme({
   },
 
   plugins: {
-    // 启用博客自动摘要
+    // 开启博客功能
     blog: {
-      autoExcerpt: true,
+      // 启用博客自动摘要
+      // autoExcerpt: true,
     },
-    search: {
-      locales: {
-        "/": {
-          placeholder: "搜索",
-        },
-      },
-    },
+    
     // 该插件会监听页面滚动事件。当页面滚动至某个 标题锚点 后，如果存在对应的 标题链接 ，那么该插件会将路由 Hash 更改为该 标题锚点 。
     activeHeaderLinks: true,
 
@@ -113,8 +110,10 @@ export default hopeTheme({
       imgMark: true,
       // 启用图片大小
       imgSize: true,
-      // 启用图片标题
-      imgTitle: true,
+
+      // TODO 后续处理
+      // // 启用图片标题
+      // imgTitle: true,
 
       // 自定义对齐
       align: true,

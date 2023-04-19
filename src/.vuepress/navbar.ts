@@ -3,7 +3,7 @@ import { navbar } from "vuepress-theme-hope";
 export default navbar([
   { 
     text: "博客",
-    icon: "gaishu",
+    icon: "home",
     link: "/blog.md" 
   },
   { 
@@ -17,34 +17,29 @@ export default navbar([
     link: "/zhishixingqiu/" 
   },
   {
-    text: "学习路线",
-    icon: "luxian",
-    link: "/xuexiluxian/"
+    text: "CS生涯规划",
+    icon: "guide",
+    link: "/guider/"
   },
   {
-    text: "珍藏资源",
-    icon: "youzhi",
+    text: "宝藏资源",
+    icon: "like",
     children: [
       {
-        text: "PDF下载", 
+        text: "PDF天堂", 
         icon: "java", 
-        link: "/pdf/readme.md" 
+        link: "/pdf/README.md" 
       },
       { 
-        text: "面渣逆袭", 
-        icon: "zhunbei", 
-        link: "/sidebar/sanfene/nixi.md" 
-      },
-      { 
-        text: "破解合集",
-        icon: "zhongyaotishi",
-        link: "/nice-article/itmind/" 
+        text: "APP整合", 
+        icon: "hot", 
+        link: "/app/README.md" 
       },
     ],
   },
   {
     text: "Hexo博客",
-    icon: "discover", 
+    icon: "heading", 
     link: "https://rl0206.love"
   },
 ]);

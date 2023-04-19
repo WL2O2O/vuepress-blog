@@ -3,7 +3,7 @@ home: true
 layout: BlogHome
 icon: home
 title: 博客
-heroImage: /logo.svg
+heroImage: http://images.rl0206.love/202304192047438.png
 heroText: WLei224
 tagline: 放置格言、座右铭
 heroFullScreen: false
