@@ -4,45 +4,45 @@ icon: home
 title: 主页
 heroImage: http://images.rl0206.love/202304181527666.png
 heroText: CS_GUIDER
-tagline: 是Java开发岗的四库全书,也寻找答案的地方;梦想从心中萌芽,CS_GUIDER帮你实现!
+tagline: 目标:Java开发岗的"四库全书", 如果你感到迷茫或者想参考一下别人的学习规划, 就快快上路吧👇; 梦想从心中萌芽,CS_GUIDER一路陪伴!
 actions:
-  - text: 使用指南 💡
+  - text: 立即开始 💡
     link: /demo/
     type: primary
 
-  - text: 文档
+  - text: 资源中心 🧑‍💻
     link: /guide/
     type: default
     
 features:
   - title: 关于CS_GUIDER
     icon: eye
-    details: 这是啥？都有啥？对我有什么用？一篇文章帮你解答清楚😎
+    details: 这是啥小破站?里面都有啥?对我有用吗?点进来看看吧😎
     link: /home/introduce.md
 
-  - title: 知识星球推荐
+  - title: 知识星球
     icon: Artboard
-    details: 良心推荐
+    details: 真心推荐二哥的星球,有用且不贵,学无止境,一起学习知识🏅
     link: /zhishixingqiu/
 
-  - title: GUIDER的故事
+  - title: GUIDER的自述
     icon: alias
-    details: Adding breadcrumb, footer, improved navbar, improved page nav and etc.
+    details: 在这里,你可以了解到关于笔者更多的故事😉
     link: https://theme-hope.vuejs.press/guide/layout/
 
-  - title: 博客之路
+  - title: 我的博客之路
     icon: comment
-    details: Start pageview statistics and comment support with Waline
+    details: 👉详细谈一谈我的博客之路,通过这个专栏来了解个人博客
     link: https://theme-hope.vuejs.press/guide/feature/comment.html
 
-  - title: CS生涯规划
+  - title: CS规划专栏
     icon: guide
-    details: Adding slide pages to display things you like
+    details: 刚踏入大学生活的我们是很容易迷茫且摆烂,何时学?定方向?学什么?如何学?欢迎光临~
     link: https://theme-hope.vuejs.press/guide/layout/slides.html
 
   - title: 项目专栏
     icon: advance
-    details: 项目教程以及经验分享
+    details: Come here!你可以获取到各大平台视频与资源,不许你错过,肝就完了🐒
     link: /home/introduce.md
 
   - title: Article information

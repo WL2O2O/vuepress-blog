@@ -56,6 +56,8 @@ export default defineUserConfig({
       {
         rel: "stylesheet",
         href: "//at.alicdn.com/t/font_3180624_7cy10l7jqqh.css",
+        // rel: "stylesheet",
+        // href: "//cdn.jsdelivr.net/npm/@docsearch/css@3"
       },
     ],
   ],
@@ -118,10 +120,29 @@ export default defineUserConfig({
       categoryId:"DIC_kwDOHBJsss4COJOx",
     }),
     // 只能搜索
+
+  //   <script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
+  // <script type="text/javascript">
+
+  //   docsearch({
+
+  //     appId: 2YNM597FQ3,
+
+  //     apiKey: 506633b70b19f8eeca4ae7f53e559ef4,
+
+  //     indexName: wlei224-gitee,
+
+  //     
+
+  //   });
+
+  // </script>
     docsearchPlugin({
       appId: "2YNM597FQ3",
       apiKey: "506633b70b19f8eeca4ae7f53e559ef4",
       indexName: "wlei224-gitee",
+      container: '### REPLACE ME WITH A CONTAINER (e.g. div) ###',
+      debug: false,
       locales: {
         "/": {
           placeholder: "搜索文档",
