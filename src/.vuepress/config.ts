@@ -6,6 +6,18 @@ import theme from "./theme";
 // 配置主题色选择器：https://theme-hope.vuejs.press/zh/guide/interface/theme-color.html#%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E4%B8%BB%E9%A2%98%E8%89%B2
 import { hopeTheme } from "vuepress-theme-hope";
 export default defineUserConfig({
+  // theme: hopeTheme({
+  //   // 关键词: "iconfont", "iconify", "fontawesome", "fontawesome-with-brands"
+  //   iconAssets: "iconfont",
+  //   // 你想要的 URL
+  //   // iconAssets: "/base/my/font-icon/resource.js",
+  //   // 上述内容的数组
+  //   // iconAssets: [
+  //   //   "/base/my/font-icon/resource.js",
+  //   //   "https://example/my/fonr-icon/resouce.css",
+  //   //   "fontawesome",
+  //   // ],
+  // }),
   // 中文
   lang: "zh-CN",
   // 标题
@@ -96,7 +108,7 @@ export default defineUserConfig({
     pwaPlugin({
       // favicon.ico一般用于作为缩略的网站标志,它显示位于浏览器的地址栏或者在标签上,用于显示网站的logo,
       favicon: "http://images.rl0206.love/202304200057802.ico",
-      // // 主题色
+      // 主题色
       themeColor: "#096dd9",
       // themeColor: {
       //   blue: "#096dd9",

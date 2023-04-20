@@ -22,7 +22,7 @@ export default hopeTheme({
   // pure: true,
 
   // 阿里巴巴矢量库图标的前缀
-  // iconPrefix: "iconfont icon-",
+  iconPrefix: "iconfont icon-",
 
   // home页和导航栏Iconfont 精选图标 和 阿里妈妈的互斥
   iconAssets: "iconfont",
