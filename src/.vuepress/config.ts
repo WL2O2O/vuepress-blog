@@ -11,9 +11,9 @@ export default defineUserConfig({
   // 标题
   title: "CS_GUIDER",
   // 描述
-  description: "记录我的CS之路,为你点亮一座灯塔！",
+  description: "记录我的CS之路,为你点亮一座灯塔!",
   // HTML 目录
-  dest: "./dist",
+  dest: "src/.vuepress/dist",
   // 如果你正在使用 PWA 插件，我们推荐在你的 VuePress 配置文件中设置 
   shouldPrefetch: false,
 
@@ -56,10 +56,38 @@ export default defineUserConfig({
       {
         rel: "stylesheet",
         href: "//at.alicdn.com/t/font_3180624_7cy10l7jqqh.css",
-        // rel: "stylesheet",
-        // href: "//cdn.jsdelivr.net/npm/@docsearch/css@3"
       },
     ],
+    // 因为不是vuepress默认主题，因此需要手动配置搜索框的css样式，如下：
+    [
+      "link",
+      {
+        rel: "stylesheet",
+        href: "//cdn.jsdelivr.net/npm/@docsearch/css@3"
+      },
+    ],  
+    [
+      "script",
+      {
+        src: "https://cdn.jsdelivr.net/npm/@docsearch/js@3"
+      } 
+    ],
+    // 性能优化
+    [
+      "link",
+      {
+        rel: "preconnect",
+        href: "https://2YNM597FQ3-dsn.algolia.net crossorigin",
+        // crossorigin: /,
+      }
+    ],
+    [
+      'link',
+      { 
+        rel: 'stylesheet', 
+        href: 'https://cdn.jsdelivr.net/npm/docsearch.js@3/dist/cdn/docsearch.min.css' 
+      }
+    ],   
   ],
 
   plugins: [
@@ -120,29 +148,12 @@ export default defineUserConfig({
       categoryId:"DIC_kwDOHBJsss4COJOx",
     }),
     // 只能搜索
-
-  //   <script src="https://cdn.jsdelivr.net/npm/@docsearch/js@3"></script>
-  // <script type="text/javascript">
-
-  //   docsearch({
-
-  //     appId: 2YNM597FQ3,
-
-  //     apiKey: 506633b70b19f8eeca4ae7f53e559ef4,
-
-  //     indexName: wlei224-gitee,
-
-  //     
-
-  //   });
-
-  // </script>
     docsearchPlugin({
       appId: "2YNM597FQ3",
       apiKey: "506633b70b19f8eeca4ae7f53e559ef4",
       indexName: "wlei224-gitee",
-      container: '### REPLACE ME WITH A CONTAINER (e.g. div) ###',
-      debug: false,
+      // container: '### REPLACE ME WITH A CONTAINER (e.g. div) ###',
+      // debug: false,
       locales: {
         "/": {
           placeholder: "搜索文档",
@@ -163,8 +174,6 @@ export default defineUserConfig({
                 noRecentSearchesText: "没有搜索历史",
                 saveRecentSearchButtonTitle: "保存至搜索历史",
                 removeRecentSearchButtonTitle: "从搜索历史中移除",
-                favoriteSearchesTitle: "收藏",
-                removeFavoriteSearchButtonTitle: "从收藏中移除",
               },
               errorScreen: {
                 titleText: "无法获取结果",
@@ -186,7 +195,6 @@ export default defineUserConfig({
       },
     }),
   ],
-
   theme,
 });
 
