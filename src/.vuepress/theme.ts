@@ -5,7 +5,7 @@ export default hopeTheme({
   hostname: "https://wlei224.gitee.io/",
 
   // 网站图标
-  logo: "http://images.rl0206.love/202304181527666.png",
+  logo: "/favicon.ico",
   // Git 仓库和编辑链接
   repo: "https://gitee.com/WLei224/WLei224.git",
   repoLabel: "Gitee",
