@@ -3,9 +3,9 @@ import { commentPlugin } from "vuepress-plugin-comment2";
 import { pwaPlugin } from "vuepress-plugin-pwa2";
 import { defineUserConfig } from "vuepress";
 import theme from "./theme";
-// 配置主题色选择器：https://theme-hope.vuejs.press/zh/guide/interface/theme-color.html#%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E4%B8%BB%E9%A2%98%E8%89%B2
 import { hopeTheme } from "vuepress-theme-hope";
 export default defineUserConfig({
+  // // 下列语句无作用，icon图标在thmem.ts中进行配置
   // theme: hopeTheme({
   //   // 关键词: "iconfont", "iconify", "fontawesome", "fontawesome-with-brands"
   //   iconAssets: "iconfont",
@@ -108,43 +108,37 @@ export default defineUserConfig({
     pwaPlugin({
       // favicon.ico一般用于作为缩略的网站标志,它显示位于浏览器的地址栏或者在标签上,用于显示网站的logo,
       favicon: "http://images.rl0206.love/202304200057802.ico",
-      // 主题色
-      themeColor: "#096dd9",
-      // themeColor: {
-      //   blue: "#096dd9",
-      //   red: "#f26d6d",
-      //   green: "#3eaf7c",
-      //   orange: "#fb9b5f",
-      // },
+      // 主题色 经测试，下列themecolor语句不起作用
+      // themeColor: "#fb9b5f",
       apple: {
-        icon: "/assets/icon/apple-icon-152.png",
+        icon: "http://images.rl0206.love/202304200057802.ico",
         statusBarColor: "black",
       },
       msTile: {
-        image: "/assets/icon/ms-icon-144.png",
+        image: "http://images.rl0206.love/202304200057802.ico",
         color: "#ffffff",
       },
       manifest: {
         icons: [
           {
-            src: "/assets/icon/chrome-mask-512.png",
+            src: "http://images.rl0206.love/202304200057802.ico",
             sizes: "512x512",
             purpose: "maskable",
             type: "image/png",
           },
           {
-            src: "/assets/icon/chrome-mask-192.png",
+            src: "http://images.rl0206.love/202304200057802.ico",
             sizes: "192x192",
             purpose: "maskable",
             type: "image/png",
           },
           {
-            src: "/assets/icon/chrome-512.png",
+            src: "http://images.rl0206.love/202304200057802.ico",
             sizes: "512x512",
             type: "image/png",
           },
           {
-            src: "/assets/icon/chrome-192.png",
+            src: "http://images.rl0206.love/202304200057802.ico",
             sizes: "192x192",
             type: "image/png",
           },
@@ -207,6 +201,17 @@ export default defineUserConfig({
       },
     }),
   ],
+  // 引入主题等配置元素
   theme,
+  // // 配置主题色选择器：https://theme-hope.vuejs.press/zh/guide/interface/theme-color.html#%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E4%B8%BB%E9%A2%98%E8%89%B2
+  // theme: hopeTheme({
+  //   themeColor: {
+  //     blue: "#2196f3",
+  //     red: "#f26d6d",
+  //     green: "#3eaf7c",
+  //     orange: "#fb9b5f",
+  //   },
+  // }),
+
 });
 

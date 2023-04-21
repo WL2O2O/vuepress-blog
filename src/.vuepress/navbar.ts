@@ -9,7 +9,9 @@ export default navbar([
   { 
     text: "CS之路", 
     icon: "lujing", 
-    link: "/collection/" 
+    link: "/collection/",
+    // 开启子导航栏的语句：
+    // children: ["tutorial/", "markdown/", "vuepress/", "customize/"],
   },
   { 
     text: "知识星球", 

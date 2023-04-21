@@ -1,7 +1,6 @@
 import { hopeTheme } from "vuepress-theme-hope";
 import navbar from "./navbar";
 import { sidebarConfig } from "./sidebar";
-
 export default hopeTheme({
   hostname: "https://wlei224.gitee.io/",
 
@@ -70,7 +69,7 @@ export default hopeTheme({
 
   blog: {
     // 个人介绍页地址
-    intro: "/about-the-author/",
+    intro: "/aboutguider/",
     sidebarDisplay: "mobile",
     // 博主头像
     avatar: "http://images.rl0206.love/202304192047438.png",
