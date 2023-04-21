@@ -21,7 +21,7 @@ features:
     link: /home/introduce.md
 
   - title: 知识星球测试
-    icon: Artboard
+    icon: discover
     details: 真心推荐二哥的星球,有用且不贵,学无止境,一起学习知识🏅
     link: /zhishixingqiu/
 
