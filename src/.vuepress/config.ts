@@ -3,21 +3,10 @@ import { commentPlugin } from "vuepress-plugin-comment2";
 import { pwaPlugin } from "vuepress-plugin-pwa2";
 import { defineUserConfig } from "vuepress";
 import theme from "./theme";
-import { hopeTheme } from "vuepress-theme-hope";
+
 export default defineUserConfig({
-  // // 下列语句无作用，icon图标在thmem.ts中进行配置
-  // theme: hopeTheme({
-  //   // 关键词: "iconfont", "iconify", "fontawesome", "fontawesome-with-brands"
-  //   iconAssets: "iconfont",
-  //   // 你想要的 URL
-  //   // iconAssets: "/base/my/font-icon/resource.js",
-  //   // 上述内容的数组
-  //   // iconAssets: [
-  //   //   "/base/my/font-icon/resource.js",
-  //   //   "https://example/my/fonr-icon/resouce.css",
-  //   //   "fontawesome",
-  //   // ],
-  // }),
+  // TODO: 配置多颜色切换
+  
   // 中文
   lang: "zh-CN",
   // 标题
@@ -32,7 +21,7 @@ export default defineUserConfig({
   head: [
     // meta
     ["meta", { name: "robots", content: "all" }],
-    ["meta", { name: "author", content: "沉默王二" }],
+    ["meta", { name: "author", content: "WLei224" }],
     [
       "meta",
       {
@@ -63,43 +52,75 @@ export default defineUserConfig({
         })();
       `
     ],
+    // 配置阿里的cdn
+    // [
+    //   "link",
+    //   {
+    //     rel: "stylesheet",
+    //     href: "//at.alicdn.com/t/font_3180624_7cy10l7jqqh.css",
+    //   },
+    // ],
+
+    // 以下是配置docsearch的配置，暂时注释掉
+    // // 因为不是vuepress默认主题，因此需要手动配置搜索框的css样式，如下：
+    // [
+    //   "link",
+    //   {
+    //     rel: "stylesheet",
+    //     href: "//cdn.jsdelivr.net/npm/@docsearch/css@3"
+    //   },
+    // ],  
+    // [
+    //   "script",
+    //   {
+    //     src: "https://cdn.jsdelivr.net/npm/@docsearch/js@3"
+    //   } 
+    // ],
+    // // 性能优化
+    // [
+    //   "link",
+    //   {
+    //     rel: "preconnect",
+    //     href: "https://2YNM597FQ3-dsn.algolia.net crossorigin",
+    //     // crossorigin: /,
+    //   }
+    // ],
+    // [
+    //   'link',
+    //   { 
+    //     rel: 'stylesheet', 
+    //     href: 'https://cdn.jsdelivr.net/npm/docsearch.js@3/dist/cdn/docsearch.min.css' 
+    //   }
+    // ], 
+    // 配置waline评论插件
     [
       "link",
       {
         rel: "stylesheet",
-        href: "//at.alicdn.com/t/font_3180624_7cy10l7jqqh.css",
-      },
-    ],
-    // 因为不是vuepress默认主题，因此需要手动配置搜索框的css样式，如下：
-    [
-      "link",
-      {
-        rel: "stylesheet",
-        href: "//cdn.jsdelivr.net/npm/@docsearch/css@3"
-      },
-    ],  
-    [
-      "script",
-      {
-        src: "https://cdn.jsdelivr.net/npm/@docsearch/js@3"
-      } 
-    ],
-    // 性能优化
-    [
-      "link",
-      {
-        rel: "preconnect",
-        href: "https://2YNM597FQ3-dsn.algolia.net crossorigin",
-        // crossorigin: /,
+        href: "https://unpkg.com/@waline/client@v2/dist/waline.css"
       }
     ],
     [
-      'link',
-      { 
-        rel: 'stylesheet', 
-        href: 'https://cdn.jsdelivr.net/npm/docsearch.js@3/dist/cdn/docsearch.min.css' 
-      }
-    ],   
+      'script',
+      {
+        type: 'module',
+        src: 'https://unpkg.com/@waline/client@v2/dist/waline.mjs',
+        async: true,
+      },
+    ],
+    [
+      'script',
+      {
+        type: 'module',
+      },
+      `
+        import { init } from 'https://unpkg.com/@waline/client@v2/dist/waline.mjs';
+        init({
+          el: '#waline',
+          serverURL: 'https://cs-guider-6cmm99f2s-wl2o2o.vercel.app/',
+        });
+      `,
+    ],
   ],
 
   plugins: [
@@ -107,38 +128,39 @@ export default defineUserConfig({
     // 允许网站通过支持该特性的浏览器将网站作为 App 安装在对应平台上。
     pwaPlugin({
       // favicon.ico一般用于作为缩略的网站标志,它显示位于浏览器的地址栏或者在标签上,用于显示网站的logo,
-      favicon: "http://images.rl0206.love/202304200057802.ico",
+      // favicon: "http://images.rl0206.love/202304200057802.ico
+      favicon: "/favicon.ico",
       // 主题色 经测试，下列themecolor语句不起作用
       // themeColor: "#fb9b5f",
       apple: {
-        icon: "http://images.rl0206.love/202304200057802.ico",
+        icon: "/assets/icon/apple-icon-152.png",
         statusBarColor: "black",
       },
       msTile: {
-        image: "http://images.rl0206.love/202304200057802.ico",
+        image: "/assets/icon/ms-icon-144.png",
         color: "#ffffff",
       },
       manifest: {
         icons: [
           {
-            src: "http://images.rl0206.love/202304200057802.ico",
+            src: "/assets/icon/chrome-mask-512.png",
             sizes: "512x512",
             purpose: "maskable",
             type: "image/png",
           },
           {
-            src: "http://images.rl0206.love/202304200057802.ico",
+            src: "/assets/icon/chrome-mask-192.png",
             sizes: "192x192",
             purpose: "maskable",
             type: "image/png",
           },
           {
-            src: "http://images.rl0206.love/202304200057802.ico",
+            src: "/assets/icon/chrome-512.png",
             sizes: "512x512",
             type: "image/png",
           },
           {
-            src: "http://images.rl0206.love/202304200057802.ico",
+            src: "/assets/icon/chrome-192.png",
             sizes: "192x192",
             type: "image/png",
           },
@@ -146,12 +168,19 @@ export default defineUserConfig({
       },
     }),
     // 留言
+    // commentPlugin({
+    //   provider: "Giscus",
+    //   repo :"itwanger/tobebetterjavaer-giscus",
+    //   repoId:"R_kgDOHBJssg",
+    //   category:"Announcements",
+    //   categoryId:"DIC_kwDOHBJsss4COJOx",
+    // }),
+    // Waline 配置
     commentPlugin({
-      provider: "Giscus",
-      repo :"itwanger/tobebetterjavaer-giscus",
-      repoId:"R_kgDOHBJssg",
-      category:"Announcements",
-      categoryId:"DIC_kwDOHBJsss4COJOx",
+      provider: "Waline",
+      serverURL: "https://cs-guider-6cmm99f2s-wl2o2o.vercel.app/",
+      // 为文章增加表情互动功能，设置为 true 提供默认表情，也可以通过设置表情地址数组来自定义表情图片，最大支持 8 个表情。
+      reaction: true,
     }),
     // 只能搜索
     docsearchPlugin({

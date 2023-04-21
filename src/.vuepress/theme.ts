@@ -21,7 +21,7 @@ export default hopeTheme({
   // pure: true,
 
   // 阿里巴巴矢量库图标的前缀
-  iconPrefix: "iconfont icon-",
+  // iconPrefix: "iconfont icon-",
 
   // home页和导航栏Iconfont 精选图标 和 阿里妈妈的互斥
   iconAssets: "iconfont",
@@ -29,15 +29,15 @@ export default hopeTheme({
   // 全局默认作者
   author: {
     name: "WLei224",
-    url: "/about-the-author/",
+    url: "/aboutguider/",
   },
 
   // 加密
   encrypt: {
     config: {
       // 这只会加密 config/page.html
-      "/nice-article/itmind/xshellazpjbjcxshellpxffxbxt.html": ["1110", "5210"],
-      "/nice-article/itmind/ideapjazjczxjhmzcmyjjhcxgxz.html": ["1110", "5210"],
+      "/nice-article/itmind/xshellazpjbjcxshellpxffxbxt.html": ["1110", "0224"],
+      "/nice-article/itmind/ideapjazjczxjhmzcmyjjhcxgxz.html": ["1110", "0224"],
     },
   },
   // 提示文字
@@ -110,9 +110,9 @@ export default hopeTheme({
       // 启用图片大小
       imgSize: true,
 
-      // TODO 后续处理
-      // // 启用图片标题
-      // imgTitle: true,
+      // TODO: 后续处理 2023/4/21已解决
+      // 启用图片标题
+      figure: true,
 
       // 自定义对齐
       align: true,

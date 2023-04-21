@@ -8,14 +8,14 @@ export default navbar([
   },
   { 
     text: "CS之路", 
-    icon: "lujing", 
+    icon: "branch", 
     link: "/collection/",
     // 开启子导航栏的语句：
     // children: ["tutorial/", "markdown/", "vuepress/", "customize/"],
   },
   { 
     text: "知识星球", 
-    icon: "Artboard", 
+    icon: "discover", 
     link: "/zhishixingqiu/" 
   },
   {
