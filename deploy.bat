@@ -1,20 +1,23 @@
 @echo off
 
-@REM  Build the website using VuePress
+REM Build the website using VuePress
 @REM pnpm docs:build
 
-@REM Clone the repository into a temporary directory
-git clone --depth=1 https://gitee.com/WLei224/WLei224.git .deploy_git
+@REM REM Clone the repository into a temporary directory
+@REM git clone --depth=1 https://gitee.com/WLei224/WLei224.git .deploy_git
 
-@REM Copy the built website files to the temporary directory
-xcopy /e src\.vuepress\dist\* .\.deploy_git\
+@REM REM Copy the built website files to the temporary directory
+@REM xcopy /e src\.vuepress\dist\* .\.deploy_git\
 
-@REM Commit and push the changes to the master branch
-cd .deploy_git
+REM Pull changes from the remote repository
+@REM cd .deploy_git
+git pull origin master
+
+REM Commit and push the changes to the master branch
 git add .
 git commit -m "Automated deployment"
-git push origin master:gh-pages
+git push origin gh-pages
 
-@REM Clean up the temporary directory
-cd ..
-rmdir /s /q .deploy_git
+@REM REM Clean up the temporary directory
+@REM cd ..
+@REM rmdir /s /q .deploy_git
