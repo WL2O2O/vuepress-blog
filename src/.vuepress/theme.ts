@@ -72,7 +72,7 @@ export default hopeTheme({
     intro: "/aboutguider/",
     sidebarDisplay: "mobile",
     // 博主头像
-    avatar: "http://images.rl0206.love/202304192047438.png",
+    avatar: "/author.png",
     // 圆角
     roundAvatar: true,
     // 座右铭

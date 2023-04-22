@@ -11,13 +11,12 @@ REM Build the website using VuePress
 
 REM Pull changes from the remote repository
 @REM cd .deploy_git
-git pull origin master
+@REM git pull origin master
 
 REM Commit and push the changes to the master branch
 git add .
 git commit -m "Automated deployment"
-git push origin gh-pages
-
+git push origin master
 @REM REM Clean up the temporary directory
 @REM cd ..
 @REM rmdir /s /q .deploy_git

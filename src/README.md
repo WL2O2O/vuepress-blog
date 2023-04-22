@@ -2,7 +2,7 @@
 home: true
 icon: home
 title: 主页
-heroImage: http://images.rl0206.love/202304181527666.png
+heroImage: /logo.png
 heroText: CS_GUIDER
 tagline: 目标:Java开发岗的"四库全书", 如果你感到迷茫或者想参考一下别人的学习规划, 就快快上路吧👇; 梦想从心中萌芽,CS_GUIDER一路陪伴!
 actions:
