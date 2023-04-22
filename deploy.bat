@@ -1,4 +1,8 @@
 @echo off
+git add .
+git commit -m "Automated deployment"
+git pull origin master
+git push origin master
 
 REM Build the website using VuePress
 @REM pnpm docs:build
@@ -14,9 +18,9 @@ REM Pull changes from the remote repository
 @REM git pull origin master
 
 REM Commit and push the changes to the master branch
-git add .
-git commit -m "Automated deployment"
-git push origin master
+@REM git add .
+@REM git commit -m "Automated deployment"
+@REM git push origin master
 @REM REM Clean up the temporary directory
 @REM cd ..
 @REM rmdir /s /q .deploy_git

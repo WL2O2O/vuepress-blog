@@ -129,7 +129,7 @@ export default defineUserConfig({
     pwaPlugin({
       // favicon.ico一般用于作为缩略的网站标志,它显示位于浏览器的地址栏或者在标签上,用于显示网站的logo,
       // favicon: "http://images.rl0206.love/202304200057802.ico",
-      favicon: "/favicon.ico",
+      favicon: "/author.png",
       // 主题色 经测试，下列themecolor语句不起作用
       // themeColor: "#fb9b5f",
       apple: {
@@ -241,6 +241,23 @@ export default defineUserConfig({
   //     orange: "#fb9b5f",
   //   },
   // }),
+
+  // TODO 
+  // // 添加rollupOptions配置项
+  // bundlerConfig: {
+  //   rollupOptions: {
+  //     output: {
+  //       // 调整chunk大小警告的限制
+  //       chunkSizeWarningLimit: 2000,
+  //       // 使用manualChunks来进行代码块分割
+  //       manualChunks(id) {
+  //         if (id.includes("node_modules")) {
+  //           return "vendor";
+  //         }
+  //       },
+  //     },
+  //   },
+  // },
 
 });
 
