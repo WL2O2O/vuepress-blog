@@ -129,7 +129,7 @@ export default defineUserConfig({
     pwaPlugin({
       // favicon.ico一般用于作为缩略的网站标志,它显示位于浏览器的地址栏或者在标签上,用于显示网站的logo,
       // favicon: "http://images.rl0206.love/202304200057802.ico",
-      favicon: "/author.png",
+      favicon: "http://images.rl0206.love/202304221329083.ico",
       // 主题色 经测试，下列themecolor语句不起作用
       // themeColor: "#fb9b5f",
       apple: {
