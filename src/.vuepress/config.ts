@@ -128,39 +128,39 @@ export default defineUserConfig({
     // 允许网站通过支持该特性的浏览器将网站作为 App 安装在对应平台上。
     pwaPlugin({
       // favicon.ico一般用于作为缩略的网站标志,它显示位于浏览器的地址栏或者在标签上,用于显示网站的logo,
-      // favicon: "http://images.rl0206.love/202304200057802.ico",
-      favicon: "docs\src\.vuepress\public\favicon.ico",
+      favicon: "http://images.rl0206.love/202304200057802.ico",
+      // favicon: "/src/.vuepress/public/favicon.ico",
       // 主题色 经测试，下列themecolor语句不起作用
       // themeColor: "#fb9b5f",
       apple: {
-        icon: "docs\src\.vuepress\public\favicon.ico",
+        icon: "/src/.vuepress/public/favicon.ico",
         statusBarColor: "black",
       },
       msTile: {
-        image: "docs\src\.vuepress\public\favicon.ico",
+        image: "/src/.vuepress/public/favicon.ico",
         color: "#ffffff",
       },
       manifest: {
         icons: [
           {
-            src: "docs\src\.vuepress\public\favicon.ico",
+            src: "/src/.vuepress/public/favicon.ico",
             sizes: "512x512",
             purpose: "maskable",
             type: "image/png",
           },
           {
-            src: "docs\src\.vuepress\public\favicon.ico",
+            src: "/src/.vuepress/public/favicon.ico",
             sizes: "192x192",
             purpose: "maskable",
             type: "image/png",
           },
           {
-            src: "docs\src\.vuepress\public\favicon.ico",
+            src: "/src/.vuepress/public/favicon.ico",
             sizes: "512x512",
             type: "image/png",
           },
           {
-            src: "docs\src\.vuepress\public\favicon.ico",
+            src: "/src/.vuepress/public/favicon.ico",
             sizes: "192x192",
             type: "image/png",
           },
