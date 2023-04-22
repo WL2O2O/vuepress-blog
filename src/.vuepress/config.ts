@@ -133,34 +133,34 @@ export default defineUserConfig({
       // 主题色 经测试，下列themecolor语句不起作用
       // themeColor: "#fb9b5f",
       apple: {
-        icon: "/assets/icon/apple-icon-152.png",
+        icon: "docs\src\.vuepress\public\favicon.ico",
         statusBarColor: "black",
       },
       msTile: {
-        image: "/assets/icon/ms-icon-144.png",
+        image: "docs\src\.vuepress\public\favicon.ico",
         color: "#ffffff",
       },
       manifest: {
         icons: [
           {
-            src: "/assets/icon/chrome-mask-512.png",
+            src: "docs\src\.vuepress\public\favicon.ico",
             sizes: "512x512",
             purpose: "maskable",
             type: "image/png",
           },
           {
-            src: "/assets/icon/chrome-mask-192.png",
+            src: "docs\src\.vuepress\public\favicon.ico",
             sizes: "192x192",
             purpose: "maskable",
             type: "image/png",
           },
           {
-            src: "/assets/icon/chrome-512.png",
+            src: "docs\src\.vuepress\public\favicon.ico",
             sizes: "512x512",
             type: "image/png",
           },
           {
-            src: "/assets/icon/chrome-192.png",
+            src: "docs\src\.vuepress\public\favicon.ico",
             sizes: "192x192",
             type: "image/png",
           },

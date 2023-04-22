@@ -1,6 +1,6 @@
 @echo off
 git add .
-git commit -m "Automated deployment"
+git commit -m "web icon"
 git pull origin master
 git push origin master
 
