@@ -50,10 +50,10 @@ features:
     details: 记录我的Redis学习笔记
     link: /redis/
 
-  - title: Blog support
-    icon: blog
-    details: Listing your articles with their dates, tags and categories with some awesome layouts
-    link: https://theme-hope.vuejs.press/guide/blog/
+  - title: 面试专栏
+    icon: advance
+    details: 写一些面试题，面试导图，必备知识
+    link: /mianshi/
 
   - title: Custom theme color
     icon: palette

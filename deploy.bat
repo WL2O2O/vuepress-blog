@@ -1,6 +1,6 @@
 @echo off
 git add .
-git commit -m "modify home"
+git commit -m "update daily"
 git pull origin master
 git push origin master
 
