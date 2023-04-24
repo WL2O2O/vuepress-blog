@@ -4,13 +4,13 @@ icon: home
 title: 主页
 heroImage: /logo.png
 heroText: CS_GUIDER
-tagline: 目标:Java开发岗的"四库全书", 如果你感到迷茫或者想参考一下别人的学习规划, 就快快上路吧👇; 梦想从心中萌芽,CS_GUIDER一路陪伴!
+tagline: Flag:①Java开发岗的"四库全书";②努力日更，争取打造一个学习兼解忧小破站👇; 梦想从心中萌芽,CS_GUIDER一路陪伴!
 actions:
-  - text: 立即开始 💡
+  - text: 打坐修仙 🧑‍💻
     link: /demo/
     type: primary
 
-  - text: 资源中心 🧑‍💻
+  - text: 解忧小破站 🤔
     link: /guide/
     type: default
     
@@ -45,10 +45,10 @@ features:
     details: Come here!你可以获取到各大平台视频与资源,不许你错过,肝就完了🐒
     link: /home/introduce.md
 
-  - title: Article information
-    icon: info
-    details: Add author, writing date, reading time, word count and other information to your article
-    link: https://theme-hope.vuejs.press/guide/feature/page-info.html
+  - title: Redis专栏
+    icon: advance
+    details: 记录我的Redis学习笔记
+    link: /redis/
 
   - title: Blog support
     icon: blog

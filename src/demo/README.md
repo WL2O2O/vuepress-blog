@@ -1,17 +1,17 @@
 ---
-title: Features Demo
+title: 一起打坐修仙吧！
 index: false
-icon: discover
+icon: alias
 category:
   - Guide
 ---
 
 ## Catalog
 
-- [Markdown Enhance](markdown.md)
+- [测试一下](markdown.md)
 
-- [Page Config](page.md)
+- [准备好了吗](page.md)
 
-- [Function Disable](disable.md)
+- [真的吗?](disable.md)
 
-- [Encryption Demo](encrypt.md)
+- [开始打坐](encrypt.md)

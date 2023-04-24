@@ -1,6 +1,6 @@
 @echo off
 git add .
-git commit -m "web icon"
+git commit -m "modify home"
 git pull origin master
 git push origin master
 
