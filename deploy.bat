@@ -1,6 +1,6 @@
 @echo off
 git add .
-git commit -m "slove themecolor"
+git commit -m "add artical"
 git pull origin master
 git push origin master
 
