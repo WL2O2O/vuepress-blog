@@ -45,7 +45,7 @@ features:
   - title: 项目专栏
     icon: advance
     details: Come here!你可以获取到各大平台视频与资源,不许你错过,肝就完了🐒
-    link: /home/introduce.md
+    link: /collection/
 
   - title: Redis专栏
     icon: advance

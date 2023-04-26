@@ -20,6 +20,14 @@ export const sidebarConfig = sidebar({
     "readme.md",
     "思维导图"
   ],
+  "/collection/":[
+    "README.md",
+    "尚医通学习笔记",
+    "什么是SSM",
+    "Educoder",
+    "MyLanqiaoNote",
+  ],
+  
   // 你可以省略 .md 扩展名，以 / 结尾的路径会被推断为 /README.md(区分大小写)
   "/nice-article/itmind/": [
     "readme.md",
