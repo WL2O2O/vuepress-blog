@@ -3,7 +3,7 @@ import navbar from "./navbar";
 import { sidebarConfig } from "./sidebar";
 export default hopeTheme({
   hostname: "https://wlei224.gitee.io/",
-
+  
   // 网站图标
   logo: "/favicon.ico",
   // Git 仓库和编辑链接

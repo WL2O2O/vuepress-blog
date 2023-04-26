@@ -36,18 +36,7 @@ export const sidebarConfig = sidebar({
     "yang1",
   ],
   "/pdf/": [
-    "java",
-    "programmer-111",
-    "java-concurrent",
-    "github-java-jiaocheng-115-star",
-    "shejimoshi",
-    "java-leetcode",
-    "ali-java-shouce",
-    "yuanyifeng-c-language",
-    "bat-shuati",
-    "os",
-    "progit",
-    "jianli",
+    "README.md",
   ],
   "/xuexiluxian/": [
     {
