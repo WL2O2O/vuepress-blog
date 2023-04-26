@@ -9,6 +9,6 @@ description: Redis练习
 head:
   - - meta
     - name: keywords
-      content: 嘿嘿
+      content: Redis,Redis学习笔记
 ---    
 欢迎来到Redis篇  

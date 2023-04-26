@@ -1,3 +1,17 @@
+---
+title: SSM
+shortTitle: 一篇文章看懂何为SSM
+category:
+  - 项目专栏
+tag:
+  - 项目专栏
+description: 技术栈简介
+head:
+  - - meta
+    - name: keywords
+      content: Spring,SpringMVC,MyBatis
+--- 
+
 SSM框架是Spring、Spring MVC和MyBatis框架的整合，是标准的MVC模式。它是目前主流的Java EE企业级框架，适用于搭建各种大型的企业级应用系统。SSM框架集由Spring、MyBatis两个开源框架整合而成，其中SpringMVC是Spring中的部分内容。
 
 标准的SSM框架有四层，分别是DAO层（Mapper）、Service层、Controller层和View层。其中，持久层的DAO层（Mapper）主要负责与数据库进行联络的一些任务，如数据持久化等，而Service层提供业务逻辑处理的服务，Controller层负责接收请求并进行处理，View层则负责展示数据。

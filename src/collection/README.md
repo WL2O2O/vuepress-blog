@@ -15,3 +15,7 @@ category:
 - [Project专栏](尚医通学习笔记.md)
 
 - [Linux系列](尚医通学习笔记.md)
+
+- [SSM介绍](什么是SSM.md)
+
+- [小破站的搭建](hellovuepress.md)
