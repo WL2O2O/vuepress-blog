@@ -1,6 +1,6 @@
 @echo off
 git add .
-git commit -m "update daily"
+git commit -m "delete sth in readme"
 git pull origin master
 git push origin master
 
