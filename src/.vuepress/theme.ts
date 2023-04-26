@@ -1,8 +1,16 @@
 import { hopeTheme } from "vuepress-theme-hope";
+// 引入导航栏和侧边栏到theme.ts, theme.ts最终会引入到config.ts
 import navbar from "./navbar";
 import { sidebarConfig } from "./sidebar";
 export default hopeTheme({
+  // 配置多颜色切换
   hostname: "https://wlei224.gitee.io/",
+    themeColor: {
+      blue: "#2196f3",
+      red: "#f26d6d",
+      green: "#3eaf7c",
+      orange: "#fb9b5f",
+    },
   
   // 网站图标
   logo: "/favicon.ico",

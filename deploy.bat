@@ -1,6 +1,6 @@
 @echo off
 git add .
-git commit -m "delete sth in readme"
+git commit -m "slove themecolor"
 git pull origin master
 git push origin master
 

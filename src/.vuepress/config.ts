@@ -2,10 +2,12 @@ import { docsearchPlugin } from "@vuepress/plugin-docsearch";
 import { commentPlugin } from "vuepress-plugin-comment2";
 import { pwaPlugin } from "vuepress-plugin-pwa2";
 import { defineUserConfig } from "vuepress";
+// 引入主题配置
 import theme from "./theme";
-
 export default defineUserConfig({
-  // TODO: 配置多颜色切换
+  // TODO: 配置多颜色切换 2023/04/26 已解决
+  // 按照官方教程，配置主题多颜色需要配置在config.ts也就是本文件中，
+  // 由于把theme.ts单独拎了出去，然后在全局配置文件config.ts中引入即可，多颜色切换已解决
   
   // 中文
   lang: "zh-CN",
@@ -230,18 +232,8 @@ export default defineUserConfig({
       },
     }),
   ],
-  // 引入主题等配置元素
+  // 引入主题的相关配置元素
   theme,
-  // // 配置主题色选择器：https://theme-hope.vuejs.press/zh/guide/interface/theme-color.html#%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4%E4%B8%BB%E9%A2%98%E8%89%B2
-  // theme: hopeTheme({
-  //   themeColor: {
-  //     blue: "#2196f3",
-  //     red: "#f26d6d",
-  //     green: "#3eaf7c",
-  //     orange: "#fb9b5f",
-  //   },
-  // }),
-
   // TODO 
   // // 添加rollupOptions配置项
   // bundlerConfig: {
