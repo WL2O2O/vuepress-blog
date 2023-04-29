@@ -1,1 +1,0 @@
-import{_ as e,X as _,Y as t,Z as c}from"./framework-179baf96.js";const o={},s=c("p",null,"测试一下",-1),n=[s];function r(a,l){return _(),t("div",null,n)}const f=e(o,[["render",r],["__file","修仙前言.html.vue"]]);export{f as default};

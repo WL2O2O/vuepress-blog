@@ -34,8 +34,8 @@ export const sidebarConfig = sidebar({
     },
     "Educoder",
     "MyLanqiaoNote",
-    "hellovuepress"
-
+    "hellovuepress",
+    "Linux"
   ],
   
   // 你可以省略 .md 扩展名，以 / 结尾的路径会被推断为 /README.md(区分大小写)
