@@ -1,6 +1,6 @@
 ---
 title: 头歌实践平台笔记
-shortTitle: 头歌时间平台笔记分享
+shortTitle: 头歌实践平台笔记分享
 category:
   - 实践练习
 tag:

@@ -1,1 +1,0 @@
-import{_,X as e,Y as t,Z as c}from"./framework-179baf96.js";const o={},s=c("p",null,"欢迎来到项目篇",-1),n=[s];function r(a,l){return e(),t("div",null,n)}const f=_(o,[["render",r],["__file","尚医通学习笔记.html.vue"]]);export{f as default};
