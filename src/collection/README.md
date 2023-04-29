@@ -25,7 +25,7 @@ category:
 
 - [头歌平台](Educoder.md)
 
-- [Linux系列](shangyitong.md)
+- [Linux系列](Linux.md)
 
 - [小破站的搭建](hellovuepress.md)
 
