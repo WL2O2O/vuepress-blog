@@ -99,6 +99,61 @@ export default hopeTheme({
       // 启用博客自动摘要
       // autoExcerpt: true,
     },
+    // // Waline 配置
+    // comment: {
+    //   provider: "Waline",
+    //   serverURL: "https://cs-guider-6cmm99f2s-wl2o2o.vercel.app/",
+    //   // 为文章增加表情互动功能，设置为 true 提供默认表情，也可以通过设置表情地址数组来自定义表情图片，最大支持 8 个表情。
+    //   reaction: true,
+    // },
+    comment: {
+      provider: "Giscus",
+      repo: "WL2O2O/CS_GUIDER_Giscus",
+      repoId: "R_kgDOHBJssg",
+      category: "Announcements",
+      categoryId: "DIC_kwDOJYdTQ84CWKC6",
+    },
+    
+    // Progressive Web app，即渐进式网络应用程序，
+    // 允许网站通过支持该特性的浏览器将网站作为 App 安装在对应平台上。
+    pwa: {
+      // favicon.ico一般用于作为缩略的网站标志,它显示位于浏览器的地址栏或者在标签上,用于显示网站的logo,
+      favicon: "http://images.rl0206.love/202304221329083.ico",
+      apple: {
+        icon: "/logo.png",
+        statusBarColor: "black",
+      },
+      msTile: {
+        image: "/logo.png",
+        color: "#ffffff",
+      },
+      manifest: {
+        icons: [
+          {
+            src: "/logo.png",
+            sizes: "512x512",
+            purpose: "maskable",
+            type: "image/png",
+          },
+          {
+            src: "/logo.png",
+            sizes: "192x192",
+            purpose: "maskable",
+            type: "image/png",
+          },
+          {
+            src: "/logo.png",
+            sizes: "512x512",
+            type: "image/png",
+          },
+          {
+            src: "/logo.png",
+            sizes: "192x192",
+            type: "image/png",
+          },
+        ],
+      },
+    },
     
     // 该插件会监听页面滚动事件。当页面滚动至某个 标题锚点 后，如果存在对应的 标题链接 ，那么该插件会将路由 Hash 更改为该 标题锚点 。
     activeHeaderLinks: true,

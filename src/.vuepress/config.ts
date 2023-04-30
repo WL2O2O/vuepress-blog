@@ -1,6 +1,4 @@
 import { docsearchPlugin } from "@vuepress/plugin-docsearch";
-import { commentPlugin } from "vuepress-plugin-comment2";
-import { pwaPlugin } from "vuepress-plugin-pwa2";
 import { defineUserConfig } from "vuepress";
 // 引入主题配置
 import theme from "./theme";
@@ -125,68 +123,10 @@ export default defineUserConfig({
     ],
   ],
   plugins: [
-    // Progressive Web app，即渐进式网络应用程序，
-    // 允许网站通过支持该特性的浏览器将网站作为 App 安装在对应平台上。
-    pwaPlugin({
-      // favicon.ico一般用于作为缩略的网站标志,它显示位于浏览器的地址栏或者在标签上,用于显示网站的logo,
-      // favicon: "http://images.rl0206.love/202304200057802.ico",
-      favicon: "http://images.rl0206.love/202304221329083.ico",
-      // 主题色 经测试，下列themecolor语句不起作用
-      // themeColor: "#fb9b5f",
-      apple: {
-        icon: "/logo.png",
-        statusBarColor: "black",
-      },
-      msTile: {
-        image: "/logo.png",
-        color: "#ffffff",
-      },
-      manifest: {
-        icons: [
-          {
-            src: "/logo.png",
-            sizes: "512x512",
-            purpose: "maskable",
-            type: "image/png",
-          },
-          {
-            src: "/logo.png",
-            sizes: "192x192",
-            purpose: "maskable",
-            type: "image/png",
-          },
-          {
-            src: "/logo.png",
-            sizes: "512x512",
-            type: "image/png",
-          },
-          {
-            src: "/logo.png",
-            sizes: "192x192",
-            type: "image/png",
-          },
-        ],
-      },
-    }),
-    // 留言
-    // commentPlugin({
-    //   provider: "Giscus",
-    //   repo :"itwanger/tobebetterjavaer-giscus",
-    //   repoId:"R_kgDOHBJssg",
-    //   category:"Announcements",
-    //   categoryId:"DIC_kwDOHBJsss4COJOx",
-    // }),
-    // Waline 配置
-    commentPlugin({
-      provider: "Waline",
-      serverURL: "https://cs-guider-6cmm99f2s-wl2o2o.vercel.app/",
-      // 为文章增加表情互动功能，设置为 true 提供默认表情，也可以通过设置表情地址数组来自定义表情图片，最大支持 8 个表情。
-      reaction: true,
-    }),
-    // 只能搜索
+    // 搜索功能
     docsearchPlugin({
       appId: "2YNM597FQ3",
-      apiKey: "506633b70b19f8eeca4ae7f53e559ef4",
+      apiKey: "c57eed21810689379dcf044a75c7568b",
       indexName: "wlei224-gitee",
       // container: '### REPLACE ME WITH A CONTAINER (e.g. div) ###',
       // debug: false,

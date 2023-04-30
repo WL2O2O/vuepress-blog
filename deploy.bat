@@ -1,6 +1,6 @@
 @echo off
 git add .
-git commit -m "add artical"
+git commit -m "modify comment and docsearch"
 git pull origin master
 git push origin master
 

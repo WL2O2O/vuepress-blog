@@ -1,0 +1,1 @@
+import{_ as e,X as t,Y as n,Z as _}from"./framework-28352652.js";const c={},o=_("p",null,"总是担心基础知识遗忘的很快，于是总结了这些面试导图，现在网站放思维导图的功能这边给在研究中。",-1),s=[o];function r(a,l){return t(),n("div",null,s)}const i=e(c,[["render",r],["__file","index.html.vue"]]);export{i as default};
