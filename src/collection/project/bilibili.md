@@ -289,3 +289,141 @@ public interface DemoDao {
 ```
 
 热部署已完成。
+## 3从用户功能体验后端经典开发模式（窥得门路）
+
+### 用户模块开发概要与接口设计
+
+> **`RESTful`风格接口设计：**
+>
+> RESTful架构、HTTP方法语义、HTTP方法幂等性、RESTful接口设计原则
+>
+> **用户模块开发概要：**通用功能与通用配置、用户相关功能
+
+### RESTful接口
+
+> REST全称是：Representational State Transfer，中文为表述性状态转移，REST指的是一组架构约束条件和原则
+>
+> RESTful表述的是资源的状态转移，在Web中资源就是URI(Uniform Resource Identifier)
+>
+> 如果一个架构符合REST的约束条件和原则，我们就称它为RESTful架构，HTTP是目前与REST相关的唯一实例
+>
+> RESTful架构应该遵循统一的接口原则，应该使用标准的HTTP方法，如GET和POST，并且遵循这些方法的语义
+
+### HTTP方法的语义
+
+![image-20230429164253420](http://images.rl0206.love/202304291643114.png)
+
+### POST和PUT的区别
+
+这两个概念非常容易混淆，POST通常被认为创建资源，PUT通常被认为更新资源，而实际上，二者均可用于创建资源，更为本质的差别实在幂等性方面。
+
+> 所谓幂等性，如果一个操作执行一次和执行多次的后果是一样的，那么这个操作就具有幂等性。
+>
+> 例如：GET获取多次，   无副作用，  具有幂等性
+>
+> ​	 DELETE删除多次，无副作用，  具有幂等性
+>
+> ​	 POST提交会创建不同的资源，  不具有幂等性（实例如下图）
+>
+> ​	 PUT是创建或更新，无副作用，  具有幂等性
+
+![image-20230429165143109](http://images.rl0206.love/202304291651182.png)
+
+`Demo：RESTfulApi:`
+
+```java
+package com.imooc.bilibili.api;
+
+import org.springframework.web.bind.annotation.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+/**
+ * @author WLei224
+ * @create 2023/4/30 11:01
+ */
+@RestController
+public class RESTfulApi {
+    private final Map<Integer,Map<String,Object>> dataMap;
+    // 声明一个构造方法，同时初始化datamap，进行传参
+    public RESTfulApi() {
+        dataMap = new HashMap<>();
+
+        for (int i = 1; i < 3; i++) {
+            Map<String,Object> data = new HashMap<>();
+            data.put("id",i);
+            data.put("name","name"+i);
+            dataMap.put(i,data);
+        }
+    }
+    // 开始写RESTful的相关方法
+    @GetMapping("objects/{id}")
+    public Map<String,Object> getData(@PathVariable Integer id){
+        return dataMap.get(id);
+    }
+
+    @DeleteMapping("objects/{id}")
+    public String deleteData(@PathVariable Integer id){
+        dataMap.remove(id);
+        return "Success";
+    }
+
+    @PostMapping("objects")
+    public String postData(@RequestBody Map<String,Object> data){
+        Integer[] idArray = dataMap.keySet().toArray(new Integer[0]);
+        Arrays.sort(idArray);
+        int nextId = idArray[idArray.length-1] + 1;
+        // data.put("id",nextId);
+        // data.put("name","name" + nextId);
+        dataMap.put(nextId,data);
+        return "Success!";
+    }
+	// 区别就在于幂等性，存在则更新，不存在则新增
+    @PutMapping("objects")
+    public String putData(@RequestBody Map<String,Object> data){
+        Integer id = Integer.valueOf(String.valueOf(data.get("id")));
+        Map<String,Object> hasData = dataMap.get(id);
+        if (hasData == null) {
+            Integer[] idArray = dataMap.keySet().toArray(new Integer[0]);
+            Arrays.sort(idArray);
+            int nextId = idArray[idArray.length-1] + 1;
+            // data.put("id",nextId);
+            // data.put("name","name" + nextId);
+            dataMap.put(nextId,data);
+        } else {
+            dataMap.put(id,data);
+        }
+        return "Success!";
+    }
+}
+```
+
+### RESTful接口URL命名原则：
+
+> 1、HTTP方法后跟的URL必须是名词的复数形式
+>
+> 2、URL总不采用大小写混合的驼峰命名，尽量全部小写，如果涉及多个单词，可用”-“连接
+>
+> 3、示例：/users、/users-fans、 反例：/getUser、/getUserFans
+
+### RESTful接口URL分级原则
+
+> 1、一级用来定位资源分类，如：/users表示需要定位到用户相关资源
+>
+> 2、二级仍用来定位具体某个资源，如：/users/20/fans/1表示id为20的用户的id为1的粉丝
+
+### RESTful接口命名示例
+
+![image-20230430153315090](http://images.rl0206.love/202304301533812.png)
+
+![image-20230430153406940](http://images.rl0206.love/202304301534235.png)
+
+###  通用功能与配置
+
+通用功能：加解密工具（AES、RSA、MD5）、json数据返回类
+
+顶层POM.xml添加依赖，
+
+添加对应的工具包到service包的util包下
+
+通用配置：Json转换配置

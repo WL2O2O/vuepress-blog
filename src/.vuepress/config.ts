@@ -124,7 +124,6 @@ export default defineUserConfig({
       `,
     ],
   ],
-
   plugins: [
     // Progressive Web app，即渐进式网络应用程序，
     // 允许网站通过支持该特性的浏览器将网站作为 App 安装在对应平台上。

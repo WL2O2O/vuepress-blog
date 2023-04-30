@@ -9,6 +9,6 @@ description: 面试题，面试必备知识
 head:
   - - meta
     - name: keywords
-      content: 嘿嘿
+      content: 
 ---      
-欢迎来到面试专栏
+总是担心基础知识遗忘的很快，于是总结了这些面试导图，现在网站放思维导图的功能这边给在研究中。
