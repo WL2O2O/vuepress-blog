@@ -1,6 +1,5 @@
 import { docsearchPlugin } from "@vuepress/plugin-docsearch";
 import { defineUserConfig } from "vuepress";
-import { commentPlugin } from "vuepress-plugin-comment2";
 // 引入主题配置
 import theme from "./theme";
 export default defineUserConfig({

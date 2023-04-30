@@ -1,6 +1,6 @@
 @echo off
 git add .
-git commit -m "solve Giscus can't comment"
+git commit -m "copyCode showInMobile"
 git pull origin master
 git push origin master
 

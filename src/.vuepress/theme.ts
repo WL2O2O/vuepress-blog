@@ -5,12 +5,12 @@ import { sidebarConfig } from "./sidebar";
 export default hopeTheme({
   // 配置多颜色切换
   hostname: "https://wlei224.gitee.io/",
-    themeColor: {
-      blue: "#2196f3",
-      red: "#f26d6d",
-      green: "#3eaf7c",
-      orange: "#fb9b5f",
-    },
+  themeColor: {
+    blue: "#2196f3",
+    red: "#f26d6d",
+    green: "#3eaf7c",
+    orange: "#fb9b5f",
+  },
   
   // 网站图标
   logo: "/favicon.ico",
@@ -94,6 +94,10 @@ export default hopeTheme({
   },
 
   plugins: {
+    // 移动端开启一键复制
+    copyCode: {
+      showInMobile: true,
+    },
     // 开启博客功能
     blog: {
       // 启用博客自动摘要
