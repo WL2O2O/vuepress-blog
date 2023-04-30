@@ -109,11 +109,10 @@ export default hopeTheme({
     comment: {
       provider: "Giscus",
       repo: "WL2O2O/CS_GUIDER_Giscus",
-      repoId: "R_kgDOHBJssg",
+      repoId: "R_kgDOJYdTQw",
       category: "Announcements",
-      categoryId: "DIC_kwDOJYdTQ84CWKC6",
+      categoryId: "DIC_kwDOJYdTQ84CWKC6"
     },
-    
     // Progressive Web app，即渐进式网络应用程序，
     // 允许网站通过支持该特性的浏览器将网站作为 App 安装在对应平台上。
     pwa: {

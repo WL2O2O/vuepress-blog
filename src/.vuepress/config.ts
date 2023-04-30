@@ -1,5 +1,6 @@
 import { docsearchPlugin } from "@vuepress/plugin-docsearch";
 import { defineUserConfig } from "vuepress";
+import { commentPlugin } from "vuepress-plugin-comment2";
 // 引入主题配置
 import theme from "./theme";
 export default defineUserConfig({
@@ -60,67 +61,6 @@ export default defineUserConfig({
     //     href: "//at.alicdn.com/t/font_3180624_7cy10l7jqqh.css",
     //   },
     // ],
-
-    // 以下是配置docsearch的配置，暂时注释掉
-    // // 因为不是vuepress默认主题，因此需要手动配置搜索框的css样式，如下：
-    // [
-    //   "link",
-    //   {
-    //     rel: "stylesheet",
-    //     href: "//cdn.jsdelivr.net/npm/@docsearch/css@3"
-    //   },
-    // ],  
-    // [
-    //   "script",
-    //   {
-    //     src: "https://cdn.jsdelivr.net/npm/@docsearch/js@3"
-    //   } 
-    // ],
-    // // 性能优化
-    // [
-    //   "link",
-    //   {
-    //     rel: "preconnect",
-    //     href: "https://2YNM597FQ3-dsn.algolia.net crossorigin",
-    //     // crossorigin: /,
-    //   }
-    // ],
-    // [
-    //   'link',
-    //   { 
-    //     rel: 'stylesheet', 
-    //     href: 'https://cdn.jsdelivr.net/npm/docsearch.js@3/dist/cdn/docsearch.min.css' 
-    //   }
-    // ], 
-    // 配置waline评论插件
-    [
-      "link",
-      {
-        rel: "stylesheet",
-        href: "https://unpkg.com/@waline/client@v2/dist/waline.css"
-      }
-    ],
-    [
-      'script',
-      {
-        type: 'module',
-        src: 'https://unpkg.com/@waline/client@v2/dist/waline.mjs',
-        async: true,
-      },
-    ],
-    [
-      'script',
-      {
-        type: 'module',
-      },
-      `
-        import { init } from 'https://unpkg.com/@waline/client@v2/dist/waline.mjs';
-        init({
-          el: '#waline',
-          serverURL: 'https://cs-guider-6cmm99f2s-wl2o2o.vercel.app/',
-        });
-      `,
-    ],
   ],
   plugins: [
     // 搜索功能
@@ -128,8 +68,6 @@ export default defineUserConfig({
       appId: "2YNM597FQ3",
       apiKey: "c57eed21810689379dcf044a75c7568b",
       indexName: "wlei224-gitee",
-      // container: '### REPLACE ME WITH A CONTAINER (e.g. div) ###',
-      // debug: false,
       locales: {
         "/": {
           placeholder: "搜索文档",

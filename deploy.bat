@@ -1,6 +1,6 @@
 @echo off
 git add .
-git commit -m "modify comment and docsearch"
+git commit -m "solve Giscus can't comment"
 git pull origin master
 git push origin master
 
