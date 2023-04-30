@@ -2,10 +2,9 @@
 title: Linux常用命令积累
 shortTitle: Linux常用命令
 isOriginal: true
-date: 2023-04-01
 sticky: true
 star: true
-time: line
+timeline: true
 category:
   - 十年磨剑
 tag:

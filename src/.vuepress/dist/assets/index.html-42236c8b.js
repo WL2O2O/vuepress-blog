@@ -1,1 +1,0 @@
-import{_ as e,X as t,Y as n,Z as _}from"./framework-1b21865a.js";const c={},o=_("p",null,"欢迎来到面试专栏",-1),s=[o];function r(a,l){return t(),n("div",null,s)}const i=e(c,[["render",r],["__file","index.html.vue"]]);export{i as default};
