@@ -1,6 +1,6 @@
 @echo off
 git add .
-git commit -m "copyCode showInMobile"
+git commit -m "update tagline"
 git pull origin master
 git push origin master
 

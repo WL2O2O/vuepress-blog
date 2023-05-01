@@ -84,7 +84,7 @@ export default hopeTheme({
     // 圆角
     roundAvatar: true,
     // 座右铭
-    description:"没有什么使我停留——除了目的，纵然岸旁有玫瑰、有绿荫、有宁静的港湾，我是不系之舟。",
+    description:"目光放远(方向务必正确); 脚步放稳(眼高切勿手低); 行则降至(唯有Persistence)!",
     medias: {
       Zhihu: "https://www.zhihu.com/people/cmower",
       CSDN: "https://blog.csdn.net/qing_gee",

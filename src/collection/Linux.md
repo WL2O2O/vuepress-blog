@@ -1,10 +1,12 @@
 ---
 title: Linux常用命令积累
 shortTitle: Linux常用命令
+# 原创
 isOriginal: true
+# 是否置顶
 sticky: true
+# 是否收藏？ 默认值为false
 star: true
-timeline: true
 category:
   - 十年磨剑
 tag:

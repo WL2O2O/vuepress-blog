@@ -7,7 +7,7 @@ title: 博客
 # 改用更小的静态图片
 heroImage: /author.png
 heroText: WLei224
-tagline: 放置格言、座右铭
+tagline: 目光放远、脚步放稳、行则降至！
 heroFullScreen: false
 projects:
   - icon: project
