@@ -8,8 +8,8 @@ export default hopeTheme({
   themeColor: {
     blue: "#2196f3",
     red: "#f26d6d",
-    green: "#3eaf7c",
-    orange: "#fb9b5f",
+    green: "#00ceac",
+    purple: "#ed7196",
   },
   
   // 网站图标
@@ -84,7 +84,7 @@ export default hopeTheme({
     // 圆角
     roundAvatar: true,
     // 座右铭
-    description:"目光放远(方向务必正确); 脚步放稳(眼高切勿手低); 行则降至(唯有Persistence)!",
+    description:"目光放远(方向务必正确); 脚步放稳(眼高切勿手低); 道阻且长(静心切勿浮躁); 行则将至(唯有Persistence)!",
     medias: {
       Zhihu: "https://www.zhihu.com/people/cmower",
       CSDN: "https://blog.csdn.net/qing_gee",
