@@ -11,7 +11,7 @@ head:
   - - meta
     - name: keywords
       content: 黑马Redis跟学笔记, Redis八股文, Redis笔记
---- 
+---
 
 # 黑马Redis
 
@@ -21,13 +21,13 @@ head:
 
 优点：
 
-* 满足很多使用场景。Redis数据库比一般的键值对数据库要强大很多，Redis中的value支持多种数据类型与数据结构，例如：String、hash、list、Set、zset（有序集合）、Bitmaps（位图）、HyperLogLog、GEO（地理信息定位）等。![Redis基本数据结构](https://cdn.tobebetterjavaer.com/tobebetterjavaer/images/sidebar/sanfene/redis-10434dc7-c7a3-4c1a-b484-de3fb37669ee.png)
+* 满足很多使用场景。Redis数据库比一般的键值对数据库要强大很多，Redis中的value支持多种数据类型与数据结构，例如：String、hash、list、Set、zset（有序集合）、Bitmaps（位图）、HyperLogLog、GEO（地理信息定位）等。![Redis基本数据结构](http://images.rl0206.love/202305030140180.png)
 * 基于内存，读写性能出色。同时内存数据可定时通过快照和日志的形式保存到硬盘之上，做到断电不丢失。
 * 还提供了键过期、发布订阅、事物、流水线、Lua脚本等附加功能。
 
 应用领域：
 
-* 缓存：应用最广的地方，很多web应用都会选择使用Redis作为缓存，以降低数据源压力，提高响应速度。![Redis缓存](https://cdn.tobebetterjavaer.com/tobebetterjavaer/images/sidebar/sanfene/redis-d44c2397-5994-452f-8b7b-eb85d2b87685.png)
+* 缓存：应用最广的地方，很多web应用都会选择使用Redis作为缓存，以降低数据源压力，提高响应速度。![Redis缓存](http://images.rl0206.love/202305030140036.png)
 * 计数器：天然计数功能，可用来记录浏览量、点赞量等
 * 排行榜：借助Redis提供的列表和有序集合数据结构，合理使用数据结构构建排行榜系统
 * 社交网络：点赞与差评、粉丝、共同好友、推送、刷新
@@ -114,7 +114,7 @@ Redis如何数据持久化？
 
 * RDB：RDB持久化是把当前进程数据生成快照保存到硬盘的过程，触发RDB持久化过程分为手动触发和自动触发。RDB⽂件是⼀个压缩的⼆进制⽂件，通过它可以还原某个时刻数据库的状态。由于RDB⽂件是保存在硬盘上的，所以即使Redis崩溃或者退出，只要RDB⽂件存在，就可以⽤它来恢复还原数据库的状态。
 
-  * 手动触发分别对应save和bgsave命令: ![save和bgsave](https://cdn.tobebetterjavaer.com/tobebetterjavaer/images/sidebar/sanfene/redis-ffe56e32-34c5-453d-8859-c2febbe6a038.png)
+  * 手动触发分别对应save和bgsave命令: ![save和bgsave](http://images.rl0206.love/202305030140505.png)
     - save命令：阻塞当前Redis服务器，直到RDB过程完成为止，对于内存比较大的实例会造成长时间阻塞，线上环境不建议使用。
     - bgsave命令：Redis进程执行fork操作创建子进程，RDB持久化过程由子进程负责，完成后自动结束。阻塞只发生在fork阶段，一般时间很短。
   * 以下场景会自动触发RDB持久化：
@@ -127,7 +127,7 @@ Redis如何数据持久化？
 
   * AOF的工作流程操作：命令写入 （append）、文件同步（sync）、文件重写（rewrite）、重启加载 （load） 
 
-    ![AOF工作流程](https://cdn.tobebetterjavaer.com/tobebetterjavaer/images/sidebar/sanfene/redis-a9fb6202-b1a1-484d-a4fa-fef519090b44.png)
+    ![AOF工作流程](http://images.rl0206.love/202305030141847.png)
 
   * 流程如下：
 
@@ -192,19 +192,19 @@ Redis的复制拓扑结构可以支持单层或多层复制。
 
   * 一主一从结构是最简单的复制拓扑结构。应用场景：用于主节点出现宕机时从节点提供故障转移支持（故障恢复）
 
-    ![一主一从结构](https://cdn.tobebetterjavaer.com/tobebetterjavaer/images/sidebar/sanfene/redis-5d91a67c-dbff-4a8d-bf9d-1fe7602d5a27.png)
+    ![一主一从结构](http://images.rl0206.love/202305030141752.png)
 
 * 一主多从
 
   * 一主多从结构（又称星形拓扑结构）。应用场景：使得应用端可以利用多个从节点实现读写分离，对于读占比较大的场景，可以把读命令发送到从节点来分担主节点压力（负载均衡）。
 
-    ![一主多从结构](https://cdn.tobebetterjavaer.com/tobebetterjavaer/images/sidebar/sanfene/redis-71074254-699a-480b-bbb0-c68f364a380b.png)
+    ![一主多从结构](http://images.rl0206.love/202305030141889.png)
 
 * 树状主从
 
   * 树状主从结构（又称树状拓扑结构）。应用场景：使得从节点不但可以复制主节点数据，同时可以作为其他从节点的主节点继续向下层复制。通过引入复制中间层，可以有效降低主节点负载和需要传送给从节点的数据量（负载均衡）。
 
-    ![树状主从结构](https://cdn.tobebetterjavaer.com/tobebetterjavaer/images/sidebar/sanfene/redis-dff14203-5e01-4d1b-a775-10ee444ada54.png)
+    ![树状主从结构](http://images.rl0206.love/202305030141766.png)
 
 
 

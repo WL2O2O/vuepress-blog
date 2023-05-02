@@ -1,6 +1,6 @@
 @echo off
 git add .
-git commit -m "update redis"
+git commit -m "update media"
 git pull origin master
 git push origin master
 

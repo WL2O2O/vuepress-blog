@@ -65,10 +65,10 @@ export default hopeTheme({
   sidebar: sidebarConfig,
 
   // 页脚支持
-  footer: '<a href="https://beian.miit.gov.cn/" target="_blank">豫ICP备2021038026号-1</a>'
-  +'<img src="https://cdn.tobebetterjavaer.com/tobebetterjavaer/images/beian.png" height="15px" width="15px" />'
-  +'<a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=41030502000411">'
-  +'<span>豫公网安备 41030502000411号</span>'
+  footer: '<a href="https://beian.miit.gov.cn/" target="_blank">豫ICP备2023001822号</a>'
+  +'<img src="http://images.rl0206.love/202305030138722.png" height="15px" width="15px" />'
+  +'<a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=41078102000226">'
+  +'<span>豫公网安备 41078102000226号</span>'
   +'</a>',
   displayFooter: true,
 
@@ -86,10 +86,13 @@ export default hopeTheme({
     // 座右铭
     description:"目光放远(方向务必正确); 脚步放稳(眼高切勿手低); 道阻且长(静心切勿浮躁); 行则将至(唯有Persistence)!",
     medias: {
-      Zhihu: "https://www.zhihu.com/people/cmower",
-      CSDN: "https://blog.csdn.net/qing_gee",
-      Github: "https://github.com/itwanger",
-      Gitee: "https://gitee.com/itwanger",
+      // 无内置图标
+      // CSDN: "https://blog.csdn.net/wl2oo1",
+      Github: "https://github.com/WL2O2O",
+      Gitee: "https://gitee.com/WLei224",
+      Email: "1149630057@qq.com",
+      QQ: "1149630057",
+      Wechat: "CW_2425"
     },
   },
 
@@ -122,6 +125,7 @@ export default hopeTheme({
     pwa: {
       // favicon.ico一般用于作为缩略的网站标志,它显示位于浏览器的地址栏或者在标签上,用于显示网站的logo,
       favicon: "http://images.rl0206.love/202304221329083.ico",
+      maxSize: 3072,
       apple: {
         icon: "/logo.png",
         statusBarColor: "black",
