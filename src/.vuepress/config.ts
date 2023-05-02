@@ -53,13 +53,13 @@ export default defineUserConfig({
       `
     ],
     // 配置阿里的cdn
-    // [
-    //   "link",
-    //   {
-    //     rel: "stylesheet",
-    //     href: "//at.alicdn.com/t/font_3180624_7cy10l7jqqh.css",
-    //   },
-    // ],
+    [
+      "link",
+      {
+        rel: "stylesheet",
+        href: "//at.alicdn.com/t/font_3180624_7cy10l7jqqh.css",
+      },
+    ],
   ],
   plugins: [
     // 搜索功能
