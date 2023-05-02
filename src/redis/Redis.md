@@ -1,7 +1,7 @@
 ---
 title: Redis学习笔记
 shortTitle: Redis基础篇+八股
-starts: true
+timeline: true
 category:
   - Redis
 tag:
