@@ -90,9 +90,9 @@ export default hopeTheme({
       // CSDN: "https://blog.csdn.net/wl2oo1",
       Github: "https://github.com/WL2O2O",
       Gitee: "https://gitee.com/WLei224",
-      Email: "1149630057@qq.com",
-      QQ: "1149630057",
-      Wechat: "CW_2425"
+      // Email: "1149630057@qq.com",
+      QQ: "http://images.rl0206.love/202305031112485.png",
+      Wechat: "http://images.rl0206.love/202305031112714.png"
     },
   },
 
