@@ -27,20 +27,15 @@ features:
     details: 星球推荐, 让我们一起学习, 一起成长🏅
     link: /zhishixingqiu/
 
-  - title: GUIDER的自述
-    icon: alias
-    details: 点击这里, 你可以了解更多关于笔者的故事😉
-    link: https://theme-hope.vuejs.press/guide/layout/
-
-  - title: 我的博客之路
-    icon: comment
-    details: 👉简单谈一谈我的博客之路
-    link: https://theme-hope.vuejs.press/guide/feature/comment.html
-
-  - title: CS规划专栏
+  - title: CS规划
     icon: guide
     details: 一起拒绝精神内耗, 点这里, 欢迎光临~
-    link: https://theme-hope.vuejs.press/guide/layout/slides.html
+    link: /guider/
+
+  - title: 算法天堂
+    icon: guide
+    details: 刷吧！一起去刷那越刷越上瘾的算法！Let's Go!
+    link: /suanfa/
 
   - title: 项目专栏
     icon: advance
