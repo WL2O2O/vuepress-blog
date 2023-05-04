@@ -18,7 +18,7 @@ actions:
     
 features:
   - title: 关于CS_GUIDER
-    icon: eye
+    icon: alias
     details: 想了解小破站? 迅速获取导航? 点击这里😎
     link: /home/introduce.md
 
@@ -33,7 +33,7 @@ features:
     link: /guider/
 
   - title: 算法天堂
-    icon: guide
+    icon: advance
     details: 刷吧！一起去刷那越刷越上瘾的算法！Let's Go!
     link: /suanfa/
 
