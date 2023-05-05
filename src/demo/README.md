@@ -8,10 +8,10 @@ category:
 
 ## 修仙
 
-- [测试一下](markdown.md)
+- [测试一下](/home/introduce.md)
 
-- [准备好了吗](page.md)
+- [准备好了吗](/home/introduce.md)
 
-- [真的吗?](disable.md)
+- [真的吗?](/home/introduce.md)
 
-- [开始打坐](encrypt.md)
+- [开始打坐](/home/introduce.md)

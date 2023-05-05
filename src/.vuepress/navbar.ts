@@ -19,7 +19,7 @@ export default navbar([
     link: "/zhishixingqiu/" 
   },
   {
-    text: "CS生涯规划",
+    text: "CS规划",
     icon: "guide",
     link: "/guider/"
   },
