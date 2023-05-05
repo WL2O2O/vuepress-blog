@@ -39,7 +39,8 @@ export const sidebarConfig = sidebar({
   ],
   "/suanfa/": [
       "README.md",
-      "leetcode-26.md"
+      "001.两数之和.md",
+      "026.删除有序数组中的重复项.md",
   ],
   // 你可以省略 .md 扩展名，以 / 结尾的路径会被推断为 /README.md(区分大小写)
   "/nice-article/itmind/": [
