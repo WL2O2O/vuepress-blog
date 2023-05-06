@@ -18,8 +18,7 @@ head:
 
 - [example](README.md)
 
-- [001-leetcode](001.两数之和)
+- [001-leetcode](001.两数之和.md)
 
 - [026-leetcode](026.删除有序数组中的重复项.md)
-
 
