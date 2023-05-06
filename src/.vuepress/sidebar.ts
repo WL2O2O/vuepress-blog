@@ -1,5 +1,9 @@
 import { sidebar } from "vuepress-theme-hope";
 export const sidebarConfig = sidebar({
+  "/guider/": [
+    "README.md",
+    "javaroute"
+  ],
   "/zhishixingqiu/": [
     "readme.md",
     "map",
@@ -35,27 +39,13 @@ export const sidebarConfig = sidebar({
     "Educoder",
     "MyLanqiaoNote",
     "hellovuepress",
-    "Linux"
+    "Linux",
+    "javaessay"
   ],
   "/suanfa/": [
       "README.md",
       "001.两数之和.md",
       "026.删除有序数组中的重复项.md",
-  ],
-  // 你可以省略 .md 扩展名，以 / 结尾的路径会被推断为 /README.md(区分大小写)
-  "/nice-article/itmind/": [
-    "readme.md",
-    "ideapxideajhideayjjhmideazxjhzcmpjjcyjjhqcyx",
-    "yigkymxczideatsyqdffblwxjcywdxbxt",
-    "ideapjazjczxjhmzcmyjjhcxgxz",
-    "ideajhmideajhmideapxideajhmideazcmideayjjhm",
-    "navicatmacyjpx",
-    "navicatzxbwindowspjbjc",
-    "typorayjpx",
-    "typoramaczwpjbhyjjdkptmarkdownbjqmksimacsocom",
-    "xshellazpjbjcxshellpxffxbxt",
-    "pycharmjhpxmazjcnyrgxxbxt",
-    "yang1",
   ],
   "/pdf/": [
     "README.md",

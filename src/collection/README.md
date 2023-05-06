@@ -21,11 +21,13 @@ category:
 
 - [Project专栏](project/)
 
+- [Java随笔](javaessay.md)
+
 - [蓝桥杯](MyLanqiaoNote.md)
 
 - [头歌平台](Educoder.md)
 
 - [Linux系列](Linux.md)
 
-- [小破站的搭建](hellovuepress.md)
+- [小破站的搭建过程](hellovuepress.md)
 

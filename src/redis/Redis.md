@@ -10,7 +10,7 @@ description: Redis基础语法，以及面试八股文，一起学起来吧！
 head:
   - - meta
     - name: keywords
-      content: 黑马Redis跟学笔记, Redis八股文, Redis笔记
+      content: 黑马Redis,heima,黑马Redis跟学笔记,Redis八股文,Redis笔记,Redis
 ---
 
 # 黑马Redis
