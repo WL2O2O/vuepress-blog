@@ -4,7 +4,7 @@ icon: home
 title: 主页
 heroImage: /logo.png
 heroText: CS_GUIDER
-tagline: 🚩Flag：静心修炼、坚持日更，打造一个学习兼解忧小破站！CS_GUIDER有话说：慢下来，走稳每一步!📝
+tagline: 🚩Flag：静心修炼、坚持日更，打造一个学习兼解忧小破站！CS_GUIDER有话说：慢下来，走好每一步!📝
 # 将一些重要的链接以按钮的形式展示在主页中
 # 通过 actions 设置它们，它是一个数组，每个元素都是一个对象，包含以下键值:text: 按钮文字link: 按钮链接type: 按钮类型 (仅支持 "primary" 与 "default" (默认))
 actions:
@@ -19,12 +19,12 @@ actions:
 features:
   - title: 关于CS_GUIDER
     icon: alias
-    details: 想了解小破站? 迅速获取导航? 点击这里😎
+    details: 快速了解小破站? 获取导航? 点击这里😎
     link: /home/introduce.md
 
   - title: 知识星球
     icon: discover
-    details: 星球推荐, 让我们一起学习, 一起成长🏅
+    details: 星球推荐, 理想中的知识分享社群, 快加入一起成长🏅
     link: /zhishixingqiu/
 
   - title: CS规划
