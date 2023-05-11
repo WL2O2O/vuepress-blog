@@ -180,7 +180,7 @@ plugins：{
 }
 ```
 
-## 解决自动部署git pages：
+### 解决自动部署git pages：
 
 新创建一个autopush.bat文件，将以下代码复制到文件中：
 
@@ -225,3 +225,36 @@ chmod +x post-commit.bat
 1. 推送代码到Gitee仓库，当你执行git commit命令后，post-commit.bat脚本会自动发送Webhooks请求，触发Gitee Pages更新。
 
 通过上述步骤，你可以在Windows系统中实现自动更新Gitee Pages，提高博客发布的效率和便捷性。
+
+### 博客引入思维导图
+
+## Markmap
+
+Markmap 是一个将 Markdown 转换为思维导图的工具。它相对于主题内置的 flowchart 支持更多的格式与内容。
+
+1. 使用 [Markmapopen in new window](https://markmap.js.org/) 生成思维导图 HTML 文件（安装markmap插件，可以以思维导图的图形预览markdown文件，然后可选是否导出为html文件）
+2. 将 HTML 文件放在 `.vuepress/public/` 下
+3. 通过 `<iframe>` 插入到 Markdown
+
+输入:
+
+```html
+<iframe
+  :src="$withBase('/markmap/demo-zh.html')"
+  width="100%"
+  height="400"
+  frameborder="0"
+  scrolling="No"
+  leftmargin="0"
+  topmargin="0"
+/>
+```
+
+输出:
+
+<iframe src="/markmap/demo-zh.html" width="100%" height="400" frameborder="0" scrolling="No" leftmargin="0" topmargin="0"></iframe>
+
+------
+
+
+
