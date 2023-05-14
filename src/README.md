@@ -8,12 +8,12 @@ tagline: 🚩Flag：静心修炼、坚持日更，打造一个学习兼解忧小
 # 将一些重要的链接以按钮的形式展示在主页中
 # 通过 actions 设置它们，它是一个数组，每个元素都是一个对象，包含以下键值:text: 按钮文字link: 按钮链接type: 按钮类型 (仅支持 "primary" 与 "default" (默认))
 actions:
-  - text: 通透之路 🧑‍💻
+  - text: 架构之路 🧑‍💻
     link: /collection/
     type: primary
 
   - text: 菜鸟日记 🤔
-    link: /xiulian/
+    link: /cainiao/
     type: default
     
 features:

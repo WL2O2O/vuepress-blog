@@ -12,9 +12,14 @@ export const sidebarConfig = sidebar({
     "july",
     "august"
   ],
-  "/xiulian/": [
+  "/cainiao/": [
     "readme.md",
-    "修仙前言"
+    "修仙前言",
+    "Educoder",
+    "MyLanqiaoNote",
+    "hellovuepress",
+    "Linux",
+    "javaessay"
   ],
   "/jieyou/": [
     "readme.md",
@@ -40,11 +45,6 @@ export const sidebarConfig = sidebar({
         "SSM",
       ],
     },
-    "Educoder",
-    "MyLanqiaoNote",
-    "hellovuepress",
-    "Linux",
-    "javaessay"
   ],
   "/suanfa/": [
       "README.md",
