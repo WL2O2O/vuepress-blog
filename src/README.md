@@ -12,8 +12,8 @@ actions:
     link: /collection/
     type: primary
 
-  - text: 解忧小破站 🤔
-    link: /guide/
+  - text: 菜鸟日记 🤔
+    link: /xiulian/
     type: default
     
 features:
@@ -52,6 +52,10 @@ features:
     details: 准备输出一个面经专栏
     link: /mianshi/
 
+  - title: 解忧专栏 🤔
+    icon: advance
+    details: 有计划，缺少执行力？时常感觉无聊且学不进？那就看看这里吧，一起分享，相互指导！
+    link: /jieyou/
 copyright: false
 footer: Theme by <a href="https://theme-hope.vuejs.press/" target="_blank">VuePress Theme Hope</a> | MIT Licensed, Copyright © 2019-present Mr.Hope
 ---

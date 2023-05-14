@@ -12,9 +12,13 @@ export const sidebarConfig = sidebar({
     "july",
     "august"
   ],
-  "/demo/": [
+  "/xiulian/": [
     "readme.md",
     "修仙前言"
+  ],
+  "/jieyou/": [
+    "readme.md",
+    "intro"
   ],
   "/redis/":[
     "readme.md",
