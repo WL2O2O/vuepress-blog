@@ -496,3 +496,8 @@ public static String decrypt(String text) throws Exception {
 
 JSON就是一种轻量化数据交换格式。
 
+如何新建JSON信息转换配置？全局异常处理？
+
+Service包下新建config包，用于放配置类。
+
+此处涉及到SpringBoot相关的注解名，例如@Configuration、@Bean，这两个经常搭配使用，可以使用@Bean向SpringBoot上下文中注入一些实体类，让他们能够提前生效，@Primary可以提高优先级
