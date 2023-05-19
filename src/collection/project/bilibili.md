@@ -456,9 +456,43 @@ public class RESTfulApi {
 
 由特点可知，加密慢，但是安全。因此适合对加密次数要求较少的场景。例如：用户的登陆，加密一次，便不用加密，而且安全性还较高。
 
-`拓展：`那么非对称加密的流程是什么，在实际应用中是如何进行加密的？
+`拓展：非对称加密的流程是什么，在实际应用中是如何进行加密的？`
 
 下面以用户注册登录场景为例，来说一下非对称加密在实际中的应用：
 
 因为RSA加密中的公钥是提供给外部进行加密使用的，用户在前端注册登录时，为了保证输入的密码其安全性（防止拦截后密码泄露），将公钥返回到前端，前端使用公钥进行加密，加密后的暗文通过接口然后传给后端，后端再通过私钥进行解密，得到密码。
+
+`加解密源码：`
+
+```java
+public static String encrypt(String source) throws Exception {
+	byte[] decoded = Base64.decodeBase64(PUBLIC_KEY);
+	RSAPublicKey rsaPublicKey = (RSAPublicKey) KeyFactory.getInstance("RSA")
+			.generatePublic(new X509EncodedKeySpec(decoded));
+	Cipher cipher = Cipher.getInstance("RSA");
+	cipher.init(1, rsaPublicKey);
+	return Base64.encodeBase64String(cipher.doFinal(source.getBytes(StandardCharsets.UTF_8)));
+}
+public static String decrypt(String text) throws Exception {
+	Cipher cipher = getCipher();
+	byte[] inputByte = Base64.decodeBase64(text.getBytes(StandardCharsets.UTF_8));
+	return new String(cipher.doFinal(inputByte));
+}
+```
+
+`最后说一下MD5加密：`
+
+`MD5：`
+
+非对称加密，即不可逆，无法看到加密前的明文。
+
+`特点：`
+
+加密速度快，无需密钥，但是安全性不高需要搭配随机盐值使用。随机盐就是一个随机数，防止黑客将加密后的MD5还原回去。
+
+> `JSON返回数据类：`
+
+`什么是JSON？`
+
+JSON就是一种轻量化数据交换格式。
 
