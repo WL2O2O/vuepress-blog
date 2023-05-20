@@ -420,13 +420,13 @@ public class RESTfulApi {
 
 ###  通用功能与配置
 
-通用功能：加解密工具（`AES`、`RSA`、`MD5`）、json数据返回类
+#### **通用功能：**
+
+加解密工具（`AES`、`RSA`、`MD5`）、json数据返回类
 
 顶层POM.xml添加commons-codec依赖，
 
 添加对应的工具包到service包的util包下
-
-通用配置：Json转换配置
 
 >  `什么是AES加密`
 
@@ -490,14 +490,64 @@ public static String decrypt(String text) throws Exception {
 
 加密速度快，无需密钥，但是安全性不高需要搭配随机盐值使用。随机盐就是一个随机数，防止黑客将加密后的MD5还原回去。
 
-> `JSON返回数据类：`
+#### **通用配置：**
 
-`什么是JSON？`
+`Json信息转换配置 && 全局异常处理配置`
 
-JSON就是一种轻量化数据交换格式。
+> `JSON返回数据配置：`
 
-如何新建JSON信息转换配置？全局异常处理？
+`什么是JSON？：JSON就是一种轻量化数据交换格式。`
 
-Service包下新建config包，用于放配置类。
+`为什么会用到JSON返回数据类和数据类转换呢？因为JSON轻量化，前端需要展示不同的数据格式时，这就需要用到JSON信息转换了。`
 
-此处涉及到SpringBoot相关的注解名，例如@Configuration、@Bean，这两个经常搭配使用，可以使用@Bean向SpringBoot上下文中注入一些实体类，让他们能够提前生效，@Primary可以提高优先级
+如何新建JSON信息转换配置？
+
+Service包下新建config包，用于放以后所有的配置类。
+
+此处涉及到Spring Boot相关的注解名，下面来说一下常见的注解：
+
+```txt
+@Configuration：标志着Java文件是一个配置类，经常搭配@Bean使用，表示向上下文注入实体类，使其生效；
+@Component：是@Configuration注解的内部注解，在Spring Boot启动阶段，自动的将Configuration
+对应的文件注入到Sping Boot上下文；
+@Bean：表示向上下文注入实体类，使其生效；
+```
+
+`HttpMessageConverters：`是一个对Http方法，接收请求，或做转换的一个工具类框架，返回的就是一个@Bean类型，因为此方法是一个JSON类型，所以要引入一个fastJson依赖（目前世界行公认效率最高的工具包）。
+
+```xml
+<dependency>
+	<groupId>com.alibaba</groupId>
+	<artifactId>fastjson</artifactId>
+	<version>1.2.78</version>
+</dependency>
+```
+
+然后配置一些和fastjson相关的配置类。
+
+例如：配置相关的数据返回类型的时间格式、序列化的相关配置、
+
+```java
+fastJsonConfig.setSerializerFeatures(
+                // 格式化输出
+                SerializerFeature.PrettyFormat,
+                // 如果输出的数据是空的，那么系统会直接把这个数据去掉，不会在前端进行显示，这个配置项可以显示出一个空串
+                SerializerFeature.WriteNullStringAsEmpty,
+                // 功能同上，列表
+                SerializerFeature.WriteNullListAsEmpty,
+                // 同上，集合
+                SerializerFeature.WriteMapNullValue,
+                // 升序排列
+                SerializerFeature.MapSortField,
+                // 进制循环引用（防止循环引用后，输出多余的引用字符串） 非常有用的一个配置
+                SerializerFeature.DisableCircularReferenceDetect
+);
+```
+
+循环引用：
+
+![image-20230520144308894](http://images.rl0206.love/202305201545971.png)
+
+> `全局异常处理配置：`
+
+放在Service包下的handle包中
