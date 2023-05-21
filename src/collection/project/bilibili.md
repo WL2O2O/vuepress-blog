@@ -550,4 +550,47 @@ fastJsonConfig.setSerializerFeatures(
 
 > `全局异常处理配置：`
 
-放在Service包下的handle包中
+放在Service包下的handle包中，命名为全局异常处理类（`CommonGlobalExceptionHandler.class`）：
+
+```Java
+package com.imooc.bilibili.service.handler;
+
+import com.imooc.bilibili.dao.damain.JsonResponse;
+import com.imooc.bilibili.dao.damain.exception.ConditionException;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+
+/**
+ * @author WLei224
+ * @create 2023/5/20 16:38
+ */
+@ControllerAdvice
+@Order(Ordered.HIGHEST_PRECEDENCE) // 最高优先级
+public class CommonGlobalExceptionHandler {
+
+    @ExceptionHandler(value = Exception.class)
+    @ResponseBody
+    public JsonResponse<String> commonExceptionHandler(HttpServletRequest request, Exception e){
+        String errorMsg = e.getMessage();
+        if(e instanceof ConditionException){
+            String errorCode = ((ConditionException) e).getCode();
+            return new JsonResponse<>(errorCode,errorMsg);
+        }else{
+            return new JsonResponse<>("500",errorMsg);
+        }
+    }
+}
+```
+
+在此之前，我定义了一个条件异常，并添加了状态码等信息，然后这个类的代码功能就是，抓取条件异常信息，然后通过`json数据返回类型jsonResponse`返回异常信息。 
+
+### 用户注册与登录
+
+数据库库表设计：用户表、用户信息表
+
+相关接口：获取RSA公钥、用户注册、用户登录  
