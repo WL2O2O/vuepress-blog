@@ -593,4 +593,54 @@ public class CommonGlobalExceptionHandler {
 
 数据库库表设计：用户表、用户信息表
 
-相关接口：获取RSA公钥、用户注册、用户登录  
+```sql
+CREATE TABLE `t_user` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `phone` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '手机号',
+  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '邮箱',
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '密码',
+  `salt` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '盐值',
+  `createTime` datetime DEFAULT NULL COMMENT '创建时间',
+  `updateTime` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户表';
+
+CREATE TABLE `t_user_info` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `userId` bigint(20) DEFAULT NULL COMMENT '用户id',
+  `nick` varchar(100) DEFAULT NULL COMMENT '昵称',
+  `avatar` varchar(255) DEFAULT NULL COMMENT '头像',
+  `sign` text COMMENT '签名',
+  `gender` varchar(2) DEFAULT NULL COMMENT '性别：0男 1女 2未知',
+  `birth` varchar(20) DEFAULT NULL COMMENT '生日',
+  `createTime` datetime DEFAULT NULL COMMENT '创建时间',
+  `updateTime` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='用户基本信息表';
+```
+
+相关接口（API）：获取RSA公钥、用户注册、用户登录
+
+> 项目编写步骤：
+>
+> entity(domain)->dao（@Mapper交给MyBatis）->service(注入dao)->api(controller)注入service[先留一个bug]
+>
+> 
+>
+> 项目整体的逻辑：
+>
+> 前端访问到我们的api接口层（也就是控制层）之后，会跳转到相关的业务逻辑层（service），在业务实现逻辑层中可能会用到与数据库之间的交互，那么service就会去访问dao层（数据持久层，放的是与数据库进行交互的接口），dao层通过@Mapper注解与MyBatis产生关联，通过MyBatis进行交互，交互的结果返回给service业务逻辑层，业务逻辑层返回给控制层接口，然后在前端体现了出来。
+>
+> 以上层层嵌套的架构，可以让代码更加清晰、优雅。
+
+🆗，通过以上步骤，实体类已经新建好了，下面进行相关接口的业务逻辑书写
+
+* 获取RSA公钥
+
+@GetMapping
+
+* 用户注册
+
+@PostMapping
+
+* 用户登录
