@@ -264,7 +264,6 @@ VuePress 使用的是 Webpack 构建工具，而使用 pnpm 作为包管理器�
 
 1. 更新 pnpm 版本：首先，您可以尝试升级 pnpm 的版本。较新的版本通常会修复一些问题并提高性能。您可以使用以下命令来更新 pnpm：
 
-   Copy
 
    ````
    npm i -g pnpm@latest
@@ -273,16 +272,12 @@ VuePress 使用的是 Webpack 构建工具，而使用 pnpm 作为包管理器�
 
 2. 切换镜像源：如果您使用的是国外的包管理器镜像源，可能会导致下载速度很慢。您可以尝试切换到国内的镜像源，例如淘宝镜像、cnpmjs 等。您可以使用以下命令来设置淘宝镜像源：
 
-   Copy
-
    ````
    pnpm config set registry https://registry.npm.taobao.org
    ```
    ````
 
 3. 使用缓存：在第一次构建 VuePress 网站时，pnpm 会下载所有依赖包，并且可能会需要很长时间。一种解决方法是使用缓存，在下一次构建时从缓存中加载依赖包而不是重新下载。您可以使用以下命令来启用缓存：
-
-   Copy
 
    ````
    pnpm install --shamefully-hoist --store-dir=./.pnpm-store
@@ -295,8 +290,6 @@ VuePress 使用的是 Webpack 构建工具，而使用 pnpm 作为包管理器�
 
 5. 按需加载：如果您的 VuePress 网站包含大量的页面和组件，可以尝试使用按需加载来提高构建速度。您可以使用 VuePress 的 `async` 组件来实现按需加载，例如：
 
-   Copy
-
    ````
    <AsyncContent path="./path/to/file.vue" />
    ```
@@ -305,3 +298,34 @@ VuePress 使用的是 Webpack 构建工具，而使用 pnpm 作为包管理器�
    ````
 
 以上是一些可以尝试的方法来提高使用 pnpm 构建 VuePress 网站的速度。如果以上方法仍然无法解决您的问题，您可以尝试在 VuePress 官方的 GitHub 仓库中搜索类似的问题，或者在 VuePress 社区中询问其他人是否遇到了类似的问题并得到了解决方法。
+
+
+### 要在 VuePress 中集成百度统计，您需要遵循以下步骤：
+
+在百度统计中创建站点并获取统计代码：首先，您需要在百度统计中创建一个站点，并获取相应的统计代码。在百度统计管理面板中，选择您要添加统计代码的站点，然后单击“代码管理”按钮。在“统计代码”页面中，您将看到一段 JavaScript 代码。复制该代码以备后用。
+
+在 VuePress 中创建配置文件：接下来，您需要在 VuePress 项目中创建一个配置文件。在您的 VuePress 项目根目录下，创建一个名为 .vuepress 的文件夹，然后在该文件夹中创建一个名为 config.js 的配置文件。在 config.js 文件中添加以下代码：
+
+```
+module.exports = {
+  head: [
+    ['script', {}, `
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?YOUR_BAIDU_SITE_ID";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+      })();
+   `]
+  ]
+}
+```
+
+在代码中，将 `YOUR_BAIDU_SITE_ID` 替换为您在百度统计中创建站点时获得的站点 ID。
+
+将配置文件添加到 Git 仓库并部署网站：完成上述步骤后，将创建的 .vuepress 文件夹和其中的 config.js 文件添加到您的 Git 仓库中，并将网站部署到您的服务器或托管平台上。如果您使用的是 GitHub Pages，您可以将 .vuepress 文件夹和其中的 config.js 文件添加到您的 GitHub 仓库中，并在仓库的设置页面中将 GitHub Pages 的源设置为“master branch /docs folder”。
+
+验证是否成功添加了百度统计：最后，您可以访问您的网站并登录到百度统计管理面板中，查看是否有网站访问数据。如果一切正常，您应该能够在百度统计中看到您网站的访问数据和用户行为数据。
+
+以上是在 VuePress 中集成百度统计的步骤和代码示例。请注意，由于百度统计的代码可能会随时更新，所以建议您在将代码添加到您的 VuePress 项目中之前，先阅读并遵循百度统计的官方文档。另外，您还可以使用 VuePress 插件来方便地集成百度统计，例如 vuepress-plugin-baidu-analytics 插件。此插件可以自动在您的 VuePress 网站中添加百度统计代码，而无需手动编辑配置文件。您可以在 VuePress 插件市场中搜索该插件，并按照其文档说明进行安装和配置。
