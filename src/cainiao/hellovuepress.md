@@ -258,4 +258,50 @@ Markmap 是一个将 Markdown 转换为思维导图的工具。它相对于主�
 
 
 
-### 
+### 尝试缩短博客构建时间的方法（以下是GPT生成的步骤，待测试！）
+
+VuePress 使用的是 Webpack 构建工具，而使用 pnpm 作为包管理器则可以大幅缩短安装依赖包的时间。然而，如果在使用 pnpm 构建 VuePress 网站时仍然遇到了速度很慢的问题，可以尝试以下几个方法：
+
+1. 更新 pnpm 版本：首先，您可以尝试升级 pnpm 的版本。较新的版本通常会修复一些问题并提高性能。您可以使用以下命令来更新 pnpm：
+
+   Copy
+
+   ````
+   npm i -g pnpm@latest
+   ```
+   ````
+
+2. 切换镜像源：如果您使用的是国外的包管理器镜像源，可能会导致下载速度很慢。您可以尝试切换到国内的镜像源，例如淘宝镜像、cnpmjs 等。您可以使用以下命令来设置淘宝镜像源：
+
+   Copy
+
+   ````
+   pnpm config set registry https://registry.npm.taobao.org
+   ```
+   ````
+
+3. 使用缓存：在第一次构建 VuePress 网站时，pnpm 会下载所有依赖包，并且可能会需要很长时间。一种解决方法是使用缓存，在下一次构建时从缓存中加载依赖包而不是重新下载。您可以使用以下命令来启用缓存：
+
+   Copy
+
+   ````
+   pnpm install --shamefully-hoist --store-dir=./.pnpm-store
+   ```
+   
+   在第一次构建时，pnpm 会将依赖包缓存到指定的目录中。在下一次构建时，pnpm 将从缓存中加载依赖包，而不是重新下载。
+   ````
+
+4. 升级 Node.js 版本：VuePress 需要使用较新的版本的 Node.js，如果您的 Node.js 版本太旧，可能会导致构建速度变慢。您可以尝试将 Node.js 版本升级到最新版，并重新构建 VuePress 网站。
+
+5. 按需加载：如果您的 VuePress 网站包含大量的页面和组件，可以尝试使用按需加载来提高构建速度。您可以使用 VuePress 的 `async` 组件来实现按需加载，例如：
+
+   Copy
+
+   ````
+   <AsyncContent path="./path/to/file.vue" />
+   ```
+   
+   这将使 VuePress 仅在需要时才加载组件，而不是在构建时将所有组件都打包进最终的 JavaScript 文件中。
+   ````
+
+以上是一些可以尝试的方法来提高使用 pnpm 构建 VuePress 网站的速度。如果以上方法仍然无法解决您的问题，您可以尝试在 VuePress 官方的 GitHub 仓库中搜索类似的问题，或者在 VuePress 社区中询问其他人是否遇到了类似的问题并得到了解决方法。
