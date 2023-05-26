@@ -42,6 +42,6 @@ export default navbar([
   {
     text: "Hexo博客",
     icon: "heading", 
-    link: "https://rl0206.love"
+    link: "https://csguider.icu/hexoblog"
   },
 ]);
