@@ -643,5 +643,7 @@ CREATE TABLE `t_user_info` (
 
 @PostMapping
 
+同样是按照接口的编写顺序来进行coding，在@Api中写接口，service中写实现，
+
 * 用户登录
 

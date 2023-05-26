@@ -3,6 +3,7 @@ git add .
 git commit -m "update article"
 git pull origin master
 git push origin master
+git push github master
 
 REM Build the website using VuePress
 @REM pnpm docs:build
