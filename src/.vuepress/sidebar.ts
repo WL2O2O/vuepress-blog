@@ -19,7 +19,8 @@ export const sidebarConfig = sidebar({
     "MyLanqiaoNote",
     "hellovuepress",
     "Linux",
-    "javaessay"
+    "javaessay",
+    "DNS"
   ],
   "/jieyou/": [
     "readme.md",
