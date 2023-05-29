@@ -1,8 +1,8 @@
 @echo off
 git add .
 git commit -m "update article"
-git pull origin master
-git push origin master
+@REM git pull origin master
+@REM git push origin master
 git pull github master
 git push github master
 
