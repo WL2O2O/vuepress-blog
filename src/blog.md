@@ -7,7 +7,7 @@ title: 博客
 # 改用更小的静态图片
 heroImage: /author.png
 heroText: WLei224
-tagline: 目光放远、脚步放稳、道阻且长，行则将至！
+tagline: 芝兰生于幽谷兮，不以无人而不芳; 目光放远、脚步放稳、道阻且长，行则将至！
 heroFullScreen: false
 projects:
   - icon: project
