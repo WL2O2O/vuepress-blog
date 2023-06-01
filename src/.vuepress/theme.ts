@@ -44,8 +44,7 @@ export default hopeTheme({
   encrypt: {
     config: {
       // 这只会加密 config/page.html
-      "/nice-article/itmind/xshellazpjbjcxshellpxffxbxt.html": ["1110", "0224"],
-      "/nice-article/itmind/ideapjazjczxjhmzcmyjjhcxgxz.html": ["1110", "0224"],
+      "/collection/project/article.html":["1110","0224"],
     },
   },
   // 提示文字
