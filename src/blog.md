@@ -13,7 +13,7 @@ projects:
   - icon: project
     name: 项目名称
     desc: 项目详细描述
-    link: https://your.project.link
+    link: https://wlei224.gitee.io/collection/project
 
   - icon: link
     name: 链接名称

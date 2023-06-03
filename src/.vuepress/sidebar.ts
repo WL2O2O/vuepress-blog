@@ -20,7 +20,8 @@ export const sidebarConfig = sidebar({
     "hellovuepress",
     "Linux",
     "javaessay",
-    "DNS"
+    "DNS",
+    "article"
   ],
   "/jieyou/": [
     "readme.md",
@@ -44,7 +45,6 @@ export const sidebarConfig = sidebar({
         "shangyitong",
         "bilibili",
         "SSM",
-        "article"
       ],
     },
   ],
