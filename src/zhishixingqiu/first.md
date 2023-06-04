@@ -1,6 +1,7 @@
 ---
 title: 沉默王二的编程知识星球-Java程序员进阶之路-第一期简介
 shortTitle: 知识星球第一期简介
+author: 沉默王二
 isOriginal: false
 category:
   - 知识星球

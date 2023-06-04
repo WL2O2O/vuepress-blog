@@ -1,6 +1,7 @@
 ---
 title: 五月总结-沉默王二-Java程序员进阶之路-知识星球
 shortTitle: 知识星球五月总结
+author: 沉默王二
 category:
   - 知识星球
 tag:

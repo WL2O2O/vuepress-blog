@@ -1,6 +1,7 @@
 ---
 title: 欢迎加入沉默王二知识星球-Java程序员进阶之路
 shortTitle: 欢迎加入二哥的编程星球
+author: 沉默王二
 sticky: true
 star: true
 isOriginal: true
