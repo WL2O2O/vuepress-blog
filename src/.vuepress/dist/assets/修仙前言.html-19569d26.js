@@ -1,0 +1,1 @@
+import{_,X as t,Y as c,Z as e}from"./framework-1ff68d8d.js";const l={},n=e("ul",null,[e("li",null,"日常记录")],-1),o=[n];function s(r,a){return t(),c("div",null,o)}const u=_(l,[["render",s],["__file","修仙前言.html.vue"]]);export{u as default};
