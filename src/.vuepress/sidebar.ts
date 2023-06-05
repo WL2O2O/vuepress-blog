@@ -21,7 +21,8 @@ export const sidebarConfig = sidebar({
     "Linux",
     "javaessay",
     "DNS",
-    "article"
+    "article",
+    "transaction"
   ],
   "/jieyou/": [
     "readme.md",
