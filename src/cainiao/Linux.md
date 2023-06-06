@@ -1,11 +1,8 @@
 ---
 title: Linux常用命令积累
 shortTitle: Linux常用命令
-# 原创
 isOriginal: true
-# 是否置顶
 sticky: true
-# 是否收藏？ 默认值为false
 star: true
 category:
   - 菜鸟日记
@@ -16,7 +13,7 @@ head:
   - - meta
     - name: keywords
       content: Linux,Docker,Linux常用命令,docker常用命令,FireWall常用命令
---- 
+---
 ```cmd
  docker相关命令：
  	#docker pull之后，使用如下命令进行创建和启动容器，因为懒的配置，所以使用默认配置。
@@ -49,4 +46,4 @@ head:
  --permanent：表示设置为持久；
  --add-port：标识添加的端口
  --remove-port:标识删除的端口
- ```
+```
