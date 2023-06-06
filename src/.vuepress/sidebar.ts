@@ -22,7 +22,8 @@ export const sidebarConfig = sidebar({
     "javaessay",
     "DNS",
     "article",
-    "transaction"
+    "transaction",
+    "mysql"
   ],
   "/jieyou/": [
     "readme.md",
@@ -95,7 +96,7 @@ export const sidebarConfig = sidebar({
     "network",
     "rocketmq",
   ],
-  // 必须放在最后面
+  // 必须放在最后面,这是默认目录
   "/": [
     {
       text: "一、前言",
