@@ -23,7 +23,8 @@ export const sidebarConfig = sidebar({
     "DNS",
     "article",
     "transaction",
-    "mysql"
+    "mysql",
+    "DMDatabase"
   ],
   "/jieyou/": [
     "readme.md",
