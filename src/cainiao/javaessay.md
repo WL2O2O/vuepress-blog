@@ -14,7 +14,7 @@ head:
 
 * *写在前面：*
   * 【免责声明：】本笔记来源自互联，是笔者结合自己的理解进行整理归纳发表在hexo博客只便于个人学习使用，若涉及到侵权，请联系我，谢谢！
-  * 个人博客地址：https://wl2o2o.github.io/
+  * 个人博客地址：https://csguider.icu/
 
 
 * 写作背景:
@@ -730,8 +730,6 @@ byte<short(char)<int<long<float<doublepackage step2;
 
 当预先定义方法无法满足我们的要求时，就需要自定义一些方法，比如说，我们来定义这样一个方法，用来检查数字是偶数还是奇数。
 
-
-
 ```java
 public static void findEvenOdd(int num) {
     if (num % 2 == 0) {
@@ -745,8 +743,6 @@ public static void findEvenOdd(int num) {
 方法名叫做 `findEvenOdd`，访问权限修饰符是 public，并且是静态的（static），返回类型是 void，参数有一个整型（int）的 num。方法体中有一个 if else 语句，如果 num 可以被 2 整除，那么就打印这个数字是偶数，否则就打印这个数字是奇数。
 
 方法被定义好后，如何被调用呢？
-
-
 
 ```java
 /**
@@ -772,9 +768,148 @@ public class EvenOddDemo {
 
 当一个方法被 static 关键字修饰时，它就是一个静态方法。换句话说，静态方法是属于类的，不属于类实例的（不需要通过 new 关键字创建对象来调用，直接通过类名就可以调用）。
 
+## 那么，Java中如何进行创建对象？
 
+创建对象的四种方式：
 
+以下是四种方式创建对象的示例代码：
 
+* 使用new关键字创建新对象
+
+```
+public class Person {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Person person = new Person("Tom", 30);
+    }
+}
+```
+
+* 使用反射机制创建新对象
+
+```
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
+public class Person {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        Class<?> clazz = Person.class;
+        Constructor<?> constructor = clazz.getConstructor(String.class, int.class);
+        Person person = (Person) constructor.newInstance("Tom", 30);
+    }
+}
+```
+
+* 使用clone机制创建新对象
+
+```
+class Person implements Cloneable {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) throws CloneNotSupportedException {
+        Person person1 = new Person("Tom", 30);
+        Person person2 = (Person) person1.clone();
+    }
+}
+```
+
+* 使用序列化机制创建新对象
+
+```
+import java.io.*;
+
+class Person implements Serializable {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        Person person1 = new Person("Tom", 30);
+
+        // 将person1对象序列化成字节数组
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(bos);
+        oos.writeObject(person1);
+
+        // 将字节数组反序列化成person2对象
+        ByteArrayInputStream bis = new ByteArrayInputStream(bos.toByteArray());
+        ObjectInputStream ois = new ObjectInputStream(bis);
+        Person person2 = (Person) ois.readObject();
+    }
+}
+```
+
+这四种方式都可以用来创建新对象，选择哪种方式取决于具体的需求和场景。需要注意的是，使用反射和序列化机制创建对象可能会对性能带来一定的影响，**因此在需要高性能的场景下，最好使用new或clone机制创建对象。**
 
 ## 访问权限控制
 
@@ -1478,10 +1613,6 @@ String类
 String cmower = "沉默王二，一枚有趣的
 ```
 
-
-
-
-
 ## *可变参数
 
 
@@ -1729,14 +1860,11 @@ true
 ```Java
 Writer writer = new Writer();
 writer.setName("沉默王二");
-
 ```
 
 像上面这个例子，就可以理解为“正射”。而反射就意味着一开始我们不知道要初始化的类到底是什么，也就没法直接使用 `new` 关键字创建对象了。
 
 我们只知道这个类的一些基本信息，就好像我们看电影的时候，为了抓住一个犯罪嫌疑人，警察就会问一些目击证人，根据这些证人提供的信息，找专家把犯罪嫌疑人的样貌给画出来——这个过程，就可以称之为**反射**。
-
-
 
 反射的缺点：
 
@@ -1757,7 +1885,49 @@ writer.setName("沉默王二");
 
 [深入理解](https://dunwu.github.io/javacore/basics/java-reflection.html#_1-%E5%8F%8D%E5%B0%84%E7%AE%80%E4%BB%8B)
 
-
+> 反射是指在运行时动态地获取类的信息以及操作对象的能力。Java语言提供了反射机制，允许程序在运行时动态地获取类的信息，如类名、字段、方法、注解等，并且可以使用获取到的信息创建对象、调用方法、修改属性等操作。反射机制是Java语言的一种特性，也是很多框架和工具的核心实现。
+>
+> 反射机制的原理是基于Java虚拟机的动态性和类加载机制。在Java程序运行时，每个类都会被Java虚拟机加载到内存中，并生成一个Class对象，用于描述这个类的信息。通过Class对象可以获取类的所有信息，如类名、字段、方法、注解等。Java程序可以通过获取Class对象的方式来操作类的信息，这就是反射机制的基本原理。
+>
+> 在Java中，获取Class对象的方式有三种：
+>
+> 1. 使用类的.class属性获取Class对象
+>
+> ```
+> Class<?> clazz = Person.class;
+> ```
+>
+> ​	2.   调用对象的getClass()方法获取Class对象
+>
+> ```
+> Person person = new Person();
+> Class<?> clazz = person.getClass();
+> ```
+>
+> 3.   使用Class.forName()方法获取Class对象
+>
+> ```
+> Class<?> clazz = Class.forName("com.example.Person");
+> ```
+>
+> 一旦获取了Class对象，就可以通过Class对象来获取类的信息和操作对象。例如，可以使用Class对象的getDeclaredFields()方法获取类的所有字段信息，并通过反射机制来修改字段的值；也可以使用Class对象的getDeclaredMethods()方法获取类的所有方法信息，并通过反射机制来调用方法。
+>
+> 需要注意的是，反射机制会对性能产生一定的影响，因为它需要在运行时动态地获取类的信息，而这种操作比编译时静态绑定的操作更耗时。因此，在需要高性能的场景下，最好避免使用反射机制。
+>
+> **扩展：Class<?> clazz什么意思？**
+>
+> `Class<?>  clazz` 是Java泛型的语法，其中`Class<?>`表示一个未知类型的Class对象，而clazz是一个变量名，可以根据需要进行修改。
+>
+> 这里的问号表示一个通配符，表示该变量可以接受任何类型的Class对象。这种语法被称为无限制通配符类型，它可以用来表示不确定类型的情况，比如获取一个未知类的Class对象。
+>
+> 需要注意的是，由于使用了通配符类型，编译器无法确定变量clazz的具体类型，因此在使用clazz时需要注意类型转换的问题。通常情况下，可以使用强制类型转换将clazz转换为具体的类型，例如：
+>
+> ```
+> Class<?> clazz = Person.class;
+> Person person = (Person) clazz.newInstance();
+> ```
+>
+> 在上述代码中，clazz是一个Class<?>类型的变量，表示一个未知类型的Class对象，但是由于我们知道clazz对应的是Person类，因此可以将clazz强制转换为Person类型，然后使用反射机制创建Person对象。需要注意的是，由于newInstance()方法返回的是Object类型，因此需要将其强制转换为Person类型。
 
 ## 集合框架（容器）
 

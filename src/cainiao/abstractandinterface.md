@@ -84,6 +84,7 @@ public class Circle implements Shape {
 - 接口中的方法默认为public，且不能有方法体；
 - 接口中的属性默认为public static final，且不能被修改；
 - JDK8之后，接口中可以有默认方法和静态方法。
+- JDK9 在接⼝中引⼊了私有⽅法和私有静态⽅法。
 
 从设计层面来说：
 
