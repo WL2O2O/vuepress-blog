@@ -46,3 +46,11 @@ head:
 * 垃圾回收
 
 ​		finalize()
+
+## JDK8新特性
+
+![](https://cdn.tobebetterjavaer.com/tobebetterjavaer/images/sidebar/sanfene/javase-37.png)
+
+
+
+![](https://cdn.tobebetterjavaer.com/tobebetterjavaer/images/sidebar/sanfene/javase-38.png)
