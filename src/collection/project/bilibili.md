@@ -79,7 +79,7 @@ head:
 
 ### **项目运行:**
 
-在`pom.xml`文件中一i纳入`SpringBoot`框架依赖:
+在`pom.xml`文件中加入`SpringBoot`框架依赖:
 
 ```xml
 <parent>
