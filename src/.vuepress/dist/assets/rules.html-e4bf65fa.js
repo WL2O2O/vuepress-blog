@@ -1,1 +1,0 @@
-import{_ as e,X as t,Y as s,Z as _}from"./framework-bb3ac5ef.js";const c={},o=_("p",null,"写好简历就相当于扣好了衣服的第一粒扣子，尤为重要！",-1),n=[o];function r(l,a){return t(),s("div",null,n)}const d=e(c,[["render",r],["__file","rules.html.vue"]]);export{d as default};

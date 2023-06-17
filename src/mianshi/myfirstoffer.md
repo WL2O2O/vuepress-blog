@@ -63,31 +63,31 @@ head:
 >   - ```java
 >     public class Counter {
 >         private int count; // 计数器
->     
+>         
 >         // 增加计数器的值
 >         public synchronized void increment() {
 >             count++;
 >         }
->     
+>         
 >         // 减少计数器的值
 >         public synchronized void decrement() {
 >             count--;
 >         }
->     
+>         
 >         // 获取计数器的值
 >         public int getCount() {
 >             return count;
 >         }
 >     }
->     
+>         
 >     public class CounterThread extends Thread {
 >         private Counter counter; // 计数器对象
->     
+>         
 >         // 构造方法，传入计数器对象
 >         public CounterThread(Counter counter) {
 >             this.counter = counter;
 >         }
->     
+>         
 >         // 线程执行的方法
 >         public void run() {
 >             for (int i = 0; i < 10000; i++) {
@@ -95,26 +95,26 @@ head:
 >             }
 >         }
 >     }
->     
+>         
 >     public class Main {
 >         public static void main(String[] args) throws InterruptedException {
 >             Counter counter = new Counter(); // 创建计数器对象
 >             CounterThread thread1 = new CounterThread(counter); // 创建线程1，传入计数器对象
 >             CounterThread thread2 = new CounterThread(counter); // 创建线程2，传入计数器对象
->     
+>         
 >             thread1.start(); // 启动线程1
 >             thread2.start(); // 启动线程2
->     
+>         
 >             thread1.join(); // 等待线程1执行完毕
 >             thread2.join(); // 等待线程2执行完毕
->     
+>         
 >             System.out.println(counter.getCount()); // 输出计数器的值
 >         }
 >     }
 >     Counter类表示一个计数器，包含了increment()和decrement()方法用于增加和减少计数器的值，以及getCount()方法用于获取计数器的值。在CounterThread类中，通过调用increment()方法来增加计数器的值。在Main类中，创建了两个CounterThread线程对象，并启动它们，最后通过join()方法等待它们执行完毕，并输出计数器的值。
->     
+>         
 >     在increment()和decrement()方法中，加上了synchronized关键字，用于保证线程同步和互斥，避免多个线程同时修改计数器的值。
->     
+>         
 >     在Main类的主方法中，首先创建了一个Counter对象，然后创建了两个CounterThread线程对象，并启动它们。使用join()方法等待它们执行完毕，最后输出计数器的值。
 >     ```
 >
@@ -146,15 +146,15 @@ head:
 >         <property name="messageService" ref="messageService"/>
 >     </bean>
 >     在这个配置文件中，配置了一个id为messageService的bean，它的类型为MessageServiceImpl。然后配置了一个id为messagePrinter的bean，它的类型为MessagePrinter，其中有一个名为messageService的属性，它的值通过ref属性指向了messageService这个bean。
->     
+>         
 >     最后，定义MessagePrinter类，它通过依赖注入的方式获取MessageService对象，并输出消息：
 >     public class MessagePrinter {
 >         private MessageService messageService;
->     
+>         
 >         public void setMessageService(MessageService messageService) {
 >             this.messageService = messageService;
 >         }
->     
+>         
 >         public void printMessage() {
 >             System.out.println(messageService.getMessage());
 >         }
@@ -182,13 +182,13 @@ head:
 >     public class AppConfig {
 >     }
 >     在这个配置类中，使用@Configuration注解标记它为Spring配置类，同时使用@ComponentScan注解指定要扫描的包路径，使得Spring容器可以将被标记为@Service的类自动创建对象并管理它们的生命周期。
->     
+>         
 >     最后，定义MessagePrinter类，它通过依赖注入的方式获取MessageService对象，并输出消息：
 >     @Component
 >     public class MessagePrinter {
 >         @Autowired
 >         private MessageService messageService;
->     
+>         
 >         public void printMessage() {
 >             System.out.println(messageService.getMessage());
 >         }
@@ -206,43 +206,43 @@ head:
 >   - 销毁：Spring容器销毁Bean实例时调用Bean的销毁方法，可以通过实现DisposableBean接口或使用@PreDestroy注解来定义销毁方法。
 >   - ```
 >     首先定义一个类：
->     
+>         
 >     java
 >     Copy
 >     public class MyBean implements InitializingBean, DisposableBean {
 >         private String message;
->     
+>         
 >         public void setMessage(String message) {
 >             this.message = message;
 >         }
->     
+>         
 >         public String getMessage() {
 >             return message;
 >         }
->     
+>         
 >         @Override
 >         public void afterPropertiesSet() throws Exception {
 >             System.out.println("MyBean initialized.");
 >         }
->     
+>         
 >         @Override
 >         public void destroy() throws Exception {
 >             System.out.println("MyBean destroyed.");
 >         }
 >     }
 >     在这个类中，定义了一个message属性和Getter/Setter方法，实现了InitializingBean和DisposableBean接口中的方法。在afterPropertiesSet()方法中，输出初始化信息；在destroy()方法中，输出销毁信息。
->     
+>         
 >     接下来，在Spring的配置文件中配置Bean的生命周期：
->     
+>         
 >     xml
 >     Copy
 >     <bean id="myBean" class="com.example.MyBean" init-method="afterPropertiesSet" destroy-method="destroy">
 >         <property name="message" value="Hello, World!"/>
 >     </bean>
 >     在这个配置文件中，首先定义了一个id为myBean的Bean，它的类型为MyBean。然后使用property元素注入了一个名为message的属性，它的值为"Hello, World!"。同时，使用init-method属性指定了Bean初始化时要调用的方法为afterPropertiesSet()，使用destroy-method属性指定了Bean销毁时要调用的方法为destroy()。
->     
+>         
 >     最后，运行代码：
->     
+>         
 >     java
 >     Copy
 >     public class Main {
@@ -254,9 +254,9 @@ head:
 >         }
 >     }
 >     在这个代码中，首先创建了一个Spring容器，并从容器中获取了一个id为myBean的Bean。然后输出了它的message属性的值。最后，注册了一个JVM关闭的钩子，使得Spring容器在JVM关闭时能够正确地销毁Bean。
->     
+>         
 >     在运行代码时，会输出如下信息：
->     
+>         
 >     Copy
 >     MyBean initialized.
 >     Hello, World!
@@ -266,37 +266,37 @@ head:
 >
 >   - ```
 >     下面是一个使用注解的示例代码，演示了Bean的生命周期过程：
->     
+>         
 >     首先定义一个类：
->     
+>         
 >     java
 >     Copy
 >     @Component
 >     public class MyBean implements InitializingBean, DisposableBean {
 >         private String message;
->     
+>         
 >         public void setMessage(String message) {
 >             this.message = message;
 >         }
->     
+>         
 >         public String getMessage() {
 >             return message;
 >         }
->     
+>         
 >         @PostConstruct
 >         public void init() {
 >             System.out.println("MyBean initialized.");
 >         }
->     
+>         
 >         @PreDestroy
 >         public void destroy() {
 >             System.out.println("MyBean destroyed.");
 >         }
 >     }
 >     在这个类中，使用@Component注解标记了它为一个Spring组件，并实现了InitializingBean和DisposableBean接口中的方法。在init()方法上使用@PostConstruct注解，表示它是Bean初始化时要调用的方法；在destroy()方法上使用@PreDestroy注解，表示它是Bean销毁时要调用的方法。
->     
+>         
 >     接下来，在Spring的配置类中配置Bean的生命周期：
->     
+>         
 >     java
 >     Copy
 >     @Configuration
@@ -310,9 +310,9 @@ head:
 >         }
 >     }
 >     在这个配置类中，使用@Configuration注解标记它为Spring配置类，并使用@ComponentScan注解指定要扫描的包路径。然后使用@Bean注解标记了一个名为myBean的Bean，同时指定了它的初始化方法为init()，销毁方法为destroy()。在@Bean方法中创建了一个MyBean对象，并设置了它的message属性为"Hello, World!"。
->     
+>         
 >     最后，运行代码：
->     
+>         
 >     java
 >     Copy
 >     public class Main {
@@ -324,9 +324,9 @@ head:
 >         }
 >     }
 >     在这个代码中，首先创建了一个AnnotationConfigApplicationContext，使用它加载了AppConfig配置类。然后从容器中获取了一个MyBean对象，并输出了它的message属性的值。最后，关闭了Spring容器。在容器关闭时，会自动调用MyBean的销毁方法。
->     
+>         
 >     在运行代码时，会输出如下信息：
->     
+>         
 >     Copy
 >     MyBean initialized.
 >     Hello, World!
@@ -366,15 +366,15 @@ head:
 >         <property name="messageService" ref="messageService"/>
 >     </bean>
 >     在这个配置文件中，配置了一个id为messageService的bean，它的类型为MessageServiceImpl。然后配置了一个id为messagePrinter的bean，它的类型为MessagePrinter，其中有一个名为messageService的属性，它的值通过ref属性指向了messageService这个bean。
->     
+>         
 >     最后，在MessagePrinter类中使用依赖注入的方式获取MessageService对象，并输出消息：
 >     public class MessagePrinter {
 >         private MessageService messageService;
->     
+>         
 >         public void setMessageService(MessageService messageService) {
 >             this.messageService = messageService;
 >         }
->     
+>         
 >         public void printMessage() {
 >             System.out.println(messageService.getMessage());
 >         }
@@ -385,16 +385,16 @@ head:
 >   - ```
 >     注解：
 >     下面是一个使用注解的示例代码，演示了依赖注入的过程：
->     
+>         
 >     首先定义一个接口：
->     
+>         
 >     java
 >     Copy
 >     public interface MessageService {
 >         String getMessage();
 >     }
 >     然后定义一个实现类：
->     
+>         
 >     java
 >     Copy
 >     @Service
@@ -404,9 +404,9 @@ head:
 >         }
 >     }
 >     在这个类中，使用@Service注解标记了它为一个Spring组件。
->     
+>         
 >     接下来，在Spring的配置类中配置依赖注入：
->     
+>         
 >     java
 >     Copy
 >     @Configuration
@@ -414,24 +414,24 @@ head:
 >     public class AppConfig {
 >     }
 >     在这个配置类中，使用@Configuration注解标记它为Spring配置类，并使用@ComponentScan注解指定要扫描的包路径，使得Spring容器可以自动创建并管理被注解标记的组件。
->     
+>         
 >     最后，在MessagePrinter类中使用依赖注入的方式获取MessageService对象，并输出消息：
->     
+>         
 >     java
 >     Copy
 >     @Component
 >     public class MessagePrinter {
 >         @Autowired
 >         private MessageService messageService;
->     
+>         
 >         public void printMessage() {
 >             System.out.println(messageService.getMessage());
 >         }
 >     }
 >     在这个类中，使用@Component注解标记了它为一个Spring组件，并使用@Autowired注解标记了messageService属性需要进行依赖注入。当Spring容器创建MessagePrinter对象时，会自动将messageService属性注入到它中。通过这种方式，对象之间的关系更加清晰、易于维护。
->     
+>         
 >     最后，运行代码：
->     
+>         
 >     java
 >     Copy
 >     public class Main {
@@ -443,9 +443,9 @@ head:
 >         }
 >     }
 >     在这个代码中，首先创建了一个AnnotationConfigApplicationContext，使用它加载了AppConfig配置类。然后从容器中获取了一个MessagePrinter对象，并调用了它的printMessage()方法。最后，关闭了Spring容器。
->     
+>         
 >     在运行代码时，会输出如下信息：
->     
+>         
 >     Copy
 >     Hello, World!
 >     在这个输出中，可以看到依赖注入的过程已经被正确地执行了。
@@ -461,16 +461,16 @@ head:
 >   - 切面织入（Weaving）：将切面和目标对象的方法进行合并，创建一个代理对象。
 >   - ```
 >     下面是一个简单的示例代码，演示了Spring AOP的使用方法：
->     
+>         
 >     首先定义一个接口：
->     
+>         
 >     java
 >     Copy
 >     public interface MessageService {
 >         String getMessage();
 >     }
 >     然后定义一个实现类：
->     
+>         
 >     java
 >     Copy
 >     @Service
@@ -480,9 +480,9 @@ head:
 >         }
 >     }
 >     在这个类中，使用@Service注解标记了它为一个Spring组件。
->     
+>         
 >     接下来，定义一个切面：
->     
+>         
 >     java
 >     Copy
 >     @Aspect
@@ -492,21 +492,21 @@ head:
 >         public void logBefore(JoinPoint joinPoint) {
 >             System.out.println("Before method execution: " + joinPoint.getSignature().getName());
 >         }
->     
+>         
 >         @AfterReturning(pointcut = "execution(* com.example.MessageService.*(..))", returning = "result")
 >         public void logAfterReturning(JoinPoint joinPoint, Object result) {
 >             System.out.println("After method execution: " + joinPoint.getSignature().getName() + ", result: " + result);
 >         }
->     
+>         
 >         @AfterThrowing(pointcut = "execution(* com.example.MessageService.*(..))", throwing = "ex")
 >         public void logAfterThrowing(JoinPoint joinPoint, Throwable ex) {
 >             System.out.println("After method execution (exception thrown): " + joinPoint.getSignature().getName() + ", exception: " + ex.getMessage());
 >         }
 >     }
 >     在这个类中，使用@Aspect注解标记了它为一个切面。然后定义了三个通知方法，分别是前置通知、后置通知和异常通知。使用@Before注解标记了前置通知方法，使用@AfterReturning注解标记了后置通知方法，使用@AfterThrowing注解标记了异常通知方法。在这些注解的参数中，使用execution()函数定义了切入的方法，它的参数是一个切点表达式，指定了要切入的方法。
->     
+>         
 >     最后，在Main类中使用MessageService对象，并输出消息：
->     
+>         
 >     java
 >     Copy
 >     public class Main {
@@ -518,9 +518,9 @@ head:
 >         }
 >     }
 >     在这个代码中，首先创建了一个AnnotationConfigApplicationContext，使用它加载了LoggingAspect和MessageServiceImpl两个组件。然后从容器中获取了一个MessageService对象，并调用了它的getMessage()方法。在调用过程中，切面中定义的通知方法会被自动执行。最后，关闭了Spring容器。
->     
+>         
 >     在运行代码时，会输出如下信息：
->     
+>         
 >     oxygene
 >     Copy
 >     Before method execution: getMessage
@@ -542,13 +542,13 @@ head:
 >   - 哈希表：一种以键值对形式存储数据的数据结构，可以通过键快速访问对应的值，适用于需要快速查找、插入、删除数据的场景。
 >   - ```
 >     数组：
->     
+>         
 >     java
 >     Copy
 >     int[] arr = {1, 2, 3, 4, 5};
 >     System.out.println(arr[2]); // 输出 3
 >     链表：
->     
+>         
 >     java
 >     Copy
 >     class ListNode {
@@ -559,7 +559,7 @@ head:
 >             this.next = null;
 >         }
 >     }
->     
+>         
 >     ListNode head = new ListNode(1);
 >     head.next = new ListNode(2);
 >     head.next.next = new ListNode(3);
@@ -567,7 +567,7 @@ head:
 >     System.out.println(head.next.val); // 输出 2
 >     System.out.println(head.next.next.val); // 输出 3
 >     栈：
->     
+>         
 >     java
 >     Copy
 >     Stack<Integer> stack = new Stack<>();
@@ -578,7 +578,7 @@ head:
 >     System.out.println(stack.pop()); // 输出 2
 >     System.out.println(stack.pop()); // 输出 1
 >     队列：
->     
+>         
 >     java
 >     Copy
 >     Queue<Integer> queue = new LinkedList<>();
@@ -589,7 +589,7 @@ head:
 >     System.out.println(queue.poll()); // 输出 2
 >     System.out.println(queue.poll()); // 输出 3
 >     二叉树：
->     
+>         
 >     java
 >     Copy
 >     class TreeNode {
@@ -602,7 +602,7 @@ head:
 >             this.right = null;
 >         }
 >     }
->     
+>         
 >     TreeNode root = new TreeNode(1);
 >     root.left = new TreeNode(2);
 >     root.right = new TreeNode(3);
@@ -610,7 +610,7 @@ head:
 >     System.out.println(root.left.val); // 输出 2
 >     System.out.println(root.right.val); // 输出 3
 >     哈希表：
->     
+>         
 >     java
 >     Copy
 >     Map<String, Integer> map = new HashMap<>();
@@ -628,7 +628,7 @@ head:
 >   - 动态规划算法：通过将原问题分解为子问题来解决问题的算法，适用于具有重叠子问题和最优子结构性质的问题。时间复杂度和空间复杂度取决于子问题的个数和规模。
 >   - ```
 >     冒泡排序：
->     
+>         
 >     java
 >     Copy
 >     void bubbleSort(int[] arr) {
@@ -644,7 +644,7 @@ head:
 >         }
 >     }
 >     选择排序：
->     
+>         
 >     java
 >     Copy
 >     void selectionSort(int[] arr) {
@@ -662,7 +662,7 @@ head:
 >         }
 >     }
 >     插入排序：
->     
+>         
 >     java
 >     Copy
 >     void insertionSort(int[] arr) {
@@ -678,7 +678,7 @@ head:
 >         }
 >     }
 >     递归算法：
->     
+>         
 >     java
 >     Copy
 >     int fibonacci(int n) {
@@ -691,7 +691,7 @@ head:
 >         return fibonacci(n - 1) + fibonacci(n - 2);
 >     }
 >     动态规划算法：
->     
+>         
 >     java
 >     Copy
 >     int fibonacci(int n) {
@@ -715,7 +715,7 @@ head:
 >   - 参数调优：调整缓冲池大小、线程池大小、连接池大小等参数，根据硬件配置和应用场景进行优化。
 >   - ```mysql
 >     MySQL中常用的调优方法有很多，下面给出一些常用的调优方法及相关语句。
->     
+>         
 >     索引优化
 >     创建索引：
 >     CREATE INDEX idx_name ON table_name(column_name);
@@ -743,7 +743,7 @@ head:
 >   - 使用场景：字符串适用于存储简单的键值对、哈希表适用于存储复杂的数据结构、列表适用于实现队列、集合适用于去重、有序集合适用于排序和排行榜等场景。
 >   - ```
 >     Redis数据结构和常用命令
->     
+>         
 >     字符串
 >     字符串是Redis最基本的数据类型，可以存储字符串、整数或浮点数等类型的数据。
 >     常用命令：
@@ -752,7 +752,7 @@ head:
 >     # 获取指定键的值
 >     GET key
 >     使用场景：适用于存储简单的键值对。
->     
+>         
 >     哈希表
 >     哈希表是Redis中的一种键值对数据结构，可以存储多个字段和对应的值。
 >     常用命令：
@@ -761,7 +761,7 @@ head:
 >     # 获取哈希表中指定字段的值
 >     HGET key field
 >     使用场景：适用于存储复杂的数据结构。
->     
+>         
 >     列表
 >     列表是Redis的一种数据结构，可以实现队列或栈等数据结构。
 >     常用命令：
@@ -770,7 +770,7 @@ head:
 >     # 将一个或多个值插入到列表尾部
 >     RPUSH key value [value ...]
 >     使用场景：适用于实现队列等数据结构。
->     
+>         
 >     集合
 >     集合是Redis的一种无序的数据结构，可以存储多个唯一的元素。
 >     常用命令：
@@ -779,7 +779,7 @@ head:
 >     # 获取集合中所有的元素
 >     SMEMBERS key
 >     使用场景：适用于去重等场景。
->     
+>         
 >     有序集合
 >     有序集合是Redis的一种数据结构，可以存储多个唯一的元素，并且每个元素都有一个分数，可以根据分数进行排序。
 >     常用命令：
@@ -788,7 +788,7 @@ head:
 >     # 获取有序集合中指定排名范围内的元素
 >     ZRANGE key start stop [WITHSCORES]
 >     使用场景：适用于排序和排行榜等场景。
->     
+>         
 >     需要注意的是，不同的Redis版本可能会有不同的数据结构和命令，具体的使用方法和使用场景需要根据实际情况进行选择和优化。同时，在使用Redis时，需要注意数据的持久化和内存限制等问题，以确保系统的稳定性和可靠性。
 >     ```
 >   
@@ -799,37 +799,37 @@ head:
 >   - 高可用技术：Redis Sentinel和Redis Cluster是Redis提供的两种高可用解决方案，可以实现自动故障检测、故障转移、负载均衡等功能。
 >   - ````
 >     在 Linux 环境下，可以使用以下步骤实现 Redis 的持久化和主从复制等高可用技术：
->     
+>         
 >     1. 安装 Redis
->     
+>         
 >     可以使用包管理器（如 apt-get、yum）安装 Redis，也可以从 Redis 官网下载源码进行编译安装。
->     
+>         
 >     2. 配置 Redis
->     
+>         
 >     在 Redis 的配置文件中，需要进行以下配置：
->     
+>         
 >     2.1. 持久化配置
->     
+>         
 >     在 Redis 配置文件中，可以通过以下配置设置 RDB 持久化和 AOF 持久化：
->     
+>         
 >     ```bash
 >     # 开启 RDB 持久化
 >     save 900 1
 >     save 300 10
 >     save 60 10000
->     
+>         
 >     # 开启 AOF 持久化
 >     appendonly yes
 >     ```
->     
+>         
 >     上述配置表示在 900 秒内如果至少有 1 个键被修改，则自动执行 RDB 持久化；在 300 秒内如果至少有 10 个键被修改，则自动执行 RDB 持久化；在 60 秒内如果至少有 10000 个键被修改，则自动执行 RDB 持久化。
->     
+>         
 >     appendonly yes 表示开启 AOF 持久化。
->     
+>         
 >     2.2. 主从复制配置
->     
+>         
 >     在 Redis 配置文件中，可以通过以下配置设置主从复制：
->     
+>         
 >     ```bash
 >     # 主节点配置
 >     bind 127.0.0.1
@@ -838,50 +838,50 @@ head:
 >     pidfile /var/run/redis_6379.pid
 >     logfile /var/log/redis_6379.log
 >     dir /var/lib/redis
->     
+>         
 >     # 从节点配置
 >     slaveof 127.0.0.1 6379
 >     ```
->     
+>         
 >     上述配置表示将本机的 Redis 实例作为主节点，IP 地址为 127.0.0.1，端口号为 6379；将另一台机器的 Redis 实例作为从节点，IP 地址为 127.0.0.1，端口号为 6379。
->     
+>         
 >     3. 启动 Redis
->     
+>         
 >     启动 Redis 实例时，可以通过以下命令启动：
->     
+>         
 >     ```bash
 >     redis-server /etc/redis/redis.conf
 >     ```
->     
+>         
 >     其中 /etc/redis/redis.conf 为 Redis 的配置文件路径。
->     
+>         
 >     4. 配置 Sentinel
->     
+>         
 >     在 Redis Sentinel 的配置文件中，需要进行以下配置：
->     
+>         
 >     ```bash
 >     sentinel monitor mymaster 127.0.0.1 6379 2
 >     sentinel down-after-milliseconds mymaster 5000
 >     sentinel failover-timeout mymaster 180000
 >     sentinel parallel-syncs mymaster 1
 >     ```
->     
+>         
 >     上述配置表示监控名为 mymaster 的主节点，IP 地址为 127.0.0.1，端口号为 6379；当主节点在 5000 毫秒内没有响应时，将被视为不可用；当主节点在 180000 毫秒内没有恢复时，将触发故障转移；故障转移时，最多有 1 个从节点参与同步数据。
->     
+>         
 >     5. 启动 Sentinel
->     
+>         
 >     启动 Sentinel 实例时，可以通过以下命令启动：
->     
+>         
 >     ```bash
 >     redis-sentinel /etc/redis/sentinel.conf
 >     ```
->     
+>         
 >     其中 /etc/redis/sentinel.conf 为 Redis Sentinel 的配置文件路径。
->     
+>         
 >     6. 配置 Redis Cluster
->     
+>         
 >     在 Redis Cluster 的配置文件中，需要进行以下配置：
->     
+>         
 >     ```bash
 >     port 7000
 >     cluster-enabled yes
@@ -889,19 +889,19 @@ head:
 >     cluster-node-timeout 5000
 >     appendonly yes
 >     ```
->     
+>         
 >     上述配置表示开启 Redis Cluster，端口号为 7000，集群配置文件为 nodes-7000.conf，节点超时时间为 5000 毫秒，开启 AOF 持久化。
->     
+>         
 >     7. 启动 Redis Cluster
->     
+>         
 >     启动 Redis Cluster 时，需要启动多个 Redis 实例，并通过以下命令将它们组成一个集群：
->     
+>         
 >     ```bash
 >     redis-cli --cluster create 127.0.0.1:7000 127.0.0.1:7001 127.0.0.1:7002 \
 >     127.0.0.1:7003 127.0.0.1:7004 127.0.0.1:7005 --cluster-replicas3
->     
+>         
 >     其中，127.0.0.1:7000~127.0.0.1:7005 为 Redis 实例的地址和端口号，--cluster-replicas 3 表示每个主节点有 3 个从节点。
->     
+>         
 >     以上是 Redis 在 Linux 环境下持久化和主从复制等高可用技术的详细解决方案。
 >     ````
 >   
@@ -912,30 +912,30 @@ head:
 >   - 缓存击穿：使用互斥锁、永不过期等方法来避免缓存击穿。
 >   - ````
 >     以下是在 Java 环境下实现缓存穿透、缓存雪崩、缓存击穿等缓存常见问题的代码示例：
->     
+>         
 >     1. 缓存穿透
->     
+>         
 >     1.1. 布隆过滤器
->     
+>         
 >     ```java
 >     public class BloomFilter {
 >         private BitSet bitSet;
 >         private int size;
 >         private int hashFunctions;
->     
+>         
 >         public BloomFilter(int size, int hashFunctions) {
 >             this.bitSet = new BitSet(size);
 >             this.size = size;
 >             this.hashFunctions = hashFunctions;
 >         }
->     
+>         
 >         public void add(String key) {
 >             for (int i = 0; i < hashFunctions; i++) {
 >                 int index = hash(key, i) % size;
 >                 bitSet.set(index);
 >             }
 >         }
->     
+>         
 >         public boolean contains(String key) {
 >             for (int i = 0; i < hashFunctions; i++) {
 >                 int index = hash(key, i) % size;
@@ -945,7 +945,7 @@ head:
 >             }
 >             return true;
 >         }
->     
+>         
 >         private int hash(String key, int index) {
 >             switch (index) {
 >                 case 0:
@@ -960,13 +960,13 @@ head:
 >         }
 >     }
 >     ```
->     
+>         
 >     1.2. 缓存空对象
->     
+>         
 >     ```java
 >     public class CacheService {
 >         private static Map<String, Object> cache = new HashMap<>();
->     
+>         
 >         public Object get(String key) {
 >             Object value = cache.get(key);
 >             if (value == null) {
@@ -981,21 +981,21 @@ head:
 >             }
 >             return value;
 >         }
->     
+>         
 >         private Object queryFromDatabase(String key) {
 >             // 查询数据库
 >             return null;
 >         }
 >     }
 >     ```
->     
+>         
 >     1.3. 限制请求频率
->     
+>         
 >     ```java
 >     public class CacheService {
 >         private static Map<String, Object> cache = new HashMap<>();
 >         private static Map<String, Long> rateLimit = new HashMap<>();
->     
+>         
 >         public Object get(String key) {
 >             // 判断请求频率
 >             long currentTime = System.currentTimeMillis();
@@ -1003,7 +1003,7 @@ head:
 >                 throw new RuntimeException("Too many requests");
 >             }
 >             rateLimit.put(key, currentTime);
->     
+>         
 >             Object value = cache.get(key);
 >             if (value == null) {
 >                 value = queryFromDatabase(key);
@@ -1014,23 +1014,23 @@ head:
 >             }
 >             return value;
 >         }
->     
+>         
 >         private Object queryFromDatabase(String key) {
 >             // 查询数据库
 >             return null;
 >         }
 >     }
 >     ```
->     
+>         
 >     2. 缓存雪崩
->     
+>         
 >     2.1. 设置缓存失效时间随机化
->     
+>         
 >     ```java
 >     public class CacheService {
 >         private static Map<String, Object> cache = new HashMap<>();
 >         private static Random random = new Random();
->     
+>         
 >         public Object get(String key) {
 >             Object value = cache.get(key);
 >             if (value == null) {
@@ -1043,21 +1043,21 @@ head:
 >             }
 >             return value;
 >         }
->     
+>         
 >         private Object queryFromDatabase(String key) {
 >             // 查询数据库
 >             return null;
 >         }
 >     }
 >     ```
->     
+>         
 >     2.2. 使用分布式锁
->     
+>         
 >     ```java
 >     public class CacheService {
 >         private static Map<String, Object> cache = new HashMap<>();
 >         private static DistributedLock lock = new DistributedLock();
->     
+>         
 >         public Object get(String key) {
 >             Object value = cache.get(key);
 >             if (value == null) {
@@ -1079,21 +1079,21 @@ head:
 >             }
 >             return value;
 >         }
->     
+>         
 >         private Object queryFromDatabase(String key) {
 >             // 查询数据库
 >             return null;
 >         }
 >     }
 >     ```
->     
+>         
 >     3. 缓存击穿
->     
+>         
 >     3.1. 互斥锁
->     
+>         
 >     ```javapublic class CacheService {
 >         private static Map<String, Object> cache = new ConcurrentHashMap<>();
->     
+>         
 >         public Object get(String key) {
 >             Object value = cache.get(key);
 >             if (value == null) {
@@ -1110,20 +1110,20 @@ head:
 >             }
 >             return value;
 >         }
->     
+>         
 >         private Object queryFromDatabase(String key) {
 >             // 查询数据库
 >             return null;
 >         }
 >     }
 >     ```
->     
+>         
 >     3.2. 永不过期
->     
+>         
 >     ```java
 >     public class CacheService {
 >         private static Map<String, Object> cache = new ConcurrentHashMap<>();
->     
+>         
 >         public Object get(String key) {
 >             Object value = cache.get(key);
 >             if (value == null) {
@@ -1142,14 +1142,14 @@ head:
 >             }
 >             return value;
 >         }
->     
+>         
 >         private Object queryFromDatabase(String key) {
 >             // 查询数据库
 >             return null;
 >         }
 >     }
 >     ```
->     
+>         
 >     以上是在 Java 环境下实现缓存穿透、缓存雪崩、缓存击穿等缓存常见问题的代码示例。需要注意的是，这些示例代码仅供参考，实际应用中还需要根据具体业务场景进行调整和优化。
 >     ````
 >   
@@ -1240,5 +1240,5 @@ head:
 7. 在医院诊预约系统中，我使用了MongoDB作为数据存储，通过文档数据库的特点实现了高性能、高可扩展性和高可用性。同时，MongoDB也支持复杂查询和索引，能够提高系统的查询效率和灵活性。
 8. 在医院诊预约系统中，我使用了Redis和RabbitMQ作为中间件，Redis作为缓存提高了系统的性能，RabbitMQ作为消息中间件实现了服务之间的异步通信，提高了系统的可靠性和可扩展性。同时，Redis和RabbitMQ也具有高可用性和可扩展性。
 
-
 综上所诉，最后实习工资两千四！！！！
+
