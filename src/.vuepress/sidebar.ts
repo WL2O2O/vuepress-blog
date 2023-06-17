@@ -38,8 +38,9 @@ export const sidebarConfig = sidebar({
   "/mianshi/":[
     "readme.md",
     "mindmap",
-    "rules",
-    "myfirstoffer"
+    "resumeRules",
+    "myfirstoffer",
+    "mianshiQA"
   ],
   "/collection/":[
     "README.md",
