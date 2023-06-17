@@ -59,4 +59,14 @@ features:
 copyright: false
 footer: Theme by <a href="https://theme-hope.vuejs.press/" target="_blank">VuePress Theme Hope</a> | MIT Licensed, Copyright © 2019-present Mr.Hope
 ---
-**拒绝精神内耗！行动胜于雄辩，不试一试怎么知道行不行？希望本站能让你从迷茫到通透，一起加油！**
+::: center
+<div align="center">
+  <a href="https://csguider.icu" target="_blank">
+    <img src="https://img.shields.io/badge/GitHub-csguider.icu-black?style=social&logo=github" width="15%">
+  </a>
+    <a href="https://wl2o2o.github.io/hexoblog" target="_blank">
+    <img src="https://img.shields.io/badge/Hexo-OriginofDreams-black?style=social&logo=hexo" width="15%">
+  </a>
+</div>  
+:::
+拒绝精神内耗！行动胜于雄辩，不试一试怎么知道行不行？希望本站能让你从迷茫到通透，一起加油！

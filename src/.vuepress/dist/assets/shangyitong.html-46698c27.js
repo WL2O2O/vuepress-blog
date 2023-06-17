@@ -1,0 +1,1 @@
+import{_ as e,X as t,Y as n,$ as o}from"./framework-b0c8e9b4.js";const s={},_=o("p",null,"欢迎观看我的医院预约挂号平台项目笔记",-1),c=[_];function a(r,l){return t(),n("div",null,c)}const d=e(s,[["render",a],["__file","shangyitong.html.vue"]]);export{d as default};
