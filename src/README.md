@@ -61,7 +61,7 @@ footer: Theme by <a href="https://theme-hope.vuejs.press/" target="_blank">VuePr
 ---
 ::: center
 <div align="center">
-  <a href="https://csguider.icu" target="_blank">
+  <a href="https://github.com/WL2O2O" target="_blank">
     <img src="https://img.shields.io/badge/GitHub-csguider.icu-black?style=social&logo=github" width="15%">
   </a>
     <a href="https://wl2o2o.github.io/hexoblog" target="_blank">
