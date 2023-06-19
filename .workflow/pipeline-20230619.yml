@@ -5,8 +5,10 @@ triggers:
   trigger: auto
   push:
     branches:
-      prefix:
-        - ''
+      precise:
+        - master
+  schedule:
+    - cron: '* 0 6 * * ? *'
 stages:
   - name: stage-00202f6d
     displayName: 未命名
