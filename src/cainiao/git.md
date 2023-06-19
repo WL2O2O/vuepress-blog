@@ -59,6 +59,51 @@ Git的设置文件为`.gitconfig`，它可以在用户主目录下（全局配�
 > # 设置提交代码时的用户信息
 > $ git config [--global] user.name "[name]"
 > $ git config [--global] user.email "[email address]"
+> 
+> # usage: git config [<options>]
+> Config file location
+>     --global              use global config file
+>     --system              use system config file
+>     --local               use repository config file
+>     --worktree            use per-worktree config file
+>     -f, --file <file>     use given config file
+>     --blob <blob-id>      read config from given blob object
+> 
+> Action
+>     --get                 get value: name [value-pattern]
+>     --get-all             get all values: key [value-pattern]
+>     --get-regexp          get values for regexp: name-regex [value-pattern]
+>     --get-urlmatch        get value specific for the URL: section[.var] URL
+>     --replace-all         replace all matching variables: name value [value-pattern]
+>     --add                 add a new variable: name value
+>     --unset               remove a variable: name [value-pattern]
+>     --unset-all           remove all matches: name [value-pattern]
+>     --rename-section      rename section: old-name new-name
+>     --remove-section      remove a section: name
+>     -l, --list            list all
+>     --fixed-value         use string equality when comparing values to 'value-pattern'
+>     -e, --edit            open an editor
+>     --get-color           find the color configured: slot [default]
+>     --get-colorbool       find the color setting: slot [stdout-is-tty]
+> 
+> Type
+>     -t, --type <>         value is given this type
+>     --bool                value is "true" or "false"
+>     --int                 value is decimal number
+>     --bool-or-int         value is --bool or --int
+>     --bool-or-str         value is --bool or string
+>     --path                value is a path (file or directory name)
+>     --expiry-date         value is an expiry date
+> 
+> Other
+>     -z, --null            terminate values with NUL byte
+>     --name-only           show variable names only
+>     --includes            respect include directives on lookup
+>     --show-origin         show origin of config (file, standard input, blob, command line)
+>     --show-scope          show scope of config (worktree, local, global, system, command)
+>     --default <value>     with --get, use default value when missing entry
+> 
+> 
 > ```
 
 ## 三、增加/删除文件
@@ -284,7 +329,7 @@ Git的设置文件为`.gitconfig`，它可以在用户主目录下（全局配�
 ## 九、撤销
 
 > ```bash
-> # 恢复暂存区的指定文件到工作区
+> # 恢复暂存区的指定文件到工作区                                 误删文件，用于恢复add时的状态
 > $ git checkout [file]
 > 
 > # 恢复某个commit的指定文件到暂存区和工作区
@@ -293,7 +338,7 @@ Git的设置文件为`.gitconfig`，它可以在用户主目录下（全局配�
 > # 恢复暂存区的所有文件到工作区
 > $ git checkout .
 > 
-> # 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变
+> # 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变      已暂存的内容不想提交，用于取消暂存de
 > $ git reset [file]
 > 
 > # 重置暂存区与工作区，与上一次commit保持一致

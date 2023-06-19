@@ -25,7 +25,8 @@ export const sidebarConfig = sidebar({
     "transaction",
     "mysql",
     "DMDatabase",
-    "collection"
+    "collection",
+    "git"
   ],
   "/jieyou/": [
     "readme.md",
