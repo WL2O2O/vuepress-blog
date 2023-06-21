@@ -17,7 +17,7 @@ head:
 >
 > axiba,图片在typora软件更新时被意外删除了！！！
 >
-> ![image-20230621155316124](https://cdn.jsdelivr.net/gh/wl2o2o/blogCdn/img/202306211602425.png)
+> ![测试一下](https://cdn.jsdelivr.net/gh/wl2o2o/blogCdn/img/202306211602425.png)
 
 # 尚医通学习笔记
 

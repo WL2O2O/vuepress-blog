@@ -13,7 +13,10 @@ head:
 ---      
 总是担心基础知识遗忘的很快，于是总结了这些面试导图，现在网站放思维导图的功能这边给在研究中。
 
-- [简历编写规范](rules.md)
+- [简历编写规范](resumeRules.md)
+
+- [第一次面试，竟然这样问！](myfirstoffer.md)
+
+- [面试后复盘](mianshiQA.md)
 
 - [JAVA SE思维导图](mindmap.md)
-
