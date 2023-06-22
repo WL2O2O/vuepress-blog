@@ -1,3 +1,16 @@
+---
+title: 一篇文章搞懂什么是Netty
+shortTitle: 浅析Netty
+category:
+  - 菜鸟日记
+tag:
+  - Netty
+description: 是平时的学习记录
+head:
+  - - meta
+    - name: keywords
+      content: Java,Java SE,Java基础,Java教程,Java程序员进阶之路,Java入门,教程,java数组,数组,复盘Java基础知识,Java随笔,,Java程序员进阶之路, Java集合框架,java集合框架,netty,什么是Netty
+---
 > 是什么？
 
 Netty 是一个开源的、高性能的、异步的、事件驱动的网络应用程序框架，它基于 Java NIO（Non-blocking I/O）技术，提供了简单易用的 API，可用于开发各种网络应用程序，包括客户端和服务器端应用程序，如网络协议服务器、Web 服务、高性能代理服务器、游戏服务器等。
