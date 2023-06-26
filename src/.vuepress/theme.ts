@@ -6,7 +6,7 @@ export default hopeTheme({
   // 配置多颜色切换
   hostname: "https://wlei224.gitee.io/",
   themeColor: {
-    blue: "#2196f3",
+    orange: "#fb9b5f",
     red: "#f26d6d",
     green: "#00ceac",
     purple: "#ed7196",
