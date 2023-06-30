@@ -1,4 +1,5 @@
 @echo off
+pnpm docs:build
 git add .
 git commit -m "upload aggregateSearch.md"
 git pull origin master
