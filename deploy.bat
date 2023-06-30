@@ -1,6 +1,6 @@
 @echo off
 git add .
-git commit -m "upload aggregateSearch.md"
+git commit -m "upload aggregateSearch && api"
 git pull origin master
 git push origin master
 git pull github master

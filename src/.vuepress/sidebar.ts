@@ -53,6 +53,8 @@ export const sidebarConfig = sidebar({
       prefix: "project/",
       collapsible: true,
       children: [
+        "aggregateSearch",
+        "api",
         "bilibili",
         "CampousLostAndFound",
         "shangyitong",
