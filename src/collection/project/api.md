@@ -224,7 +224,7 @@ create table if not exists myapi.`interface_info`
     `createTime` datetime default CURRENT_TIMESTAMP not null comment '创建时间',
     `updateTime` datetime default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '更新时间',
     `isDelete` tinyint default 0 not null comment '是否删除(0-未删, 1-已删)'
-) comment '接口信息';
+) comment  '接口信息';
 
 -- 用户调用接口关系表
 create table if not exists myapi.`user_interface_info`
@@ -265,11 +265,21 @@ insert into myapi.`interface_info` (`name`, `description`, `url`, `requestHeader
 
 
 
+> 留一个小bug，数据库建表语句直接套用的最终建表语句，user表中涉及到两个关于key的字段，手动改成了可以为空，若有问题，后续再做出更改
+
+
+
+
+
 > 利用`MyBatisX`插件生成接口管理的增删改查代码
 
-然后复制到已经创建好的dao、service、mapper包里，此时，增删改查操作已完成，就这么简单
+将生成的代码逻辑复制到项目的dao、service、mapper包里，
 
-然后还剩一个controller层，直接复制一份模板中的controller层的代码，进行复用 
+然后还剩一个controller层，直接复制一份模板中的controller层的代码，进行复用
+
+注意此时模糊查询使用的字段不是content，而是description，进行相应的更改。
+
+此时，增删改查操作已完成，就这么简单 
 
 跑通后端
 
@@ -287,6 +297,10 @@ insert into myapi.`interface_info` (`name`, `description`, `url`, `requestHeader
 因为没有开发注册页面，可以从注册中心项目中复制一个过来
 
 为了便捷的进行开发，先从swagger注册一个账号，然后登录发现没有进行跳转，通过分析得出，是因为前端没有记录用户的登录状态，所以要进一步进行完善，在typings.d.ts中进行定义全局登录态
+
+
+
+改造页面，将前端展示的表格，用来展示自己的数据
 
 
 
