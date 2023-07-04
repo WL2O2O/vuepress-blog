@@ -312,6 +312,58 @@ insert into myapi.`interface_info` (`name`, `description`, `url`, `requestHeader
   * 优化页面代码
   * 首页没有页面，后续进行开发一个非管理员用户可以看到的页面
   * 调整导航栏的位置，可以先使用antDesignPro框架提供的切换导航布局小设置
+  
+* ### 新建模态框的编写真的很搞心态，最后的原因竟然是因为一个小的错误（静下心来）（血泪教训，做完项目过一遍react）
+
+* ### 完善修改框
+
+  * 此处设计到React的核心知识点，也是重中之重（useEffect、useRef）
+
+  * ```tsx
+    const formRef = useRef<ProFormInstance>();
+    
+    useEffect(() => {
+      if(formRef){
+        formRef.current?.setFieldsValue(values);
+      } 
+    }, [values])
+    
+    return (
+        <Modal visible={visible} footer={null} onCancel={() => onCancel?.()}>
+          <ProTable
+            type="form"
+            columns={columns}
+            // 因为这里使用的form组件，只会初始化一次，所以会造成点击修改按钮进行修改的话，数据是不会变的
+            // form={{
+            //   initialValues: values
+            // }}
+            
+            // 所以此处用到了监听
+            formRef={formRef}
+            
+            onSubmit={async (value) => {
+              onSubmit?.(value);
+            }}
+          />
+        </Modal>
+      );
+    ```
+
+  * > 此处有Bug，后端报空指针
+
+
+* ### 完善删除框
+
+  * 仿照以上步骤完成
+
+  * > 此时发现进行相关操作之后数据不会自动更新，所以我们引入actionRef，它可以拿到proTable的控制权，使用actionRef.current?.reload()
+
+
+
+
+
+
+## 模拟接口项目
 
 
 
