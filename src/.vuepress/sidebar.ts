@@ -17,6 +17,7 @@ export const sidebarConfig = sidebar({
     "修仙前言",
     "abstractandinterface",
     "article",
+    "Bugsss",
     "collection",
     "DMDatabase",
     "DNS",
