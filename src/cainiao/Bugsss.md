@@ -47,28 +47,32 @@ head:
 
 1. 粗心大意导致的错误（前后对比）
 
+> ```
 > <CreateModal
->         columns={columns}
->         onCancel={() => {
->           // 注意这里
->           handleUpdateModalOpen(false);
->         }}
->         onSubmit={(values) => {
->           handleAdd(values);
->         }}
->         visible={createModalOpen}
+>      columns={columns}
+>      onCancel={() => {
+>        // 注意这里
+>        handleUpdateModalOpen(false);
+>      }}
+>      onSubmit={(values) => {
+>        handleAdd(values);
+>      }}
+>      visible={createModalOpen}
 > />
+> ```
 
 
 
+> ```
 > <CreateModal
->         columns={columns}
->         onCancel={() => {
->           handleModalOpen(false);
->         }}
->         onSubmit={(values) => {
->           handleAdd(values);
->         }}
->         visible={createModalOpen} 
+>      columns={columns}
+>      onCancel={() => {
+>        handleModalOpen(false);
+>      }}
+>      onSubmit={(values) => {
+>        handleAdd(values);
+>      }}
+>      visible={createModalOpen} 
 > />
+> ```
 
