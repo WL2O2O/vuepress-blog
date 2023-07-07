@@ -362,8 +362,13 @@ insert into myapi.`interface_info` (`name`, `description`, `url`, `requestHeader
 
 
 
+## 模拟接口项目（smartapi-interface）
 
-## 模拟接口项目
+提供三个模拟接口
+
+1. GET接口
+2. POST接口（url传参）
+3. POST接口（Restful）
 
 
 
