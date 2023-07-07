@@ -108,6 +108,10 @@ head:
 
 接口预警
 
+
+
+
+
 ## 需求分析
 
 1. 管理员可以对接口信息进行增删改查
@@ -130,7 +134,7 @@ head:
 
 
 
-## 项目初始化
+## 项目初始化（前后端）
 
 * ### 前端
 
@@ -302,7 +306,7 @@ insert into myapi.`interface_info` (`name`, `description`, `url`, `requestHeader
 
 
 
-## 接口调用开发
+## 接口调用开发（前端）
 
 > 首先发现一个问题，使用后端swagger进行user密码更改的时候，密码没有进行加密，会导致前端进行校验的时候返回用户名或者密码不正确的信息
 
@@ -362,13 +366,23 @@ insert into myapi.`interface_info` (`name`, `description`, `url`, `requestHeader
 
 
 
-## 模拟接口项目（smartapi-interface）
+## 模拟接口项目（smartapi-interface）（后端）
 
 提供三个模拟接口
 
 1. GET接口
 2. POST接口（url传参）
 3. POST接口（Restful）
+
+
+
+
+
+### 开始开发模拟接口项目部分
+
+
+
+
 
 
 
