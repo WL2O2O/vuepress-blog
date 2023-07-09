@@ -4,6 +4,6 @@ E:
 
 cd E:\CS_GUIDER\docs
 
-echo "开始执行构建脚本"
+echo "start autoBuild.bat"
 
 pnpm docs:build

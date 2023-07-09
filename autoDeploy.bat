@@ -4,7 +4,7 @@ E:
 
 cd E:\CS_GUIDER\docs
 
-echo "开始执行部署脚本"
+echo "start autoDeploy.bat"
 
 git add .
 git commit -m "auto deploy daily"
