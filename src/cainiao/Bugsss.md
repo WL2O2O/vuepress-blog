@@ -35,11 +35,11 @@ head:
   merge = refs/heads/master
 ```
 
+2. github图床上传的图片显示失败
 
+**解决办法：**
 
-
-
-
+`TODO:`
 
 ## 项目篇
 
@@ -61,18 +61,49 @@ head:
 > />
 > ```
 
-
-
 > ```
 > <CreateModal
->      columns={columns}
->      onCancel={() => {
->        handleModalOpen(false);
->      }}
->      onSubmit={(values) => {
->        handleAdd(values);
->      }}
->      visible={createModalOpen} 
+>   columns={columns}
+>   onCancel={() => {
+>     handleModalOpen(false);
+>   }}
+>   onSubmit={(values) => {
+>     handleAdd(values);
+>   }}
+>   visible={createModalOpen} 
 > />
 > ```
+
+
+
+
+
+
+
+## 工具篇
+
+* ### `pnpm`
+
+
+
+
+
+* ### `HuTool`
+
+```shell
+cn.hutool.core.io.IORuntimeException: ConnectException: Connection refused: connect
+
+	at cn.hutool.http.HttpRequest.send(HttpRequest.java:1328)
+	at cn.hutool.http.HttpRequest.doExecute(HttpRequest.java:1176)
+	cn.hutool.http.HttpRequest.send(HttpRequest.java:1323)
+	... 73 more
+
+Disconnected from the target VM, address: '127.0.0.1:6928', transport: 'socket'
+
+Process finished with exit code -1
+```
+
+**解决方法：**
+
+
 

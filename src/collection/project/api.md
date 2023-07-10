@@ -14,6 +14,14 @@ head:
 
 # API开放平台
 
+> 写在最前面：
+>
+> ​	学到的知识与收到的建议：
+>
+> 	1. 把自己所有的数据库建表语句总结到一起，后续有用；
+> 	1. 记录Bug文档
+> 	1. 多记录一些需求的解决方案、提高自己的架构能力
+
 ## 项目介绍
 
 > 前端开发的时候有有时会需要后端的接口，如果此时有一个API接口可以使用，那么就无需后端借口了
@@ -537,7 +545,7 @@ wl + abcdefgh ==》afdasfafszv（通过签名算法加密）
 >
 > ​	我们看到鱼总的后端项目中，另外两个项目（SDK和interface）是两个目录的标识，于是我就直接复制粘贴到后端项目的文件夹中了，然后Java源文件会变成红J，可以通过右键rsc下main下的Java文件夹，然后mark Directory as--》Sources Root，将Java文件夹标记为源码根目录，如图所示：
 >
-> ![image-20230708205543307](E:/Master/TyporaImages/api/image-20230708205543307.png)
+> ![image-20230708205543307](https://cdn.jsdelivr.net/gh/wl2o2o/blogCdn/img/202307092023528.png)
 >
 > 然后我们发现maven的pom依赖文件的图标也不对，也通过桐言的方法，右键--》add maven project标记为maven项目，大功告成！
 
@@ -567,6 +575,25 @@ wl + abcdefgh ==》afdasfafszv（通过签名算法加密）
 
 2.判断接口是否可以被调用
 
+​	利用开发好的SDK，通过调用接口看是否能够进行调用的通
+
+​	第一步：启动smartapi-interface项目
+
+​	第二步：在smartapi-backend中引入SDK的依赖
+
+​	第三步：在application.yml中写入ak、sk
+
+​	第四步：在接口中引入客户端的实例
+
+​			@Resource
+
+​			private SmartApiClient smartapiclient
+
+> TODO:
+>
+> > >  1. 判断接口是否可以调用时，由固定方法名改为可以根据测试地址进行调用
+> > >  2. 用户测试接口判断接口是否可以调用时，由固定方法名改为可以根据测试地址进行调用
+
 3.修改数据库接口字段为1
 
 **下线接口**（仅管理员） 
@@ -575,15 +602,19 @@ wl + abcdefgh ==》afdasfafszv（通过签名算法加密）
 
 2.修改数据库接口字段为 0
 
+按钮已添加并完善。测试中出现一个经典问题，如图所示：
+
+![image-20230710000821503](https://cdn.jsdelivr.net/gh/wl2o2o/blogCdn/img/202307100008989.png)
+
 
 
 > 待办事件：
 >
 > 流程：
 >
-> **后端**增加上线下线接口
+> 
 >
-> **前端**添加上线、下线按钮、、增加用户浏览页面、查看接口文档、申请签名
+> **前端**添加上线、下线按钮、√、增加用户浏览页面、查看接口文档、申请签名
 >
 > **后端**申请签名（更改完善数据库写生成签名的算法）
 >
@@ -593,7 +624,7 @@ wl + abcdefgh ==》afdasfafszv（通过签名算法加密）
 >
 > **后端**
 >
-> 开发在线调用的jie'kou
+> 开发在线调用的接口
 >
 > 
 
@@ -603,37 +634,355 @@ wl + abcdefgh ==》afdasfafszv（通过签名算法加密）
 
 
 
-### 前端浏览接口，查看接口文档，申请签名（注册） 
+### 前端浏览接口
+
+```react
+import { PageContainer } from '@ant-design/pro-components';
+import React, {useEffect, useState} from 'react';
+import {List, message} from "antd";
+import {
+  listInterfaceInfoByPageUsingGET
+} from "@/services/smartapi-backend/interfaceInfoController";
+
+
+/**
+ * 主页
+ * @constructor
+ */
+const Index: React.FC = () => {
+
+  const [loading, setLoading] = useState(false);
+  const [list, setList] = useState<API.InterfaceInfo[]>([]);
+  const [total ,setTotal] = useState<number>(0);
+
+  const loadData = async (current=1 , pageSize = 8 ) =>{
+    setLoading(true);
+    try {
+      const res = await listInterfaceInfoByPageUsingGET({
+        current,pageSize
+      });
+      setList(res?.data?.records ?? []);
+      setTotal(res?.data?.total ?? 0);
+
+    } catch (error: any) {
+
+      message.error('请求失败,'+error.message);
+      return false;
+    }
+    setLoading(false);
+  }
+  useEffect(() => {
+    loadData();
+  },[])
+
+
+  return (
+    <PageContainer title="在线接口开放平台">
+      <List
+        className="my-list"
+        loading={loading}
+        itemLayout="horizontal"
+        dataSource={list}
+        renderItem={item => {
+
+          const apiLink =`/interface_info/${item.id}`;
+          return(
+            <List.Item
+              actions={[<a key={item.id} href={apiLink}>查看</a>]}
+            >
+              <List.Item.Meta
+                title={<a href={apiLink}>{item.name}</a>}
+                description={item.description}
+              />
+            </List.Item>
+          )
+        }
+
+        }
+        pagination ={
+          {
+            // eslint-disable-next-line @typescript-eslint/no-shadow
+            showTotal(total: number){
+              return '总数：' +total;
+            },
+            pageSize: 8,
+            total,
+            onChange(page,pageSize){
+              loadData(page,pageSize);
+            }
+          }
+        }
+      />
+    </PageContainer>
+  );
+};
+
+export default Index;
+```
+
+### 查看接口文档
+
+```react
+import { PageContainer } from '@ant-design/pro-components';
+import React, {useEffect, useState} from 'react';
+import {Card, Descriptions, message} from "antd";
+import {
+  getInterfaceInfoByIdUsingGET,
+
+} from "@/services/smartapi-backend/interfaceInfoController";
+import { useParams} from "@@/exports";
+
+
+/**
+ * 主页
+ * @constructor
+ */
+const Index: React.FC = () => {
+
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState<API.InterfaceInfo>();
+  const params  = useParams();
+
+  const loadData = async () =>{
+    if (!params.id){
+      message.error('参数不存在');
+      return ;
+    }
+    setLoading(true);
+    try {
+      const res = await getInterfaceInfoByIdUsingGET({
+        id: Number(params.id)
+      });
+      setData(res.data);
+
+    } catch (error: any) {
+
+      message.error('请求失败,'+error.message);
+      return false;
+    }
+    setLoading(false);
+  }
+  useEffect(() => {
+    loadData();
+  },[])
+
+  return (
+    <PageContainer title="查看接口文档">
+      <Card>
+        {
+          data?(
+            <Descriptions title={data.name} column={1}>
+              <Descriptions.Item label="描述">{data.description}</Descriptions.Item>
+              <Descriptions.Item label="接口状态">{data.status? '正常': '关闭'}</Descriptions.Item>
+              <Descriptions.Item label="请求地址">{data.url}</Descriptions.Item>
+              <Descriptions.Item label="请求方法">{data.method}</Descriptions.Item>
+              <Descriptions.Item label="请求头">{data.requestHeader}</Descriptions.Item>
+              <Descriptions.Item label="响应头">{data.responseHeader}</Descriptions.Item>
+              <Descriptions.Item label="创建时间">{data.createTime}</Descriptions.Item>
+              <Descriptions.Item label="更新时间">{data.updateTime}</Descriptions.Item>
+            </Descriptions>
+          ):(
+            <>接口不存在</>
+          )}
+      </Card>
+    </PageContainer>
+  );
+};
+
+export default Index;
+```
+
+### 申请签名（注册） 
+
+通过数据库新增字段、更改用户注册的逻辑（使用DigestUtil加密算法生成ak、sk，然后加入数据库）
+
+> 留一个小作业:
+>
+> 新增一个小拓展功能：用户可以手动更改自己的ak、sk
+
+### 新建真实数据（前端）
+
+**新建这些真实的数据**
+
+```text
+getUsernameByPost,
+
+获取用户名,
+
+http://localhost:8123/name/user,
+
+{”Content-Type“: ”application/json“},
+
+{”Content-Type“: ”application/json“},
+
+```
+
+oh my god，此时发现遗忘了一个重要的请求参数字段，于是通过建表语句、IDEA客户端modify table，来增加这么一个字段。
+
+修改相应的model实体包中的字段信息以及向mybatisplus.xml中添加这个字段。
+
+重启项目---》前端重新使用openai插件生成接口
+
+前端也需要完善修改组件的表单列名，新增一个requestParams
+
+完成！
+
+**完善接口信息的请求参数信息**
+
+**在线调用**
+
+前端界面的编写，通过ant design组件库利用现成的表单组件来完成在线按钮的添加与请求参数的基本表单。
+
+![image-20230710023831281](https://cdn.jsdelivr.net/gh/wl2o2o/blogCdn/img/202307100238354.png)
+
+请求参数的类型（JSON类型）
+
+> 又一个小作业：
+>
+> 在线调用的扩展点：
+>
+> 先跑通整个流程，然后根据请求头和请求类型的不同设计不同的表单和界面，增强用户体验
 
 
 
+### 后端调用流程
+
+![image-20230710024253445](https://cdn.jsdelivr.net/gh/wl2o2o/blogCdn/img/202307100242406.png)
+
+按照标准的企业开发流程来说：
+
+一定会选择第一种开发方式，不然后期的网关与计费就毫无作用，
+
+第二种方式可以用来自己调用测试。
 
 
 
+流程：
+
+1. 前端将用户输入的请求参数与要进行测试的接口id发给平台后端
+2. 在调用前进行一些校验
+3. 平台后端去调用模拟接口
+
+```Java
+/**
+     * 测试调用
+     *
+     * @param interfaceInfoInvokeRequest
+     * @param request
+     * @return
+     */
+    @PostMapping("/invoke")
+    public BaseResponse<Object> invokeInterfaceInfo(@RequestBody InterfaceInfoInvokeRequest interfaceInfoInvokeRequest,
+                                                    HttpServletRequest request) {
+        if (interfaceInfoInvokeRequest == null || interfaceInfoInvokeRequest.getId() <= 0) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR);
+        }
+        long id = interfaceInfoInvokeRequest.getId();
+        String userRequestParams = interfaceInfoInvokeRequest.getUserRequestParams();
+        // 判断是否存在
+        InterfaceInfo oldInterfaceInfo = interfaceInfoService.getById(id);
+        if (oldInterfaceInfo == null) {
+            throw new BusinessException(ErrorCode.NOT_FOUND_ERROR);
+        }
+        if (oldInterfaceInfo.getStatus() == InterfaceInfoStatusEnum.OFFLINE.getValue()) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "接口已关闭");
+        }
+        User loginUser = userService.getLoginUser(request);
+        String accessKey = loginUser.getAccessKey();
+        String secretKey = loginUser.getSecretKey();
+        MyClient tempClient = new MyClient(accessKey, secretKey);
+        Gson gson = new Gson();
+        com.wl.smartapiclientsdk.model.User user = gson.fromJson(userRequestParams, com.wl.smartapiclientsdk.model.User.class);
+        String usernameByPost = tempClient.getUserNameByPost(user);
+        return ResultUtils.success(usernameByPost);
+    }
+```
+
+后端调用逻辑已完成
+
+现在继续完善前端的接口，将前端点击调用按钮后改为我们刚才通过后端实现的真实的功能。
+
+```
+const onFinish = (values: any) => {
+    if (!params.id){
+      message.error('接口不存在');
+      return ;
+    }
+    try {
+      invokeInterfaceInfoUsingPOST({
+        id: params.id,
+        ...values
+      })
+      message.success('请求成功');
+      return true;
+    } catch (error: any) {
+      message.error('请求失败，' + error.message);
+    }
+  };
+```
+
+逻辑打通之后还要进行回显数据：
+
+```
+// async 是设置同步的意思
+
+ const onFinish = async (values: any) => {
+    if (!params.id){
+      message.error('接口不存在');
+      return ;
+    }
+    try {
+// 等待
+
+      const res = await invokeInterfaceInfoUsingPOST({
+        id: params.id,
+        ...values
+      })
+// 将res.data赋给setInvokeRes
+
+      setInvokeRes(res.data);
+      message.success('请求成功');
+      return true;
+    } catch (error: any) {
+      message.error('请求失败，' + error.message);
+    }
+  };
+```
+
+然后在表单处新增一个卡片，用于接收invokeRes进行数据回显。
+
+已完成，测试通过！
+
+并且完善了一个缓冲显示的loading
 
 
 
+TODO:
+
+> >  1. 判断接口是否可以调用时，由固定方法名改为可以根据测试地址进行调用
+> >  2. 用户测试接口判断接口是否可以调用时，由固定方法名改为可以根据测试地址进行调用
+> >  3. 此时任何人调用模拟接口都是可以的，因为我们的SDK是写死在配置文件中的，所以后续再进行完善，从数据库中进行校验！
 
 
 
+over！
+
+下面我们的网关用Spring Cloud GateWay实现
 
 
 
+## Day04 
 
+1. 开发接口调用次数统计  20min
 
+2. 优化系统的架构---学习架构设计、接触应用场景==>面对一个需求就会自然而然地提高开发效率。 60min
 
+   （怎么把一个项目的架构设计做的更加合理，涉及到API网关的知识）
 
-
-
-
-
-
-
-
-
-
-
-
+   * 网关是什么？
+   * 网关的作用？
+   * 网关的应用场景以及实现？
+   * 结合业务去应用网关
 
 
 
