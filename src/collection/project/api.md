@@ -1020,22 +1020,233 @@ create table if not exists smartapi.`user_interface_info`
 ) comment '用户调用接口关系';
 ```
 
-直接使用Mybatis-X生成相关的实体类（注意在删除字段上米娜加上逻辑删除@TableLogic）、mapper、service实现类没然后移动到项目对应的包中。
+### 步骤：
 
-复制写好的Controller，改那些增删改查！ 完成√
+1. 开发基本的增删改查（给管理员使用）
+
+   > 直接使用Mybatis-X生成相关的实体类（注意在删除字段上米娜加上逻辑删除@TableLogic）、mapper、service实现类没然后移动到项目对应的包中。
+   >
+   > 复制写好的Controller，改那些增删改查！ 完成√
+
+2. 开发用户调用接口次数加1（或者减1）
+
+   问：如果每个接口的方法，都写调用次数 + 1，是不是比较麻烦，如果在本项目中，将这个调用次数+ 1，封装成一个方法，也是可以的，但是`代码侵入性很强！`
+
+   致命问题是：接口开发者需要自己进行调用！
+
+   解决方法：
+
+   1. Spring中的AOP（推荐，是Spring的一个核心特性）
+   2. Servelet中的拦截器、过滤器（Fillter）
+   3. 通用的方法（缺点：代码侵入性强，需要自己调用）
+   4. 网关
 
 
 
-视频进度：
+简单说一下AOP切面的基本过程：
 
-37：58
+> 先说一下AOP切面的作用：
+>
+> 就相当于在接口或者方法调用前或者调用之后帮你做一些事情，其底层的原理就是动态代理。
+>
+> 使用AOP切面的
+>
+> 优点：
+>
+> 独立于接口，在每个接口调用前后加 1
+>
+> 缺点：
+>
+> 只存在于单个项目中，如果每个团队都要写一个自己的切面
+>
+> // TODO：下去看一下AOP的流程，熟悉一下
+
+
+
+我们在这个项目中使用网关来实现接口调用次数。
+
+网关就当与在所有接口的入口前加了一层检票口，如图所示：
+
+![image-20230716015231451](https://cdn.jsdelivr.net/gh/wl2o2o/blogCdn/img/202307160152994.png)
+
+因为网关实现的有调用次数的统计，所以开发者可以通关网关来查看，而用户调用接口时直接输入请求参数、请求地址即可。
+
+### 网关：
+
+这里为什么写这么多理论呢？写代码不一定是最重要的，重要的是思想！逻辑思想明白之后，无非就是看文档、百度实现。
+
+> 什么是网关呢？就相当于车票检票口，统一去检票。
+>
+> 优点？统一去进行一些操作、处理一些问题。
+>
+> 作用？
+>
+> 1. 路由
+>
+> 2. 负载均衡
+>
+> 3. 统一鉴权
+>
+> 4. 统一处理跨域
+>
+> 5. 统一业务处理（缓存）
+>
+> 6. 访问控制
+>
+> 7. 发布控制（灰度发布，也就是慢慢控制接口的流量，不断开放给更多用户，然后达到升级接口的目的）
+>
+> 8. 流量染色（给流量添加一些标识，比如新的请求头信息）
+>
+> 9. 统一接口保护 
+>
+>    1. 限制请求
+>
+>    2. 信息脱敏（网关可以操作你的请求口，进而抹去敏感信息）
+>
+>    3. 降级（熔断，保险起见，接口下线后，可以返回一些提示信息）
+>
+>    4. 限流
+>
+>       （// TODO：学习令牌桶算法，学习露桶算法，学习一下）
+>
+>    5. RedislimitHandler
+>
+>    6. 超时时间
+>
+>    7. 重试（业务保护）
+>
+> 10. 统一日志
+>
+> 11. 统一文档（将下游项目的文档统一聚合，展示到一个页面）
+
+
+
+### 路由
+
+起到转发的作用，比如有接口A和接口B,网关会记录这些信息，根据用户访问的地址和参数，转发请求到对应的接口（服务器/集群）
+
+用户a调用接口A
+
+/a=>接口A /b=>接口B
+
+https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/#gateway-request-predicates-factories
+
+### 负载均衡 
+
+在路由的基础上可以转发到某一个服务器
+
+/c => 服务A/ 集群A（随机转发到其中的某一个机器）
+
+uri从固定地址改成b:xx
+
+### 统一鉴权 
+
+判断用户是否有权限进行操作，无论访问什么接口，我都统一去判断权限，不用重复写
+
+### 统一处理跨域 
+
+网关统一处理跨域，不用在每个项目单独处理
+
+https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/#cors-configuration
+
+### 统一业务处理 
+
+把每个项目中都要做的通用逻辑放到上层（网关），统一处理，比如本项目的次数统计
+
+### 访问控制 
+
+黑白名单，比如限制ddos ip
+
+### 发布控制 
+
+灰度发布，比如上线新接口，先给新接口分配 20%流量，老接口80% ,再慢慢调整比例
+
+https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/#the-weight-route-predicate- factory
+
+### 流量染色 
+
+区分用户来源
+
+给请求（流量）添加一些标识，一般是设置请求头中，添加新的请求头 https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/#the-addrequestheader-gatewayfilter-factory
+
+全局染色：https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/#default-filters
+
+### 接口保护 
+
+1 限制请求 https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/#requestheadersiz-gatewayfilter-factory 
+
+2 信息脱敏 https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/#the-removerequestheader-gatewayfilter-factory 
+
+3 降级（熔断） 进行兜底 https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/#fallback-headers 
+
+4 限流 https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/#the-requestratelimiter-gatewayfilter-factory 
+
+5 超时时间   超时就中断 https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/#http-timeouts-configuration 
+
+6 重试（业务保护）： https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/#the-retry-gatewayfilter-factory 
+
+### 统一日志 
+
+统一的请求，响应信息记录
+
+### 统一文档 
+
+将下游项目的文档进行聚合，在一个页面统一查看
+
+建议用：https://doc.xiaominfo.com/docs/middleware-sources/,aggregation-introduction
+
+
+### 网关的分类
+
+1. 全局网关（接入层网关）：作用是负载均衡、请求日志，不和业务逻辑绑定
+
+2. 业务网关（微服务网关：会有一些业务逻辑）：作用是根据不同的请求转发到不同的项目接口
+
+   参考文章：https://blog.csdn.net/qq21040559/article/,details/,122961395
+
+### 实现
+
+1. Nginx（推荐的全局型网关）
+
+2. Kong网关（适合API网关）--收费！！
+
+3. `Spring Cloud Gateway`（取代了Zuul，因为架构设计并不太好，并发量也有限）
+
+   > 优点：用到了NIO、多路复用、底层Netty、React模型；
+   >
+   > 最大的亮点：可以用Java代码写逻辑，其他网关都需要学习一些其他语言（Nginx需要学到一些Lua脚本）
+
+网关技术选型：https://zhuanlan.zhihu.com/p/500587132
+
+### Spring Cloud Gateway用法
+
+官网是最好的老是去看官网
+
+去看官网：https://spring.io/projects/spring-cloud-gateway
+
+官方文档：https://docs.spring.io/spring-cloud-gateway/docs/current/reference//html/
 
 
 
 
 
+### 创建一个Gateway项目
+
+小作业：完成官网的小demo（编程式demo）
 
 
 
 
-123
+
+## Day05 把API网关应用到项目中
+
+任务：
+
+1. 完成统一的用户鉴权、统一的接口调用次数统计（API网关应用）
+2. 完善功能
+
+
+
+
+
+  

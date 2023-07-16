@@ -24,6 +24,7 @@ export const sidebarConfig = sidebar({
     "Educoder",
     "git",
     "hellovuepress",
+    "JVM",
     "javaessay",    
     "Linux",
     "MyLanqiaoNote",
