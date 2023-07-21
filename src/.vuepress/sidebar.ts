@@ -66,8 +66,9 @@ export const sidebarConfig = sidebar({
   ],
   "/suanfa/": [
       "README.md",
-      "001.两数之和.md",
-      "026.删除有序数组中的重复项.md",
+      "001.两数之和",
+      "026.删除有序数组中的重复项",
+      "JZ06 从尾到头打印链表",
   ],
   "/pdf/": [
     "README.md",
