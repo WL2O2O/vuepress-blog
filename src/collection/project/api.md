@@ -1270,7 +1270,7 @@ https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/#the-wei
 
 
 
-### 业务逻辑：
+### 业务逻辑
 
 > 为什么会用到API网关？
 >
@@ -1285,6 +1285,49 @@ https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/#the-wei
 7. 响应日志
 8. 调用成功，接口调用次数 + 1
 9. 调用失败，返回规范错误码
+
+
+
+### 实现
+
+1. **请求转发**
+
+   [使用前缀匹配断言](https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/#the-path-route-predicate-factory)
+
+   所有路径为：`/api/**` 的请求转发，转发到http://localhost:8123/api/**
+
+   比如：
+
+   请求于http://localhost:8090/api/name/get?/name=wlei224
+
+   转发到http://localhost:8123/api/name/get?/name=wlei224
+
+```yaml
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: path_route
+        uri: https://example.org
+        predicates:
+        - Path=/red/{segment},/blue/{segment}
+```
+
+2. 其他业务逻辑
+
+​	todo：Spring注解	  @component
+
+​	使用Spring Cloud Gateway中的GlobalFilter实现请求拦截处理（类似于AOP）
+
+​	![image-20230725194819206](https://cdn.jsdelivr.net/gh/wl2o2o/blogCdn/img/202307251948339.png)
+
+​	[GlobalFilter](https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/#gateway-combined-global-filter-and-gatewayfilter-ordering)直接复制代码
+
+​	
+
+2. 
+
+
 
 
 
