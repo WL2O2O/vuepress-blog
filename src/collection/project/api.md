@@ -1315,17 +1315,29 @@ spring:
 
 2. 其他业务逻辑
 
-​	todo：Spring注解	  @component
+> ​	todo：Spring注解	  @component
 
 ​	使用Spring Cloud Gateway中的GlobalFilter实现请求拦截处理（类似于AOP）
 
 ​	![image-20230725194819206](https://cdn.jsdelivr.net/gh/wl2o2o/blogCdn/img/202307251948339.png)
 
-​	[GlobalFilter](https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/#gateway-combined-global-filter-and-gatewayfilter-ordering)直接复制代码
+​	[GlobalFilter](https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/#gateway-combined-global-filter-and-gatewayfilter-ordering)直接复制代码到网关项目的全局异常类中。
 
-​	
+​	验证通过√
 
-2. 
+2. 正式开始写业务逻辑
+
+> 1. 用户发送请求到API网关（请求转发）√
+> 2. *请求日志*
+> 3. *黑白名单*
+> 4. 用户鉴权（如何？判断ak、sk）
+> 5. 请求的模拟接口是否存在？
+> 6. 请求转发，调用模拟接口
+> 7. 响应日志
+> 8. 调用成功，接口调用次数 + 1
+> 9. 调用失败，返回规范错误码
+
+​	为了方便进行业务逻辑的编写，我们可以将提前编写好的业务流程粘贴到类文件中。
 
 
 

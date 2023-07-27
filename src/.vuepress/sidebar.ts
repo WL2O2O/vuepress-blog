@@ -31,6 +31,7 @@ export const sidebarConfig = sidebar({
     "mysql",
     "netty",
     "object",
+    "tip",
     "transaction",
   ],
   "/jieyou/": [
