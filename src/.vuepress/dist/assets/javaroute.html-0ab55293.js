@@ -1,1 +1,0 @@
-import{_ as e,X as t,Y as o,$ as _}from"./framework-b0c8e9b4.js";const a={},c=_("p",null,"待补充！",-1),s=[c];function n(r,l){return t(),o("div",null,s)}const d=e(a,[["render",n],["__file","javaroute.html.vue"]]);export{d as default};
