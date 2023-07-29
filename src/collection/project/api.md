@@ -1328,15 +1328,207 @@ spring:
 2. 正式开始写业务逻辑
 
 > 1. 用户发送请求到API网关（请求转发）√
+>
+>    代码能运行到这个controller业务逻辑层，就说明用户已经发送了请求
+>
 > 2. *请求日志*
+>
+>    ![image-20230728115938432](https://cdn.jsdelivr.net/gh/wl2o2o/blogCdn/img/202307281159504.png)
+>
+>    我们发现请求参数中含有一个交换机，于是可以试着从这里找到request请求，拿到请求头中的信息；
+>
+>    添加`@Slf4j`注解，用log.info在控制台输出请求头日志；
+>
 > 3. *黑白名单*
+>
+>    在权限管理业务中一般设置的是白名单，这样只有允许的才可以进行访问，更加安全！
+>
+>    在IDEA中直接敲`prsf`写一个白名单常量。
+>
+>    ```Java
+>    // 2. 访问控制 -- 设置黑白名单（可以用设置响应状态码来实现）
+>    ServerHttpResponse response = exchange.getResponse();
+>    if(!IP_WHITE_LIST.contains(sourceAdress)) {
+>        // handleNoAuth(response);
+>        response.setStatusCode(HttpStatus.FORBIDDEN);
+>    	return response.setComplete();
+>    }
+>    ```
+>
+>    
+>
 > 4. 用户鉴权（如何？判断ak、sk）
+>
+>    ```java
+>    //  用户鉴权（如何？判断ak、sk）
+>    HttpHeaders headers = request.getHeaders();
+>    String accessKey = headers.getFirst("accessKey");
+>    String nonce = headers.getFirst("nonce");
+>    String timeStamp = headers.getFirst("timeStamp");
+>    String sign = headers.getFirst("sign");
+>    String body = headers.getFirst("body");
+>    // TODO 要去数据库中查询
+>    // 为了方便进行校验，直接进行判断数据，正规来说应该从数据库中进行校验数据
+>    if (!"wl".equals(accessKey)){
+>        // throw new RuntimeException("无权限！");
+>        // 封装了一个方法，专门用于处理异常请求
+>        return handleNoAuth(response);
+>    }
+>    if (Long.parseLong(nonce) > 10000L){
+>    	return handleNoAuth(response);
+>    }
+>    
+>    //  时间戳校验自己实现，时间和当前时间不能超过5min
+>    Long currentTime = System.currentTimeMillis() / 1000;
+>    Long FIVE_MINUTES = 60 * 5L;
+>    if ((currentTime-Long.parseLong(timeStamp)) >= FIVE_MINUTES) {
+>    	return handleNoAuth(response);
+>    }
+>    
+>    // TODO 要去数据库中查询
+>    String serverSign = SignUtils.getSign(body, "abcdefgh");
+>    if (!serverSign.equals(sign)) {
+>    	throw new RuntimeException("无权限！");
+>    }
+>    ```
+>
+>    
+>
 > 5. 请求的模拟接口是否存在？
+>
+>    // TODO 从数据库中进行查询接口是否存在，以及请求方法是否匹配（严格的话可以再校验一下请求参数，但是业务层面的请求参数不建议放到全局请求网关里面）
+>    // 因为数据库的访问方法已经再backend中已经写过，操作较为复杂的话不建议重复写，所以我们可以采用远程调用的方式（也就是可以说是微服务，这个项目完全可以写成微服务：`OpenFeigh`，目前项目的定位还是`分布式项目`结合微服务的远程调用，避免重复写业务逻辑）
+>
+>    
+>
 > 6. 请求转发，调用模拟接口
+>
+>    ```java
+>    Mono<Void> filter = chain.filter(exchange);
+>    ```
+>
+>    
+>
 > 7. 响应日志
+>
+>    ```java
+>    log.info("响应：" + response.getStatusCode());
+>    ```
+>
+>    
+>
 > 8. 调用成功，接口调用次数 + 1
+>
+>    ```java
+>    // TODO invokeCount
+>    ```
+>
 > 9. 调用失败，返回规范错误码
+>
+>    ```Java
+>    // 用户鉴权异常
+>        public Mono<Void> handleNoAuth(ServerHttpResponse response) {
+>            response.setStatusCode(HttpStatus.FORBIDDEN);
+>            return response.setComplete();
+>        }
+>        // 自定义错误异常
+>        public Mono<Void> handleInvokeError(ServerHttpResponse response) {
+>            response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
+>            return response.setComplete();
+>        }
+>    ```
+>
+>    
+>
 
-​	为了方便进行业务逻辑的编写，我们可以将提前编写好的业务流程粘贴到类文件中。
+* 为了方便进行业务逻辑的编写，我们可以向上面一样，将提前编写好的业务流程粘贴到类文件中。
 
+### 🧑‍💻业务逻辑预期结果：
+
+等模拟接口调用完成，才记录响应日志、统计调用次数。
+
+### 存在问题：
+
+> 虽然上述代码可以跑通，但是还存在一个问题，我们通过debug模式可以看到，代码在执行到请求转发的`Mono<Void> filter = chain.filter(exchange);`方法后，并没有进入到方法中，反而是继续执行下面的代码，直到`chain.filter`方法之后才进入模拟接口方法中。
+>
+> `原因：`
+>
+> chain.filter是个异步操作，可以理解为前端的promise
+>
+> `解决方案：`
+>
+> 利用Spring Cloud Gateway提供的自定义响应装饰器中的response装饰者，以次增强原有response的处理能力
+>
+> 引申：什么叫装饰者设计模式？
+>
+> ​	作用就是：在原本类的基础上对原有类的能力的增强，也就可以理解为给response买了一件装备，拥有了更多的能力。解释成代码语言意思就是，增写response部分代码，实现需要的功能。
+>
+> `参考博客：` 
+>
+> https://blog.csdn.net/qq_19636353/article/details/126759522  (以这个为主) 
+>
+> `其他参考：` 
+>
+> https://blog.csdn.net/m0_67595943/article/details/124667975 
+>
+> https://blog.csdn.net/weixin_43933728/article/details/121359727?spm=1001.2014.3001.5501 
+>
+> https://blog.csdn.net/zx156955/article/details/121670681 https://blog.csdn.net/qq_39529562/article/details/108911983
+
+```java
+public Mono<Void> handleResponse(ServerWebExchange exchange, GatewayFilterChain chain){  
+
+    try {  
+        //从交换寄拿响应对象  
+        ServerHttpResponse originalResponse = exchange.getResponse();  
+        //缓冲区工厂，拿到缓存数据  
+        DataBufferFactory bufferFactory = originalResponse.bufferFactory();  
+        //拿到响应码  
+        HttpStatus statusCode = originalResponse.getStatusCode();  
+        if(statusCode == HttpStatus.OK){  
+            //装饰，增强能力  
+            ServerHttpResponseDecorator decoratedResponse = new ServerHttpResponseDecorator(originalResponse) {  
+            //等调用完转发的接口后才会执行
+                @Override  
+                public Mono<Void> writeWith(Publisher<? extends DataBuffer> body) {  
+                    log.info("body instanceof Flux: {}", (body instanceof Flux));  
+                    //对象是响应式的  
+                    if (body instanceof Flux) {  
+                        //我们拿到真正的body  
+                        Flux<? extends DataBuffer> fluxBody = Flux.from(body); 
+                        //往返回值里面写数据  
+                        //拼接字符串  
+                        return super.writeWith(fluxBody.map(dataBuffer -> { 
+                            // 7. TODO 调用成功，接口调用次数 + 1 invokeCount
+                            byte[] content = new byte[dataBuffer.readableByteCount()];  
+                            dataBuffer.read(content);  
+                            DataBufferUtils.release(dataBuffer);//释放掉内存  
+                            // 构建日志  
+                            StringBuilder sb2 = new StringBuilder(200);  
+                            sb2.append("<--- {} {} \n");  
+                            List<Object> rspArgs = new ArrayList<>();  
+                            rspArgs.add(originalResponse.getStatusCode());  
+                            //rspArgs.add(requestUrl);  
+                            String data = new String(content, StandardCharsets.UTF_8);//data 
+                            sb2.append(data);  
+                            log.info(sb2.toString(), rspArgs.toArray());//log.info("<-- {} {}\n", originalResponse.getStatusCode(), data);  
+                           return bufferFactory.wrap(content);  
+                        }));  
+                    } else {  
+                        // 8. 调用失败，fan'hui一个规范的
+                        log.error("<--- {} 响应code异常", getStatusCode());  
+                    }  
+                    return super.writeWith(body);  
+                }  
+            };  
+            //设置 response 对象为装饰过的  
+            return chain.filter(exchange.mutate().response(decoratedResponse).build());  
+        }  
+        return chain.filter(exchange);//降级处理返回数据  
+    }catch (Exception e){  
+        log.error("gateway log exception.\n" + e);  
+        return chain.filter(exchange);  
+    }  
+}
+```
 
