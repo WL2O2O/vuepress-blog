@@ -1377,14 +1377,14 @@ spring:
 >    if (Long.parseLong(nonce) > 10000L){
 >    	return handleNoAuth(response);
 >    }
->    
+>       
 >    //  时间戳校验自己实现，时间和当前时间不能超过5min
 >    Long currentTime = System.currentTimeMillis() / 1000;
 >    Long FIVE_MINUTES = 60 * 5L;
 >    if ((currentTime-Long.parseLong(timeStamp)) >= FIVE_MINUTES) {
 >    	return handleNoAuth(response);
 >    }
->    
+>       
 >    // TODO 要去数据库中查询
 >    String serverSign = SignUtils.getSign(body, "abcdefgh");
 >    if (!serverSign.equals(sign)) {
@@ -1532,3 +1532,4 @@ public Mono<Void> handleResponse(ServerWebExchange exchange, GatewayFilterChain 
 }
 ```
 
+## Day06 
