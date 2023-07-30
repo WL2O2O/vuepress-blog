@@ -1377,14 +1377,14 @@ spring:
 >    if (Long.parseLong(nonce) > 10000L){
 >    	return handleNoAuth(response);
 >    }
->       
+>          
 >    //  时间戳校验自己实现，时间和当前时间不能超过5min
 >    Long currentTime = System.currentTimeMillis() / 1000;
 >    Long FIVE_MINUTES = 60 * 5L;
 >    if ((currentTime-Long.parseLong(timeStamp)) >= FIVE_MINUTES) {
 >    	return handleNoAuth(response);
 >    }
->       
+>          
 >    // TODO 要去数据库中查询
 >    String serverSign = SignUtils.getSign(body, "abcdefgh");
 >    if (!serverSign.equals(sign)) {
@@ -1525,11 +1525,148 @@ public Mono<Void> handleResponse(ServerWebExchange exchange, GatewayFilterChain 
             return chain.filter(exchange.mutate().response(decoratedResponse).build());  
         }  
         return chain.filter(exchange);//降级处理返回数据  
-    }catch (Exception e){  
+    }catch (Exception e){
         log.error("gateway log exception.\n" + e);  
-        return chain.filter(exchange);  
-    }  
+        return chain.filter(exchange);
+    }
 }
 ```
 
-## Day06 
+## Day06 完善网关的业务逻辑
+
+### 今日计划
+
+1. 补充完整网关的业务逻辑（如何操作数据库?如何服用之前写过的方法？RPC）
+2. 完善系统的TODO和其他功能，并开发一个管理员的监控统计功能
+
+
+
+### 网关业务逻辑
+
+问题：之前的项目已经写过了调用数据库的那些mybatis的业务逻辑，复制粘贴太麻烦
+
+解决：用一个可以直接调用的解决方法：RPC
+
+
+
+### 如何调用其他项目的方法
+
+1. 复制粘贴代码和相关依赖
+2. HTTP请求（提供接口，供其他项目进行调用）
+3. jar包调用
+4. 把公共代码达成jar包，其他项目直接引用
+
+### HTTP请求怎么调用
+
+1. 提供方开发一个接口（地址、请求方法、参数、返回值）
+2. 调用方使用`HTTP Client`之类的代码取发送HTTP请求
+
+
+
+### RPC（remote produce call）
+
+**作用：像调用本地方法一样去调用远程方法**
+
+优点：
+
+	1. 对开发者更加透明，减少了调用见的沟通成本
+	1. RPC向远程服务器发送请求时，未必要使用HTTP协议，比如：TCP/IP、或者自己封装的协议。（内部服务更加适用）
+
+### `Feign && RPC`
+
+> Feign底层用的HTTP协议，虽然也可以很方便的进行调用，但是区别在于Feign只是让请求过程更加精简,HTTP请求其实可以做到和RPC一样的事情，但是还有区别：RPC向远程服务器发送请求时，未必要使用HTTP协议，比如：TCP/IP、或者自己封装的协议。
+
+HTTP协议是一个7层协议，如果想要接口的性能更高，可以使用TCP/IP协议，更加原生的协议。
+
+一般来说微服务项目内部的接口，用`RPC`的性能可能会更加高一点，协议可选项更加多一点。
+
+`工作流程图：`
+
+![image-20230729232829504](https://cdn.jsdelivr.net/gh/wl2o2o/blogCdn/img/202307292328515.png)
+
+🆗，现在模型已经搭建好了，那么如何进行实现呢？使用Dubbo框架（如何学习？看官方文档）
+
+### Dubbo框架（RPC实现）（阿里公司的）
+
+其它类似的框架还有`GRPC`（Google公司的）、`TRPC`（腾讯公司的）
+
+最好的学习方式：[阅读官方文档！](https://cn.dubbo.apache.org/zh-cn/overview/mannual/java-sdk/quick-start/spring-boot/)
+
+
+
+### 两种使用方式
+
+1. Spring Boot代码（注解+编程式）：写Java接口，服务提供者和消费者都去引用这个接口 偏程导
+
+2. IDL(接口调用语言)：创建一个公共的接口定义文件，服务提供者和消费者读取这个文件。
+
+   优点：
+
+   * 跨语言，所有的框架都认识
+
+   * 底层是Triple（自定义封装协议，优点见[官文](https://cn.dubbo.apache.org/zh-cn/overview/mannual/java-sdk/reference-manual/protocol/triple/)）
+
+     ![image-20230730003800623](https://cdn.jsdelivr.net/gh/wl2o2o/blogCdn/img/202307300038465.png)
+
+### 示例项目学习
+
+```
+git clone -b master https://github.com/apache/dubbo-samples.git
+```
+
+zookeeper注册中心：通过内嵌的方式运行，更方便
+
+最先启动注册中心，先启动服务提供者，再启动服务消费者
+
+### 整合应用
+
+1. 服务提供者：backend
+
+   a. 实际情况应该是去数据库中查是否已分配给用户
+
+   b. 从数据库中查询模拟接口是否存在，以及请求方法是否匹配（还可以校验请求参数）
+
+   c. 调用成功，接口调用次数+1 invokeCount
+
+2. gateway项日作为服务调用者，调用这3个方法
+
+
+
+> 整合步骤：
+>
+> 1. 依赖引入  视频事件：`00:52`
+>
+>    ```
+>       
+>    ```
+>
+>    
+>
+> 2. 将官方示例代码中的privider包粘到backend中
+
+
+
+
+
+
+
+
+
+## Day07 完善网关业务与上线
+
+### 今日计划
+
+1. 完善网关的业务
+2. 开发管理员的分析功能
+3. 项目上线
+
+
+
+### 重新梳理网关的业务逻辑
+
+1. 实际情况应该是去数据库中查是否已分配给用户
+2. 从数据库中查询模拟接口是否存在，以及请求方法是否匹配（还可以校验请求参数）
+3. 调用成功，接口调用次数+1 invokeCount
+
+ 
+
