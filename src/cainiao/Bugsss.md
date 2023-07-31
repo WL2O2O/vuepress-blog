@@ -113,3 +113,11 @@ Process finished with exit code -1
 
 
 
+* `Nacos`
+
+> 遇到一个`nocos`小BUG：
+>
+> Dubbo整合nocos的时候，提供者与消费者的包名不一样，这时，提供者将接口的信息注册到nacos文档时，用到的是provider的包名路径，如果出现消费者的包名路径与提供者的包名不同的时候，这时消费者就会报错找不到提供者的Service服务，如图：
+>
+> ![image-20230731193204173](https://cdn.jsdelivr.net/gh/wl2o2o/blogCdn/img/202307311932647.png)
+
