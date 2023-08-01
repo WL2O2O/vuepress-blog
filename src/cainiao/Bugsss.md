@@ -80,7 +80,10 @@ head:
 
    bug缘由：早在我把模拟接口项目整个粘贴到后端项目中时就已经存在bug了，之前没有发现，尝试把这个项目单独拎出来的话没问题。
 
-   解决方法：我先试试是不是maven的module没有配置好
+   解决方法：
+   
+   * 我先试试是不是maven的module没有配置好
+   * ​	
 
 
 
@@ -120,4 +123,18 @@ Process finished with exit code -1
 > Dubbo整合nocos的时候，提供者与消费者的包名不一样，这时，提供者将接口的信息注册到nacos文档时，用到的是provider的包名路径，如果出现消费者的包名路径与提供者的包名不同的时候，这时消费者就会报错找不到提供者的Service服务，如图：
 >
 > ![image-20230731193204173](https://cdn.jsdelivr.net/gh/wl2o2o/blogCdn/img/202307311932647.png)
+
+* `maven`
+
+问题：Spring Boot项目涉及到多个模块时，应该怎么办？
+
+​	方案一：
+
+​		类似于maven项目的多模块编译
+
+​	方案二：
+
+​		将pom文件设置为maven项目
+
+​		<img src="https://cdn.jsdelivr.net/gh/wl2o2o/blogCdn/img/202308010328505.png" alt="将pom文件设置为maven项目" style="zoom:33%;" />
 
