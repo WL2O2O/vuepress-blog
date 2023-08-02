@@ -1377,14 +1377,14 @@ spring:
 >    if (Long.parseLong(nonce) > 10000L){
 >    	return handleNoAuth(response);
 >    }
->                
+>                   
 >    //  时间戳校验自己实现，时间和当前时间不能超过5min
 >    Long currentTime = System.currentTimeMillis() / 1000;
 >    Long FIVE_MINUTES = 60 * 5L;
 >    if ((currentTime-Long.parseLong(timeStamp)) >= FIVE_MINUTES) {
 >    	return handleNoAuth(response);
 >    }
->                
+>                   
 >    // TODO 要去数据库中查询
 >    String serverSign = SignUtils.getSign(body, "abcdefgh");
 >    if (!serverSign.equals(sign)) {
@@ -1637,7 +1637,7 @@ zookeeper注册中心：通过内嵌的方式运行，更方便
 > 1. 依赖引入  视频事件：`00:52`
 >
 >    ```
->             
+>                
 >    ```
 >
 >    
@@ -1682,13 +1682,15 @@ zookeeper注册中心：通过内嵌的方式运行，更方便
 
 ### 公共服务
 
-1. 目的是让方法、实体在多个项目中进行复用，避免重复编写
+> 目的是让方法、实体在多个项目中进行复用，避免重复编写
 
+* 服务业务
 
+  * 1. 数据库中是否已分配给用户密钥（accesskey、secretkey）--boolean
+    2. 从数据库中查询模拟接口是否存在（请求路径、请求方法、请求参数）--boolean
+    3. 接口调用次数 + 1 `invokeCount`（ak、sk、请求接口路径）
 
-
-
-
+   
 
 
 
