@@ -1377,14 +1377,14 @@ spring:
 >    if (Long.parseLong(nonce) > 10000L){
 >    	return handleNoAuth(response);
 >    }
->                      
+>                                     
 >    //  时间戳校验自己实现，时间和当前时间不能超过5min
 >    Long currentTime = System.currentTimeMillis() / 1000;
 >    Long FIVE_MINUTES = 60 * 5L;
 >    if ((currentTime-Long.parseLong(timeStamp)) >= FIVE_MINUTES) {
 >    	return handleNoAuth(response);
 >    }
->                      
+>                                     
 >    // TODO 要去数据库中查询
 >    String serverSign = SignUtils.getSign(body, "abcdefgh");
 >    if (!serverSign.equals(sign)) {
@@ -1442,6 +1442,14 @@ spring:
 >
 
 * 为了方便进行业务逻辑的编写，我们可以向上面一样，将提前编写好的业务流程粘贴到类文件中。
+
+
+
+### 测试
+
+通过测试我们发现，通过http://127.0.0.1:8090/api/name/get?name=wl进行访问时，还是会遭到拒绝，为什么呢？此时不是请求头丢失，而是我们根本就没写请求头，跑通这个逻辑的话，可以从前端进行调用测试。
+
+![image-20230803025109861](https://cdn.jsdelivr.net/gh/wl2o2o/blogCdn/img/202308030251719.png)
 
 ### 🧑‍💻业务逻辑预期结果：
 
@@ -1637,7 +1645,7 @@ zookeeper注册中心：通过内嵌的方式运行，更方便
 > 1. 依赖引入  视频事件：`00:52`
 >
 >    ```
->                   
+>                                  
 >    ```
 >
 >    
@@ -1675,7 +1683,12 @@ zookeeper注册中心：通过内嵌的方式运行，更方便
 ### 重新梳理网关的业务逻辑
 
 1. 实际情况应该是去数据库中查是否已分配给用户
+
+   a 先根据 accessKey 判断用户是否存在，查到 secretKey
+   b 对比 secretKey 和用户传的加密后的 secretKey 是否一致
+
 2. 从数据库中查询模拟接口是否存在，以及请求方法是否匹配（还可以校验请求参数）
+
 3. 调用成功，接口调用次数+1 invokeCount
 
 
@@ -1684,48 +1697,252 @@ zookeeper注册中心：通过内嵌的方式运行，更方便
 
 > 目的是让方法、实体在多个项目中进行复用，避免重复编写
 
-* 服务业务
+* 业务分析
 
-  * 1. 数据库中是否已分配给用户密钥（accesskey、secretkey，返回用户信息，为空表示不存在）
+  * 1. 数据库中是否已分配给用户密钥（accesskey、secretkey，返回用户信息，为空表示不存在）√
     2. 从数据库中查询模拟接口是否存在（请求路径、请求方法、请求参数，返回接口信息，为空表示不存在）
-    3. 接口调用次数 + 1 `invokeCount`（ak、sk、请求接口路径）
-
-   
+    3. 接口调用次数 + 1 `invokeCount`（ak、sk、请求接口路径）√
 
 
 
 
+* 使用步骤：
+  * 1. 新建干净的 maven 项目，只保留必要的公共依赖
+  
+  * 2. 抽取 service 和实体类
+  
+  * 3. install 本地 maven 包
+  
+  * 4. 让服务提供者引入 common 包，测试是否正常运行（出现Bug，backend包中的实现类一直报错：
+  
+       > `'getBaseMapper()' in 'com.baomidou.mybatisplus.extension.service.impl.ServiceImpl' clashes with 'getBaseMapper()' in 'com.baomidou.mybatisplus.extension.service.IService'; attempting to use incompatible return type`
+       >
+       > 原因是`UserInterfaceInfoMapper`类中，忘记更改引入的实体类路径。
+       >
+       > 小技巧：![image-20230803051309362](https://cdn.jsdelivr.net/gh/wl2o2o/blogCdn/img/202308030513641.png)
+       >
+       > 可以通过这种方式快速实现外部提供的的接口。
+  
+  * 5. 让服务消费者引入 common 包
 
+* 业务流程
 
+  * 1. 新建干净的 maven 项目，只保留必要的公共依赖
 
+  * 2. 抽取 service 和实体类
 
+  * 3. install 本地 maven 包
+  
+  * 4. 让服务提供者引入 common 包，测试是否正常运行，加上@DubboService，以便供其它类使用
 
+    ```java
+    // mybatisplus真好用！业务crud手到擒来！
+    /**
+     * @author WLei224
+     * @create 2023/8/3 5:15
+     */
+    public class InnerInterfaceInfoServiceImpl implements InnerInterfaceInfoService {
+        @Resource
+        private InterfaceInfoMapper interfaceInfoMapper;
+        @Override
+        public InterfaceInfo getInterfaceInfo(String url, String method) {
+            if (StringUtils.isAnyBlank(url,method)){
+                throw new BusinessException(ErrorCode.PARAMS_ERROR);
+            }
+            QueryWrapper<InterfaceInfo> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("url",url);
+            queryWrapper.eq("method",method);
+            return interfaceInfoMapper.selectOne(queryWrapper);
+        }
+    }
+    ```
 
+   * 5. 让服务消费者引入 common 包
+  
+     > 1. API网关项目中引入 common 依赖
+     >
+     > 2. 使用服务提供者提供的服务（@DubboService和@DubboReference）
+     >
+     >    通过@DubboReference注入公共模块中编写好的三个服务
+     >
+     > 3. 完善网关中的todo标签，完善业务逻辑
+  
+  ### 问题
+  
+  ​	项目调试中存在一个问题：需要手动对接口的调用次数进行分配，这里考虑可以增加一个管理调用次数的接口。
 
+### 统计分析功能
 
+#### 需求
 
+各个接口的总调用次数的占比图（饼图），取调用次数最多的三个接口，从而进行分析出哪个接口还没有人进行调用，进而对其降低资源或者下线，高频接口（增加资源、提高收费）
 
+#### 实现
 
+* **前端**
 
+  * 强烈推荐使用现成的库
 
+    * Echarts：https://echarts.apache.org/zh/index.html（推荐）
 
+    * AntV：https://antv.vision/zh（推荐）
 
+    * BizCharts
 
+    * 如果是 React 项目，用这个库：https://github.com/hustcc/echarts-for-react
 
+    * > 怎么用？
+      >
+      > 1. 看官网
+      > 2. 找到快速入门、按文档去引入库
+      > 3. 进入示例页面
+      > 4. 找到你要的图
+      > 5. 在线调试
+      > 6. 复制代码
+      > 7. 改为真实数据
 
+* **后端**
 
+  * 写一个接口，得到下列示例数据：
+    接口 A：2次
+    接口 B：3次
 
+  * 步骤：
 
+    1. SQL 查询调用数据：
 
+       ```sql
+       select interfaceInfoId, sum(totalNum) as totalNum from user_interface_info group by interfaceInfoId order by totalNum desc limit 3;
+       ```
 
+    2. 业务层去关联查询接口信息。
+    
+       `controller`:（就不写Service了，直接写业务逻辑）
+    
+       ```java
+       /**
+        * 分析控制器
+        * @author yupi
+        */
+       @RestController
+       @RequestMapping("/analysis")
+       @Slf4j
+       public class AnalysisController {
+       
+           @Resource
+           private UserInterfaceInfoMapper userInterfaceInfoMapper;
+       
+           @Resource
+           private InterfaceInfoService interfaceInfoService;
+       
+           @GetMapping("/top/interface/invoke")
+           @AuthCheck(mustRole = "admin")
+           public BaseResponse<List<InterfaceInfoVO>> listTopInvokeInterfaceInfo() {
+               List<UserInterfaceInfo> userInterfaceInfoList = userInterfaceInfoMapper.listTopInvokeInterfaceInfo(3);
+       
+               Map<Long, List<UserInterfaceInfo>> interfaceInfoIdObjMap = userInterfaceInfoList.stream()
+                       .collect(Collectors.groupingBy(UserInterfaceInfo::getInterfaceInfoId));
+       
+               QueryWrapper<InterfaceInfo> queryWrapper = new QueryWrapper<>();
+               queryWrapper.in("id", interfaceInfoIdObjMap.keySet());
+               List<InterfaceInfo> list = interfaceInfoService.list(queryWrapper);
+       
+               if (CollectionUtils.isEmpty(list)) {
+                   throw new BusinessException(ErrorCode.SYSTEM_ERROR);
+               }
+               List<InterfaceInfoVO> interfaceInfoVOList = list.stream().map(interfaceInfo -> {
+                   InterfaceInfoVO interfaceInfoVO = new InterfaceInfoVO();
+                   BeanUtils.copyProperties(interfaceInfo, interfaceInfoVO);
+                   int totalNum = interfaceInfoIdObjMap.get(interfaceInfo.getId()).get(0).getTotalNum();
+                   interfaceInfoVO.setTotalNum(totalNum);
+                   return interfaceInfoVO;
+               }).collect(Collectors.toList());
+               return ResultUtils.success(interfaceInfoVOList);
+           }
+       }
+       ```
+    
+       `封装类`：
+    
+       ```java
+       /**
+        * 接口信息封装视图
+        * @TableName product
+        */
+       @EqualsAndHashCode(callSuper = true)
+       @Data
+       public class InterfaceInfoVO extends InterfaceInfo {
+       
+           /**
+            * 调用次数
+            */
+           private Integer totalNum;
+       
+           private static final long serialVersionUID = 1L;
+       }
+       ```
+    
+       `UserInterfaceInfoMapper`:
+    
+       ```java
+       /**
+        * @Entity com.wl.smartapicommon.model.entity.UserInterfaceInfo
+        */
+       public interface UserInterfaceInfoMapper extends BaseMapper<UserInterfaceInfo> {
+       
+           // 获取前几个调用次数最多的接口
+           List<UserInterfaceInfo> listTopInvokeInterfaceInfo(int limit);
+       
+       }
+       ```
+    
+       `xml中添加sql语句`：
+    
+       ```xml
+       <select id="listTopInvokeInterfaceInfo" resultType="com.wl.smartapicommon.model.entity.UserInterfaceInfo">
+           select interfaceInfoId, sum(totalNum) as totalNum
+           from user_interface_info
+           group by interfaceInfoId
+           order by totalNum
+           desc limit #{limit};
+       </select>
+       ```
+    
 
+### 上线计划
 
+* 前端：参考之前用户中心或伙伴匹配系统的上线方式
+* 后端：
+  * backend 项目：web 项目，部署 spring boot 的 jar 包（对外的）
+  * gateway 网关项目：web 项目，部署 spring boot 的 jar 包（对外的）
+  * interface 模拟接口项目：web 项目，部署 spring boot 的 jar 包（不建议对外暴露的）
 
+***关键：网络必须要连通***
 
+>如果自己学习用：单个服务器部署这三个项目就足够。
+>如果你是搞大事，多个服务器建议在 同一内网 ，内网交互会更快、且更安全。
 
+### 项目扩展思路
 
+1. 用户自己可以申请更换签名
 
+2. 怎么让其他用户也能上传接口？
 
+   > * 需要提供一个机制（一个页面），让用户来输入自己的接口host（都武器的地址）、接口信息、将接口写入数据库；
+   > * 可以在interfaceInfo表中加个host字段，以次区分服务器地址，让接口提供者更灵活的接入系统；
+   > * 将接口信息入库前，要对接口进行校验，比如检查地址是否遵循规则、是否可以正常调用,并遵循甲方要求（使用SDK）
 
+3. 网关校验是否还有调用次数
 
- 
+   需要考虑并发的问题，防止瞬间调用超频。
+
+4. 网关优化
+
+   比如增加限流、降级保护、提高性能等。还可以考虑搭配Nginx网关使用。
+
+5. 功能增强
+
+   可以针对不同的请求头或者接口类型来设计前端界面和表单，百年与用户进行调用，增强体验。
+
+   （可以参考swagger、postman、kniffj的界面）
+

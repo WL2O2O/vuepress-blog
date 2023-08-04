@@ -80,24 +80,30 @@ head:
 
    bug缘由：早在我把模拟接口项目整个粘贴到后端项目中时就已经存在bug了，之前没有发现，尝试把这个项目单独拎出来的话没问题。
 
-   解决方法：
-   
+   **解决方法：**
+
    * 我先试试是不是maven的module没有配置好（因为是直接把模拟接口项目直接粘贴到后端项目中了）
    * 后续整合网管业务的时候，遇到了项目包名不一致的问题，然后在包名重命名中出现了n个问题，最后迫不得已将项目重构了，然后在项目中直接创建module是没有问题的，因此证实了上述猜想中的module没有配置好！
 
+3. 当Springboot项目中引入了Mabatis，但是没有进行配置，会导致项目运行的时候报错：找不到配置，如图：
 
+   ![image-20230803205650059](https://cdn.jsdelivr.net/gh/wl2o2o/blogCdn/img/202308032056940.png)
+
+	* **解决方法**:在启动类上添加一个排除数据库配置的注解：
+	
+	  > 
 
 
 
 ## 工具篇
 
-* ### `pnpm`
+### pnpm
 
 
 
 
 
-* ### `HuTool`
+### HuTool
 
 ```shell
 cn.hutool.core.io.IORuntimeException: ConnectException: Connection refused: connect
@@ -114,15 +120,29 @@ Process finished with exit code -1
 
 **解决方法：**
 
+​	待补充！！！
 
 
-* `Nacos`
+
+### Nacos
+
+#### 找不到相关Service服务
+
+* 消费者与提供者项目包名不一致导致找不到service服务
 
 > 遇到一个`nocos`小BUG：
 >
 > Dubbo整合nocos的时候，提供者与消费者的包名不一样，这时，提供者将接口的信息注册到nacos文档时，用到的是provider的包名路径，如果出现消费者的包名路径与提供者的包名不同的时候，这时消费者就会报错找不到提供者的Service服务，如图：
 >
 > ![image-20230731193204173](https://cdn.jsdelivr.net/gh/wl2o2o/blogCdn/img/202307311932647.png)
+
+#### 端口被占用
+
+> netstat -ano | findstr 8848
+>
+> taskkill /pid 1244 /f
+
+![解除端口占用的命令](https://cdn.jsdelivr.net/gh/wl2o2o/blogCdn/img/202308040415943.png)
 
 * `maven`
 
