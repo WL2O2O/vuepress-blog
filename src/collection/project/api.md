@@ -1377,14 +1377,14 @@ spring:
 >    if (Long.parseLong(nonce) > 10000L){
 >    	return handleNoAuth(response);
 >    }
->                                                 
+>                                                    
 >    //  时间戳校验自己实现，时间和当前时间不能超过5min
 >    Long currentTime = System.currentTimeMillis() / 1000;
 >    Long FIVE_MINUTES = 60 * 5L;
 >    if ((currentTime-Long.parseLong(timeStamp)) >= FIVE_MINUTES) {
 >    	return handleNoAuth(response);
 >    }
->                                                 
+>                                                    
 >    // TODO 要去数据库中查询
 >    String serverSign = SignUtils.getSign(body, "abcdefgh");
 >    if (!serverSign.equals(sign)) {
@@ -1645,7 +1645,7 @@ zookeeper注册中心：通过内嵌的方式运行，更方便
 > 1. 依赖引入  视频事件：`00:52`
 >
 >    ```
->                                              
+>                                                 
 >    ```
 >
 >    
@@ -1956,4 +1956,4 @@ zookeeper注册中心：通过内嵌的方式运行，更方便
 
 ### 后端优化
 
-停更一下
+停更一下，，，
