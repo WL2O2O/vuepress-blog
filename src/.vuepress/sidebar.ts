@@ -60,6 +60,7 @@ export const sidebarConfig = sidebar({
         "api",
         "bilibili",
         "CampousLostAndFound",
+        "oj",
         "shangyitong",
         "SSM",
       ],
