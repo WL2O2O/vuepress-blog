@@ -11,33 +11,18 @@ tagline: 芝兰生于幽谷兮，不以无人而不芳; 目光放远、脚步放
 heroFullScreen: false
 projects:
   - icon: project
-    name: 项目名称
-    desc: 项目详细描述
+    name: 我的项目
+    desc: 项目巩固与练习
     link: https://wlei224.gitee.io/collection/project
 
   - icon: link
-    name: 链接名称
-    desc: 链接详细描述
-    link: https://link.address
-
-  - icon: book
-    name: book name
-    desc: Detailed description of the book
-    link: https://link.to.your.book
-
-  - icon: article
-    name: article name
-    desc: Detailed description of the article
-    link: https://link.to.your.article
+    name: 项目BUG记录
+    desc: 做好项目BUG积累，吃一堑长一智！
+    link: /cainiao/Bugsss.md
 
   - icon: friend
-    name: friend name
-    desc: Detailed description of friend
-    link: https://link.to.your.friend
-
-  - icon: /logo.svg
-    name: custom item（自定义项）
-    desc: Detailed description of this custom item
+    name: 友链
+    desc: 欢迎联系我加入我的友链
     link: https://link.to.your.friend
 
 footer: customize your footer text

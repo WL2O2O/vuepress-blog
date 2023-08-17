@@ -9,8 +9,9 @@ description: 面试题，面试必备知识
 head:
   - - meta
     - name: keywords
-      content: 
----      
+      content: 如何准备面试，面试经验，面试心得
+---
+
 总是担心基础知识遗忘的很快，于是总结了这些面试导图，现在网站放思维导图的功能这边给在研究中。
 
 - [简历编写规范](resumeRules.md)

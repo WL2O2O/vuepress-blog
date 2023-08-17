@@ -5,7 +5,7 @@ export const sidebarConfig = sidebar({
     "javaroute"
   ],
   "/cainiao/": [
-    "readme.md",
+    "README.md",
     "修仙前言",
     "abstractandinterface",
     "article",
@@ -27,11 +27,11 @@ export const sidebarConfig = sidebar({
     "transaction",
   ],
   "/redis/":[
-    "readme.md",
+    "README.md",
     "Redis"
   ],
   "/mianshi/":[
-    "readme.md",
+    "README.md",
     "mindmap",
     "resumeRules",
     "myfirstoffer",
@@ -65,32 +65,32 @@ export const sidebarConfig = sidebar({
   ],
   
   // 必须放在最后面,这是默认目录
-  // "/": [
-  //   {
-  //     text: "一、前言",
-  //     link: "home",
-  //   },
-  //   {
-  //     text: "二、Java核心",
-  //     collapsible: true,
-  //     children: [
-  //       {
-  //         prefix: "overview/",
-  //         text: "2.1 Java概述",
-  //         collapsible: true,
-  //         children: [
-  //         "what-is-java",
-  //         "java-history",
-  //         "java-can-do-what",
-  //         "jdk-install-config",
-  //         "IDEA-install-config",
-  //         "hello-world",
-  //         ],
-  //       },
-  //     ],
-  //   },
+  "/": [
+    {
+      text: "一、前言",
+      link: "home",
+    },
+    {
+      text: "二、Java核心",
+      collapsible: true,
+      children: [
+        {
+          prefix: "overview/",
+          text: "2.1 Java概述",
+          collapsible: true,
+          children: [
+          "what-is-java",
+          "java-history",
+          "java-can-do-what",
+          "jdk-install-config",
+          "IDEA-install-config",
+          "hello-world",
+          ],
+        },
+      ],
+    },
     
-  // ],
+  ],
 });
 
 

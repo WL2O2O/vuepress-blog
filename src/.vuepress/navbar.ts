@@ -13,21 +13,31 @@ export default navbar([
     // 开启子导航栏的语句：
     // children: ["tutorial/", "markdown/", "vuepress/", "customize/"],
   },
+  // {
+  //   text: "宝藏资源",
+  //   icon: "like",
+  //   children: [
+  //     {
+  //       text: "PDF天堂", 
+  //       icon: "java", 
+  //       link: "/pdf/README.md" 
+  //     },
+  //     { 
+  //       text: "APP整合", 
+  //       icon: "hot", 
+  //       link: "/app/README.md" 
+  //     },
+  //   ],
+  // },
   {
-    text: "宝藏资源",
-    icon: "like",
-    children: [
-      {
-        text: "PDF天堂", 
-        icon: "java", 
-        link: "/pdf/README.md" 
-      },
-      { 
-        text: "APP整合", 
-        icon: "hot", 
-        link: "/app/README.md" 
-      },
-    ],
+    text: "PDF天堂", 
+    icon: "java", 
+    link: "/pdf/README.md" 
+  },
+  { 
+    text: "APP整合", 
+    icon: "hot", 
+    link: "/app/README.md" 
   },
   {
     text: "Hexo博客",
