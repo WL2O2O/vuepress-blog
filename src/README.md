@@ -20,12 +20,7 @@ features:
   - title: 关于CS_GUIDER
     icon: alias
     details: 快速了解小破站? 获取导航? 点击这里😎
-    link: /home/introduce.md
-
-  - title: 知识星球
-    icon: discover
-    details: 星球推荐, 理想中的知识分享社群, 快加入一起成长🏅
-    link: /zhishixingqiu/
+    link: /intro/introduce.md
 
   - title: CS规划
     icon: guide
@@ -47,15 +42,7 @@ features:
     details: 记录我的Redis学习笔记
     link: /redis/
 
-  - title: 面试专栏
-    icon: advance
-    details: 准备输出一个面经专栏
-    link: /mianshi/
 
-  - title: 解忧专栏 🤔
-    icon: advance
-    details: 有计划，缺少执行力？时常感觉无聊且学不进？那就看看这里吧，一起分享，相互指导！
-    link: /jieyou/
 copyright: false
 footer: Theme by <a href="https://theme-hope.vuejs.press/" target="_blank">VuePress Theme Hope</a> | MIT Licensed, Copyright © 2019-present Mr.Hope
 ---

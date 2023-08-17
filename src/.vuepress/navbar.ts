@@ -13,16 +13,6 @@ export default navbar([
     // 开启子导航栏的语句：
     // children: ["tutorial/", "markdown/", "vuepress/", "customize/"],
   },
-  { 
-    text: "知识星球", 
-    icon: "discover", 
-    link: "/zhishixingqiu/" 
-  },
-  {
-    text: "CS规划",
-    icon: "guide",
-    link: "/guider/"
-  },
   {
     text: "宝藏资源",
     icon: "like",
