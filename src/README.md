@@ -22,11 +22,6 @@ features:
     details: 快速了解小破站? 获取导航? 点击这里😎
     link: /intro/introduce.md
 
-  - title: CS规划
-    icon: guide
-    details: 一起拒绝精神内耗, 点这里, 欢迎光临~
-    link: /guider/
-
   - title: 算法天堂
     icon: advance
     details: 刷吧！一起去刷那越刷越上瘾的算法！Let's Go!
