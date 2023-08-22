@@ -22,6 +22,7 @@ export const sidebarConfig = sidebar({
     "MyLanqiaoNote",
     "mysql",
     "netty",
+    "netblog",
     "object",
     "tip",
     "transaction",
