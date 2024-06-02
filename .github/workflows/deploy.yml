@@ -33,7 +33,7 @@ jobs:
         - name: Deploy
           uses: JamesIves/github-pages-deploy-action@v4
           with:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             # 需要部署到的分支
             branch: gh-pages
             # 需要部署的文件夹
