@@ -46,7 +46,7 @@ Java源程序-（`javac编译` `编译型`）
 
 按照虚拟机内存规范划分：
 
-![image-20230717091757266](E:/Master/TyporaImages/JVM/image-20230717091757266.png)
+![JVM-2024-06-02-21-19-16](https://cdn.jsdelivr.net/gh/wl2o2o/blogCdn/img/JVM-2024-06-02-21-19-16.png)
 
 JVM分为线程共享与隔离区，如上图所示。
 
