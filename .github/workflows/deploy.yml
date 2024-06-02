@@ -37,7 +37,7 @@ jobs:
             # 需要部署到的分支
             branch: gh-pages
             # 需要部署的文件夹
-            folder: 'vuepress-blog/dist'
+            folder: dist
         
 
   # deploy-server:
