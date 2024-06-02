@@ -37,8 +37,7 @@ jobs:
             # 需要部署到的分支
             branch: gh-pages
             # 需要部署的文件夹
-            folder: dist
-        
+            folder: 'src/.vuepress/dist'        
 
   # deploy-server:
   #   runs-on: ubuntu-latest
