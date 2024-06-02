@@ -5,38 +5,39 @@ on:
     branches:
       - master
 
-build-and-deploy:
-    concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v3
+jobs:
+  build-and-deploy:
+      concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout 🛎️
+          uses: actions/checkout@v3
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8.1.1
-          run_install: true
+        - name: Install pnpm
+          uses: pnpm/action-setup@v2
+          with:
+            version: 8.1.1
+            run_install: true
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18.12.1
-          cache: pnpm
+        - name: Setup Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: 18.12.1
+            cache: pnpm
 
-      - name: Build Blog
-        env:
-          NODE_OPTIONS: --max_old_space_size=4096
-        run: pnpm docs:build
+        - name: Build Blog
+          env:
+            NODE_OPTIONS: --max_old_space_size=4096
+          run: pnpm docs:build
 
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # 需要部署到的分支
-          branch: gh-pages
-          # 需要部署的文件夹
-          folder: 'setup-pnpm/dist'
+        - name: Deploy
+          uses: JamesIves/github-pages-deploy-action@v4
+          with:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            # 需要部署到的分支
+            branch: gh-pages
+            # 需要部署的文件夹
+            folder: dist
         
 
   # deploy-server:
