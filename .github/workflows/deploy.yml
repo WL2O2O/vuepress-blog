@@ -35,8 +35,10 @@ jobs:
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
+          # 需要部署到的分支
           branch: gh-pages
-          folder: dist
+          # 需要部署的文件夹
+          folder: ~/src/.vuepress/dist
 
   # deploy-server:
   #   runs-on: ubuntu-latest
